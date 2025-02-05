@@ -1,12 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react()], // React plugin for Vite
   server: {
-    proxy: {
-      '/api': 'http://localhost:5000', // Proxy API requests to the backend
-    },
+    port: 3000, // Port for the development server
+    host: true, // Expose the server to all network interfaces (useful for Docker)
+  },
+  preview: {
+    port: 4173, // Port for the preview server
+    host: true, // Expose the preview server to all network interfaces
+  },
+  build: {
+    outDir: 'dist', // Output directory for the production build
+    emptyOutDir: true, // Clear the output directory before building
   },
 });
