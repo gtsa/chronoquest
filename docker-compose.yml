@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: chronoquest
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
   backend:
     build:
       context: .  # Use the root directory as the build context
@@ -13,6 +25,10 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      # Use a connection string that points to the “db” service
+      - DATABASE_URL=postgres://user:password@db:5432/chronoquest
+    depends_on:
+      - db
     restart: unless-stopped
 
   frontend:
@@ -28,3 +44,6 @@ services:
     environment:
       - NODE_ENV=development
     restart: unless-stopped
+
+volumes:
+  db_data:
