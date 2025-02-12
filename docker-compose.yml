@@ -11,37 +11,46 @@ services:
       - db_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+
   backend:
     build:
-      context: .  # Use the root directory as the build context
+      context: .
       dockerfile: backend/Dockerfile
     ports:
       - "5000:5000"
     volumes:
       - ./backend:/app
-      - ./shared:/app/shared  # Mount shared folder
+      - ./shared:/app/shared
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      # Use a connection string that points to the “db” service
-      - DATABASE_URL=postgres://user:password@db:5432/chronoquest
-    depends_on:
-      - db
     restart: unless-stopped
+    networks:
+      otterverse-net:
+        aliases:
+          - chronoquest-backend
 
   frontend:
     build:
-      context: .  # Use the root directory as the build context
+      context: .
       dockerfile: frontend/Dockerfile
     ports:
       - "4173:4173"
     volumes:
       - ./frontend:/app
-      - ./shared:/app/shared  # Mount shared folder
+      - ./shared:/app/shared
       - /app/node_modules
     environment:
       - NODE_ENV=development
     restart: unless-stopped
+    networks:
+      otterverse-net:
+        aliases:
+          - chronoquest-frontend
+
+networks:
+  otterverse-net:
+    external: true
 
 volumes:
   db_data:

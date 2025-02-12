@@ -53,6 +53,10 @@ ChronoQuest is an engaging and educational historical knowledge game where playe
    npm start
    ```
 
+## Integration with OtterVerse
+ChronoQuest is now integrated into the OtterVerse platform as one of its modular services. When deployed as part of OtterVerse, ChronoQuest runs as a separate Docker Compose stack and communicates via a shared external network (named `otterverse-net`). In this setup, the ChronoQuest frontend is accessible via the network alias `chronoquest-frontend`. For complete deployment instructions and to see how ChronoQuest interacts with the other services, please refer to the OtterVerse documentation.
+
+
 ## Contribution
 Contributions are welcome! Please submit issues and pull requests to help improve the game.
 
