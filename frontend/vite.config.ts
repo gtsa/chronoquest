@@ -10,6 +10,10 @@ export default defineConfig({
   preview: {
     port: 4173, // Port for the preview server
     host: true, // Expose the preview server to all network interfaces
+    allowedHosts: [
+      'chronoquest-frontend',
+      'chronoquest-backend'
+    ] // Allow this hostname in the preview server
   },
   build: {
     outDir: 'dist', // Output directory for the production build
