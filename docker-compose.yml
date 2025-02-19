@@ -29,9 +29,6 @@ services:
       - NODE_ENV=development
       - DATABASE_URL=postgres://user:password@db:5432/chronoquest
     restart: unless-stopped
-    depends_on:
-      - db
-    entrypoint: [ "sh", "-c", "yarn ts-node /app/backend/src/seed.ts && node /app/backend/dist/index.js" ]
     networks:
       otterverse-net:
         aliases:
