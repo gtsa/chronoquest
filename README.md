@@ -69,15 +69,16 @@ docker-compose up -d
 #### **Step 2: Apply Migrations**
 Since the database is empty, you must apply migrations to recreate the `events` table:
 ```sh
-docker exec -it $(docker ps -qf "name=db") psql -U user -d chronoquest -f /app/migrations/001-create-events.sql
+docker exec -it $(docker ps -qf "name=backend") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h db -f /app/migrations/001-create-events.sql'
 ```
+
 This will:
 - Ensure the `events` table exists before inserting data.
 
 #### **Step 3: Verify Migrations Were Applied**
 To check if the table was created, run:
 ```sh
-docker exec -it $(docker ps -qf "name=db") psql -U user -d chronoquest -c "\dt"
+docker exec -it $(docker ps -qf "name=db") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "\dt"'
 ```
 If `events` appears in the table list, migrations were applied successfully.
 
@@ -107,7 +108,7 @@ This will:
 #### **Step 3: Verify That Data is Seeded**
 To check if the data was inserted successfully, run:
 ```sh
-docker exec -it $(docker ps -qf "name=db") psql -U user -d chronoquest -c "SELECT * FROM events LIMIT 5;"
+docker exec -it $(docker ps -qf "name=db") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT * FROM events LIMIT 5;"
 ```
 If you see event records, seeding was successful.
 
