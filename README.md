@@ -56,6 +56,34 @@ ChronoQuest is an engaging and educational historical knowledge game where playe
 ## Integration with OtterVerse
 ChronoQuest is now integrated into the OtterVerse platform as one of its modular services. When deployed as part of OtterVerse, ChronoQuest runs as a separate Docker Compose stack and communicates via a shared external network (named `otterverse-net`). In this setup, the ChronoQuest frontend is accessible via the network alias `chronoquest-frontend`. For complete deployment instructions and to see how ChronoQuest interacts with the other services, please refer to the OtterVerse documentation.
 
+## 📌 Applying Database Migrations
+
+When the database is reset (e.g., after running `docker-compose down -v`), you must reapply migrations before seeding data.
+
+#### **Step 1: Ensure Docker Containers are Running**
+First, start the database and backend services:
+```sh
+docker-compose up -d
+```
+
+#### **Step 2: Apply Migrations**
+Since the database is empty, you must apply migrations to recreate the `events` table:
+```sh
+docker exec -it $(docker ps -qf "name=db") psql -U user -d chronoquest -f /app/migrations/001-create-events.sql
+```
+This will:
+- Ensure the `events` table exists before inserting data.
+
+#### **Step 3: Verify Migrations Were Applied**
+To check if the table was created, run:
+```sh
+docker exec -it $(docker ps -qf "name=db") psql -U user -d chronoquest -c "\dt"
+```
+If `events` appears in the table list, migrations were applied successfully.
+
+##### **❗ Important Notes**
+- **Migrations must be applied every time the database is reset** (`docker-compose down -v`).
+- If migrations are not applied, **the seed script will fail** because the `events` table will not exist.
 
 ## 📌 Seeding the Database
 
