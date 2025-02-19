@@ -57,6 +57,36 @@ ChronoQuest is an engaging and educational historical knowledge game where playe
 ChronoQuest is now integrated into the OtterVerse platform as one of its modular services. When deployed as part of OtterVerse, ChronoQuest runs as a separate Docker Compose stack and communicates via a shared external network (named `otterverse-net`). In this setup, the ChronoQuest frontend is accessible via the network alias `chronoquest-frontend`. For complete deployment instructions and to see how ChronoQuest interacts with the other services, please refer to the OtterVerse documentation.
 
 
+## 📌 Seeding the Database
+
+To populate the database with initial historical events, you need to manually run the seed script after setting up the project.
+
+#### **Step 1: Ensure Docker Containers are Running**
+Before seeding, make sure the database and backend services are running:
+```sh
+docker-compose up -d
+```
+
+#### **Step 2: Run the Seed Script**
+Once the containers are up, execute the following command to seed the database:
+```sh
+docker exec -it $(docker ps -qf "name=backend") yarn ts-node /app/backend/src/seed.ts
+```
+This will:
+- Insert predefined historical events into the database.
+- Ensure the database is initialized for use.
+
+#### **Step 3: Verify That Data is Seeded**
+To check if the data was inserted successfully, run:
+```sh
+docker exec -it $(docker ps -qf "name=db") psql -U user -d chronoquest -c "SELECT * FROM events LIMIT 5;"
+```
+If you see event records, seeding was successful.
+
+#### **❗ Important Notes**
+- **Seeding should only be done when needed** to avoid duplicate entries.
+- If you reset the database (`docker-compose down -v`), you’ll need to **reseed manually**.
+
 ## Contribution
 Contributions are welcome! Please submit issues and pull requests to help improve the game.
 
