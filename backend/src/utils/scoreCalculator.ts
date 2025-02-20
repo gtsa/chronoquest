@@ -1,25 +1,15 @@
+import { gameConfig, Level } from '../game_config/gameConfig';
+
 export function calculateScore(
   submittedOrder: number[],
   correctOrder: number[],
-  level: 'beginner' | 'intermediate' | 'advanced'
+  level: Level
 ): number {
-  const difficultyMultiplier = {
-    beginner: 1.0,
-    intermediate: 1.5,
-    advanced: 2.0
-  } as const;
+  // Use gameConfig values dynamically
+  const numCards = gameConfig.numCardsPerLevel[level];
+  const baseScore = gameConfig.baseScoreCoefficient * gameConfig.difficultyMultiplier[level];
 
-  // Number of cards per difficulty level
-  const numCardsPerLevel = {
-    beginner: 5,
-    intermediate: 7,
-    advanced: 9
-  } as const;
-
-  const numCards = numCardsPerLevel[level];
-
-  // Calculate base score based on difficulty level
-  const baseScore = 100 * difficultyMultiplier[level];
+  console.log(`Calculating score with baseScore=${baseScore} and numCards=${numCards}`);
 
   // Count correctly placed cards
   let correctCount = 0;
@@ -29,7 +19,7 @@ export function calculateScore(
     }
   });
 
-  // If the order is fully correct, return double the base score
+  // If fully correct, return double the base score
   if (correctCount === numCards) {
     return baseScore * 2;
   }
