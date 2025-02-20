@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import pool from '../db';
 import { calculateScore } from '../utils/scoreCalculator';
-
+import dayjs from 'dayjs';
 
 const router = Router();
 
@@ -12,22 +12,33 @@ const difficultyMap: Record<string, number> = {
   advanced: 9,
 };
 
-// GET /events - Fetch a random set of events based on difficulty
+// GET /events - Fetch a random set of events based on difficulty and 'same date mode' state
 router.get('/', async (req, res) => {
-  const { level = 'beginner' } = req.query; // Default to beginner if no level provided
-  const limit = difficultyMap[level as string] || 5; // Fallback to 5 events if invalid level
+  const { level = 'beginner', sameDateMode = false } = req.query;
+  const limit = difficultyMap[level as string] || 5;
+
+  // Get today's day and month
+  const today = dayjs();
+  const day = today.date();
+  const month = today.month() + 1;
 
   try {
-    const result = await pool.query(
-      'SELECT * FROM events ORDER BY RANDOM() LIMIT $1',
-      [limit]
-    );
+    let query = 'SELECT * FROM events ORDER BY RANDOM() LIMIT $1';
+    let params: any[] = [limit];
+
+    if (sameDateMode === 'true') {
+      query = `SELECT * FROM events WHERE EXTRACT(DAY FROM date) = $2 AND EXTRACT(MONTH FROM date) = $3 ORDER BY RANDOM() LIMIT $1`;
+      params = [limit, day, month];
+    }
+
+    const result = await pool.query(query, params);
     res.json(result.rows);
   } catch (error) {
     console.error('Error fetching events:', error);
     res.status(500).json({ error: 'Failed to fetch events' });
   }
 });
+
 
 // POST /events - create a new event
 router.post('/', async (req, res) => {
