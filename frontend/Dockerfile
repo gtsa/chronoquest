@@ -2,21 +2,23 @@ FROM node:18
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json from the frontend directory
+# Copy package.json first to optimize caching
 COPY frontend/package*.json ./
 
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the frontend files
+# Copy the frontend source code
 COPY frontend/ ./
 
-# Copy the shared folder
+# Copy shared folder
 COPY shared /app/shared
 
-# Build the project
+# 🚨 Fix: Delete old builds automatically on container start
+RUN rm -rf dist node_modules/.vite
+
+# Run Vite build before starting the server
 RUN npm run build
 
 EXPOSE 4173
 
-CMD ["npm", "run", "preview"]
+CMD ["sh", "-c", "rm -rf dist node_modules/.vite && npm run build && npm run preview"]
