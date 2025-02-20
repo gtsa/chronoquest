@@ -108,7 +108,7 @@ This will:
 #### **Step 3: Verify That Data is Seeded**
 To check if the data was inserted successfully, run:
 ```sh
-docker exec -it $(docker ps -qf "name=db") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT * FROM events LIMIT 5;"
+docker exec -it $(docker ps -qf "name=db") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT * FROM events LIMIT 5;"'
 ```
 If you see event records, seeding was successful.
 
