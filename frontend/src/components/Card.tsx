@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
 interface CardProps {
-  event: { id: number; title: string; year: number };
+  event: { id: number; name: string; date: string };
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
 }
@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard }) => {
 
   return (
     <div ref={ref} className="card" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <p>{event.title} ({event.year})</p>
+      <p>{event.name} <br></br>({event.date.split("-")[0]})</p>
     </div>
   );
 };

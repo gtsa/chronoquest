@@ -4,14 +4,19 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "./Card";
 
 const GameBoard: React.FC = () => {
-  const [events, setEvents] = useState<{ id: number; title: string; year: number }[]>([]);
+  const [events, setEvents] = useState<{ id: number; name: string; date: string }[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/events") // Adjust URL if needed
-      .then(response => response.json())
-      .then(data => setEvents(data))
-      .catch(error => console.error("Error fetching events:", error));
-  }, []);
+    fetch("http://localhost:5000/events")
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setEvents(data);
+      })
+      .catch(error => console.error("Fetch error:", error));
+    },
+    []);
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     const updatedEvents = [...events];
@@ -21,11 +26,13 @@ const GameBoard: React.FC = () => {
   };
 
   const submitOrder = async () => {
+    
     try {
-      const response = await fetch("http://localhost:5000/validate", {
+      // const eventsIDs = events.map(event => event.id)
+      const response = await fetch("http://localhost:5000/events/validate_order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ events }),
+        body: JSON.stringify(events),
       });
 
       if (!response.ok) {

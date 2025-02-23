@@ -1,23 +1,22 @@
 import express from "express";
 import cors from "cors";
+import eventRoutes from "./routes/events";
 
 const app = express();
 
-// 🚀 Enable CORS for frontend requests
-app.use(cors({
-  origin: "http://localhost:4173", // Allow frontend to access backend
-  methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type"
-}));
-
+// Enable CORS for frontend requests
+app.use(cors());
 app.use(express.json());
 
-// Example route
-app.get("/events", (req, res) => {
-  res.json([{ id: 1, title: "Sample Event", year: 2023 }]);
+// Root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the ChronoQuest Backend API');
 });
 
-// Start server
-app.listen(5000, () => {
-  console.log("Server is running on http://localhost:5000");
+// Register the existing events route
+app.use("/events", eventRoutes);
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
