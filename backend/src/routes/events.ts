@@ -63,44 +63,45 @@ router.post('/', async (req, res) => {
 
 // POST /validate_order - Validate if the player's submitted order is correct
 router.post('/validate_order', async (req, res) => {
-  const { submittedOrder, level } = req.body;
+  console.log("🔍 Received req.body:", req.body); // Debugging
+
+  // Extract `submittedOrder` (which is now an array)
+  const submittedOrder = req.body.submittedOrder ?? req.body; // ✅ Handles both formats
+
+  // Extract `level` separately
+  const level = req.body.level ?? gameConfig.levelDefault; // ✅ Fallback to default if missing
+
+  console.log("submittedOrder:", submittedOrder);
+  console.log("Type of submittedOrder:", typeof submittedOrder);
+  console.log("Is Array?", Array.isArray(submittedOrder));
+  console.log("level:", level);
 
   if (!submittedOrder || !Array.isArray(submittedOrder) || submittedOrder.length === 0) {
-    return res.status(400).json({ error: 'Invalid submission. Must provide an array of event IDs.' });
+    return res.status(400).json({ error: 'Invalid submission. Must provide an array of event objects.' });
   }
 
   if (!validLevels.includes(level as Level)) {
     return res.status(400).json({ error: 'Invalid difficulty level.' });
   }
 
-  const expectedCount = gameConfig.numCardsPerLevel[level as Level];
-
-  if (submittedOrder.length !== expectedCount) {
-    return res.status(400).json({
-      error: `Invalid number of events. Expected ${expectedCount} events for ${level} difficulty, but received ${submittedOrder.length}.`,
-    });
-  }
+  // Extract IDs from event objects
+  const eventIDs = submittedOrder.map(event => event.id);
 
   try {
-    // Fetch events from database
     const result = await pool.query<{ id: number; date: string }>(
       'SELECT id, date FROM events WHERE id = ANY($1::int[])',
-      [submittedOrder]
+      [eventIDs]
     );
 
-    if (result.rows.length !== submittedOrder.length) {
+    if (result.rows.length !== eventIDs.length) {
       return res.status(400).json({ error: 'Some event IDs are invalid.' });
     }
 
-    // Sort events in correct order
     const correctOrder = result.rows.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     const correctOrderIds = correctOrder.map(event => event.id);
 
-    // Check correctness
-    const isCorrect = JSON.stringify(submittedOrder) === JSON.stringify(correctOrderIds);
-
-    // Calculate score using the difficulty multiplier
-    const score = calculateScore(submittedOrder, correctOrderIds, level as Level) * gameConfig.difficultyMultiplier[level as Level];
+    const isCorrect = JSON.stringify(eventIDs) === JSON.stringify(correctOrderIds);
+    const score = calculateScore(eventIDs, correctOrderIds, level as Level) * gameConfig.difficultyMultiplier[level as Level];
 
     res.json({
       correct: isCorrect,
@@ -112,5 +113,6 @@ router.post('/validate_order', async (req, res) => {
     res.status(500).json({ error: 'Failed to validate event order' });
   }
 });
+
 
 export default router;

@@ -1,18 +1,20 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import eventsRouter from './routes/events';
+import express from "express";
+import cors from "cors";
+import eventRoutes from "./routes/events";
 
 const app = express();
-app.use(bodyParser.json());
+
+// Enable CORS for frontend requests
+app.use(cors());
+app.use(express.json());
 
 // Root route
 app.get('/', (req, res) => {
   res.send('Welcome to the ChronoQuest Backend API');
-
 });
 
-// Mount the events API on /events
-app.use('/events', eventsRouter);
+// Register the existing events route
+app.use("/events", eventRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
