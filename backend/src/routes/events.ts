@@ -63,18 +63,12 @@ router.post('/', async (req, res) => {
 
 // POST /validate_order - Validate if the player's submitted order is correct
 router.post('/validate_order', async (req, res) => {
-  console.log("🔍 Received req.body:", req.body); // Debugging
 
   // Extract `submittedOrder` (which is now an array)
-  const submittedOrder = req.body.submittedOrder ?? req.body; // ✅ Handles both formats
+  const submittedOrder = req.body.submittedOrder ?? req.body;
 
   // Extract `level` separately
-  const level = req.body.level ?? gameConfig.levelDefault; // ✅ Fallback to default if missing
-
-  console.log("submittedOrder:", submittedOrder);
-  console.log("Type of submittedOrder:", typeof submittedOrder);
-  console.log("Is Array?", Array.isArray(submittedOrder));
-  console.log("level:", level);
+  const level = req.body.level ?? gameConfig.levelDefault;
 
   if (!submittedOrder || !Array.isArray(submittedOrder) || submittedOrder.length === 0) {
     return res.status(400).json({ error: 'Invalid submission. Must provide an array of event objects.' });
