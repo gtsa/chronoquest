@@ -16,6 +16,7 @@ const GameBoard: React.FC = () => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/events")
@@ -49,7 +50,7 @@ const GameBoard: React.FC = () => {
       setIsCorrect(result.correct);
       setSubmitted(true);
       setModalOpen(true);
-      setScoreMessage(getScoreMessage(result.score))
+      setScoreMessage(getScoreMessage(result.score));
     } catch (error) {
       console.error("Error submitting order:", error);
     }
@@ -58,7 +59,7 @@ const GameBoard: React.FC = () => {
   const closeModal = () => {
     setModalOpen(false);
     setEvents(correctOrder.map((id) => events.find((e) => e.id === id)!));
-  };  
+  };
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -87,7 +88,27 @@ const GameBoard: React.FC = () => {
         >
           <div className="modal-content">
             <h2>{scoreMessage[0]}</h2>
-            <p>Your Score: <strong>{score}</strong></p>
+            <p>
+              Your Score: <strong>{score}</strong>
+              <span
+                className="info-icon"
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              >
+                ℹ️
+              </span>
+            </p>
+            {showTooltip && (
+              <div className="tooltip">
+                <p><strong>Score Breakdown:</strong></p>
+                <ul>
+                  <li>✔️ <strong>Perfect Score Bonus:</strong> If all cards are correctly placed, your score doubles.</li>
+                  <li><strong>Card Placement:</strong> Each correctly placed card adds points based on difficulty.</li>
+                  <li><strong>Difficulty Scaling:</strong> Higher difficulty levels have greater scoring potential.</li>
+                  <li><strong>Partial Accuracy:</strong> Even if not fully correct, you still earn proportional points.</li> 
+                </ul>
+              </div>
+            )}
             <p>{scoreMessage[1]}</p>
             <button className="close-btn" onClick={closeModal}>Close</button>
           </div>
