@@ -3,8 +3,9 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "./Card";
 import Modal from "react-modal";
+import "./GameBoard.css";
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const GameBoard: React.FC = () => {
   const [events, setEvents] = useState<{ id: number; name: string; date: string }[]>([]);
@@ -16,9 +17,9 @@ const GameBoard: React.FC = () => {
 
   useEffect(() => {
     fetch("http://localhost:5000/events")
-      .then(response => response.json())
-      .then(data => setEvents(data))
-      .catch(error => console.error("Fetch error:", error));
+      .then((response) => response.json())
+      .then((data) => setEvents(data))
+      .catch((error) => console.error("Fetch error:", error));
   }, []);
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
@@ -53,47 +54,43 @@ const GameBoard: React.FC = () => {
 
   const closeModal = () => {
     setModalOpen(false);
-    // Rearrange cards to correct order
-    setEvents(correctOrder.map(id => events.find(e => e.id === id)!));
+    setEvents(correctOrder.map((id) => events.find((e) => e.id === id)!));
   };
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="game-board">
-        {events.map((event, index) => (
-          <Card key={event.id} event={event} index={index} moveCard={moveCard} />
-        ))}
+      <div className="game-board-container">
+        {/* Row 1: Cards */}
+        <div className="game-board">
+          {events.map((event, index) => (
+            <Card key={event.id} event={event} index={index} moveCard={moveCard} />
+          ))}
+        </div>
 
-        {!submitted && (
-          <button className="submit-btn" onClick={submitOrder}>
-            Submit Order
-          </button>
-        )}
+        {/* Row 2: Submit Button (Forced to New Line) */}
+        <div className="submit-container">
+          {!submitted && (
+            <button className="submit-btn" onClick={submitOrder}>
+              Submit<br />
+              Chronological Order
+            </button>
+          )}
+        </div>
 
         <Modal
           isOpen={modalOpen}
           onRequestClose={closeModal}
-          className={`modal ${isCorrect ? 'success' : 'failure'}`}
+          className={`modal ${isCorrect ? "success" : "failure"}`}
           overlayClassName="modal-overlay"
         >
-          <div className={`modal-content ${isCorrect ? 'success' : 'failure'}`}>
+          <div className="modal-content">
             <h2>{isCorrect ? "🎉 Fantastic Work!" : "🤔 Good Effort!"}</h2>
             <p>Your Score: <strong>{score}</strong></p>
             {isCorrect ? (
               <p>You got them all right! Your historical skills are sharp.</p>
             ) : (
               <>
-                <p>Review the correct order to sharpen your historical accuracy:</p>
-                <ol>
-                  {correctOrder.map(id => {
-                    const event = events.find(e => e.id === id);
-                    return (
-                      <li key={id}>
-                        {event?.name} ({event?.date.split("-")[0]})
-                      </li>
-                    );
-                  })}
-                </ol>
+                <p>Review the correct order to sharpen your historical accuracy</p>
               </>
             )}
             <button className="close-btn" onClick={closeModal}>Close</button>

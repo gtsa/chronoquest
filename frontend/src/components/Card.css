@@ -1,0 +1,27 @@
+.card {
+  width: 250px; /* Ensures all cards have the same width */
+  height: 120px; /* Ensures all cards have the same height */
+  padding: 10px;
+  border: 2px solid #646cff;
+  border-radius: 5px;
+  background-color: #1a1a1a;
+  text-align: center;
+  cursor: grab;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-wrap: balance;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: normal;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  z-index: 3; /* Bring hovered card to the front */
+}

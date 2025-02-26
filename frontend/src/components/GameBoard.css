@@ -1,0 +1,122 @@
+.game-board-container {
+  display: flex;
+  flex-direction: column; /* Stack cards and button */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: row; /* Keep all cards in a single row */
+  align-items: center;
+  justify-content: center; /* Center cards if there's space */
+  position: relative;
+  gap: clamp(-30px, 2vw, 15px); /* Adjust gap dynamically */
+  padding: 20px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto; /* Allows horizontal scrolling if necessary */
+  z-index: 1;
+}
+
+/* Submit button is now explicitly placed on the next row */
+.submit-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px; /* Ensure space between cards and button */
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  border: none;
+  background: linear-gradient(90deg, #ff7eb3, #ff758c);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Centered Modal Fix */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure the overlay is above everything */
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 25px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-out;
+  z-index: 1001;
+}
+
+.modal.success {
+  background: #072200;
+}
+
+.modal.failure {
+  background: #22000e;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal-content.success {
+  border-top: 6px solid #66cc66;
+}
+
+.modal-content.failure {
+  border-top: 6px solid #f39f86;
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: #646cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #535bf2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import "./Card.css";
 
 interface CardProps {
   event: { id: number; name: string; date: string };
