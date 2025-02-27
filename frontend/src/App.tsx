@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <div className="app">
-      <h1>ChronoQuest: Reorder the Events</h1>
+      <h1>ChronoQuest</h1>
       <GameBoard />
     </div>
   );
