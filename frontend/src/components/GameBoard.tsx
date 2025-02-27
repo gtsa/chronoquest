@@ -58,7 +58,10 @@ const GameBoard: React.FC = () => {
 
   const closeModal = () => {
     setModalOpen(false);
-    setEvents(correctOrder.map((id) => events.find((e) => e.id === id)!));
+    
+    setTimeout(() => {
+      setEvents(correctOrder.map((id) => events.find((e) => e.id === id)!));
+    }, 750);
   };
 
   return (
