@@ -1,6 +1,6 @@
 .game-board-container {
   display: flex;
-  flex-direction: column; /* Stack cards and button */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -8,23 +8,22 @@
 
 .game-board {
   display: flex;
-  flex-direction: row; /* Keep all cards in a single row */
+  flex-direction: row;
   align-items: center;
-  justify-content: center; /* Center cards if there's space */
+  justify-content: center;
   position: relative;
-  gap: clamp(-30px, 2vw, 15px); /* Adjust gap dynamically */
+  gap: clamp(-30px, 2vw, 15px);
   padding: 20px;
-  flex-wrap: nowrap; /* Prevent wrapping */
-  overflow-x: auto; /* Allows horizontal scrolling if necessary */
+  flex-wrap: nowrap;
+  overflow-x: auto;
   z-index: 1;
 }
 
-/* Submit button is now explicitly placed on the next row */
 .submit-container {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 20px; /* Ensure space between cards and button */
+  margin-top: 20px;
 }
 
 .submit-btn {
@@ -46,7 +45,6 @@
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
 }
 
-/* Centered Modal Fix */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -57,7 +55,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* Ensure the overlay is above everything */
+  z-index: 1000;
 }
 
 .modal {

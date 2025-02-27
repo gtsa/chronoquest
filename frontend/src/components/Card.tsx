@@ -3,12 +3,13 @@ import { useDrag, useDrop } from "react-dnd";
 import "./Card.css";
 
 interface CardProps {
-  event: { id: number; name: string; date: string };
+  event: { id: number; name: string; date: string; description: string; imageurl: string };
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
+  flipped: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ event, index, moveCard }) => {
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop({
@@ -32,8 +33,23 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard }) => {
   drag(drop(ref));
 
   return (
-    <div ref={ref} className="card" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <p>{event.name} <br></br>({event.date.split("-")[0]})</p>
+    <div ref={ref} className={`card ${flipped ? "flipped" : ""}`} style={{ opacity: isDragging ? 0.5 : 1 }}>
+      <div className="card-inner">
+        <div className="card-front">
+          <p>{event.name} <br />({event.date.split("-")[0]})</p>
+        </div>
+        <div className="card-back">
+          <div className="card-content">
+            <p className="truncate-text">{event.imageurl}</p>
+            <hr />
+            <p>{event.name}</p>
+            <hr />
+            <p>{event.date.split("-")[0]}</p>
+            <hr />
+            <p>{event.description}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
