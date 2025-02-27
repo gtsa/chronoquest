@@ -48,7 +48,13 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
         </div>
         <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
           <div className="card-content">
-            <p className="truncate-text">{event.imageurl}</p>
+            <div>
+              <img 
+                src={event.imageurl} 
+                alt={event.name} 
+                className="card-image"
+              />
+            </div>
             <hr />
             <p>{event.name}</p>
             <hr />
