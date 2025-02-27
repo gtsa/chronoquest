@@ -28,6 +28,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
   const [{ isDragging }, drag] = useDrag({
     type: "CARD",
     item: { index },
+    canDrag: !submitted,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
