@@ -28,6 +28,8 @@ const GameBoard: React.FC = () => {
   }, []);
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
+    if (submitted) return;
+    
     const updatedEvents = [...events];
     const [removed] = updatedEvents.splice(dragIndex, 1);
     updatedEvents.splice(hoverIndex, 0, removed);
