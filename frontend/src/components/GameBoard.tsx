@@ -16,6 +16,7 @@ const GameBoard: React.FC = () => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [cardResults, setCardResults] = useState<Record<number, boolean>>({});
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
 
@@ -40,11 +41,11 @@ const GameBoard: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(events),
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to submit order");
       }
-
+  
       const result = await response.json();
       setScore(result.score);
       setCorrectOrder(result.correctOrder);
@@ -52,6 +53,12 @@ const GameBoard: React.FC = () => {
       setSubmitted(true);
       setModalOpen(true);
       setScoreMessage(getScoreMessage(result.score));
+  
+      const correctnessMap: Record<number, boolean> = {};
+      events.forEach((event, index) => {
+        correctnessMap[event.id] = result.correctOrder[index] === event.id;
+      });
+      setCardResults(correctnessMap);
     } catch (error) {
       console.error("Error submitting order:", error);
     }
@@ -67,6 +74,8 @@ const GameBoard: React.FC = () => {
         )
       );
 
+      setFlippedCards(false);
+
       // Flip cards after a short delay
       setTimeout(() => {
         setFlippedCards(true);
@@ -80,7 +89,15 @@ const GameBoard: React.FC = () => {
         {/* Row 1: Cards */}
         <div className="game-board">
           {events.map((event, index) => (
-            <Card key={event.id} event={event} index={index} moveCard={moveCard} flipped={flippedCards} />
+            <Card 
+              key={event.id} 
+              event={event} 
+              index={index} 
+              moveCard={moveCard} 
+              flipped={flippedCards} 
+              cardResults={cardResults} 
+              submitted={submitted}  
+            />
           ))}
         </div>
 
