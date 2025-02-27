@@ -7,9 +7,12 @@ interface CardProps {
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
   flipped: boolean;
+  submitted: boolean;
+  cardResults: Record<number, boolean>;
 }
 
-const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped }) => {
+
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop({
@@ -33,12 +36,16 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped }) => {
   drag(drop(ref));
 
   return (
-    <div ref={ref} className={`card ${flipped ? "flipped" : ""}`} style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <div className="card-inner">
-        <div className="card-front">
+    <div
+      ref={ref}
+      className={`card ${flipped ? "flipped" : ""}`}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
+      <div className={`card-inner`}>
+        <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
           <p>{event.name} <br />({event.date.split("-")[0]})</p>
         </div>
-        <div className="card-back">
+        <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
           <div className="card-content">
             <p className="truncate-text">{event.imageurl}</p>
             <hr />
