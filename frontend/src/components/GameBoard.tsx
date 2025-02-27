@@ -23,6 +23,7 @@ const GameBoard: React.FC = () => {
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
   const [showCards, setShowCards] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [finalMessage, setFinalMessage] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5000/events")
@@ -91,6 +92,9 @@ const GameBoard: React.FC = () => {
         setFlippedCards(true);
       }, 300);
     }, 300);
+
+    setFinalMessage(`${scoreMessage[0]}... You scored ${score} points. See you tomorrow!`);
+
   };
 
   return (
@@ -100,7 +104,8 @@ const GameBoard: React.FC = () => {
             <div className="loading-spinner"></div>
         ) : (
           <>
-            <h2>Reorder the Events</h2>
+            {!submitted && <h2>Reorder the Events</h2>}
+            {submitted && !modalOpen && finalMessage && <h2>{finalMessage}</h2>}
             <div className="game-board">
               {showCards &&
                 events.map((event, index) => (
