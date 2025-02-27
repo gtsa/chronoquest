@@ -63,11 +63,7 @@ router.post('/', async (req, res) => {
 
 // POST /validate_order - Validate if the player's submitted order is correct
 router.post('/validate_order', async (req, res) => {
-
-  // Extract `submittedOrder` (which is now an array)
   const submittedOrder = req.body.submittedOrder ?? req.body;
-
-  // Extract `level` separately
   const level = req.body.level ?? gameConfig.levelDefault;
 
   if (!submittedOrder || !Array.isArray(submittedOrder) || submittedOrder.length === 0) {

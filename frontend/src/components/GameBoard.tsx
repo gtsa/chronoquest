@@ -3,13 +3,13 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "./Card";
 import Modal from "react-modal";
-import { getScoreMessage } from "../utils/scoreFeedback"; // Import function
+import { getScoreMessage } from "../utils/scoreFeedback";
 import "./GameBoard.css";
 
 Modal.setAppElement("#root");
 
 const GameBoard: React.FC = () => {
-  const [events, setEvents] = useState<{ id: number; name: string; date: string }[]>([]);
+  const [events, setEvents] = useState<{ id: number; name: string; date: string; description: string; imageurl: string  }[]>([]);
   const [score, setScore] = useState<number | null>(null);
   const [scoreMessage, setScoreMessage] = useState<string[]>(["Processing your results..."]);
   const [correctOrder, setCorrectOrder] = useState<number[]>([]);
@@ -17,6 +17,7 @@ const GameBoard: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
+  const [flippedCards, setFlippedCards] = useState<boolean>(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/events")
@@ -58,10 +59,19 @@ const GameBoard: React.FC = () => {
 
   const closeModal = () => {
     setModalOpen(false);
-    
+
     setTimeout(() => {
-      setEvents(correctOrder.map((id) => events.find((e) => e.id === id)!));
-    }, 750);
+      setEvents((prevEvents) =>
+        correctOrder.map((id: number) =>
+          prevEvents.find((e: { id: number }) => e.id === id)!
+        )
+      );
+
+      // Flip cards after a short delay
+      setTimeout(() => {
+        setFlippedCards(true);
+      }, 300);
+    }, 300);
   };
 
   return (
@@ -70,7 +80,7 @@ const GameBoard: React.FC = () => {
         {/* Row 1: Cards */}
         <div className="game-board">
           {events.map((event, index) => (
-            <Card key={event.id} event={event} index={index} moveCard={moveCard} />
+            <Card key={event.id} event={event} index={index} moveCard={moveCard} flipped={flippedCards} />
           ))}
         </div>
 
