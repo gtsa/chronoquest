@@ -67,13 +67,16 @@ docker-compose up -d
 ```
 
 #### **Step 2: Apply Migrations**
-Since the database is empty, you must apply migrations to recreate the `events` table:
-```sh
-docker exec -it $(docker ps -qf "name=backend") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h db -f /app/migrations/001-create-events.sql'
-```
+Since the database is empty, you must apply **all migrations** to recreate the required tables.
 
+Run the following command to apply all migrations in the `migrations/` folder:
+```sh
+docker exec -it $(docker ps -qf "name=backend") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h db -f <(cat /app/migrations/*.sql)'
+```
 This will:
-- Ensure the `events` table exists before inserting data.
+
+- Ensure **all necessary tables** are created before inserting data.
+- Apply any **new migrations automatically**.
 
 #### **Step 3: Verify Migrations Were Applied**
 To check if the table was created, run:
