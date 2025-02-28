@@ -6,3 +6,4 @@ dist/
 .dockerignore
 **/.dockerignore
 .vscode/
+backend/cookies.txt

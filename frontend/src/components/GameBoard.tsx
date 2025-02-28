@@ -23,21 +23,45 @@ const GameBoard: React.FC = () => {
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
   const [showCards, setShowCards] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
 
+  // 🔹 Check if the player is allowed to play today
   useEffect(() => {
-    fetch("http://localhost:5000/events")
-      .then((response) => response.json())
-      .then((data) => {
-        setEvents(data);
+    const checkGameAvailability = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/game/start", {
+          method: "POST",
+          credentials: "include",
+        });
+
+        const data = await response.json();
+        
+        if (response.status === 403) {
+          setErrorMessage(data.message);
+          setLoading(false);
+          return;
+        }
+
+        // ✅ If allowed to play, fetch events
+        const eventsResponse = await fetch("http://localhost:5000/api/events");
+        const eventsData = await eventsResponse.json();
+        setEvents(eventsData);
         setTimeout(() => {
           setShowCards(true);
           setLoading(false);
         }, 800);
-      })
-      .catch((error) => console.error("Fetch error:", error));
+      } catch (error) {
+        console.error("Error:", error);
+        setErrorMessage("Something went wrong. Please try again.");
+        setLoading(false);
+      }
+    };
+
+    checkGameAvailability();
   }, []);
 
+  // 🔹 Drag and drop functionality
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     if (submitted) return;
 
@@ -47,9 +71,10 @@ const GameBoard: React.FC = () => {
     setEvents(updatedEvents);
   };
 
+  // 🔹 Submit order to check correctness
   const submitOrder = async () => {
     try {
-      const response = await fetch("http://localhost:5000/events/validate_order", {
+      const response = await fetch("http://localhost:5000/api/events/validate_order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(events),
@@ -94,14 +119,18 @@ const GameBoard: React.FC = () => {
     }, 300);
 
     setFinalMessage(`${scoreMessage[0]}... You scored ${score} points. See you tomorrow!`);
-
   };
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="game-board-container">
         {loading ? (
-            <div className="loading-spinner"></div>
+          <div className="loading-spinner"></div>
+        ) : errorMessage ? (
+          <div className="error-message">
+            <h2>History unfolds one day at a time! Return tomorrow for new events from the past.</h2>
+            <p>Come back tomorrow to play again!</p>
+          </div>
         ) : (
           <>
             {!submitted && <h2>Reorder the Events</h2>}
@@ -166,7 +195,7 @@ const GameBoard: React.FC = () => {
         </div>
       </Modal>
     </DndProvider>
-  );
+  );  
 };
 
 export default GameBoard;
