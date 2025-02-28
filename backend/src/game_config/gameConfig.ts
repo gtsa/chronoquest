@@ -11,7 +11,9 @@ export const gameConfig = {
   },
   baseScoreCoefficient: 100,
   sameDateModeDefault: false,
+  oneGamePerDayMode: false,
   levelDefault: 'beginner',
+  httpsOn: false,
 };
 
 export type Level = keyof typeof gameConfig.numCardsPerLevel;
