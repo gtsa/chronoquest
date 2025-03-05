@@ -45,7 +45,6 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
       <div className={`card-inner`}>
         <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
           <div className={`event-name`}>{event.name}</div>
-          ~
           <div className={`event-hint`}>({event.date.split("-")[0]})</div>
         </div>
         <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
@@ -61,7 +60,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
             <hr />
             <div className={`card-details`}>{event.description}</div>
             <hr />
-            <div className={`card-extra-info`}>www.wikipedia/org/placeholder</div>
+            <div className={`card-extra-info`}>www.wikipedia.org/placeholder</div>
           </div>
         </div>
       </div>

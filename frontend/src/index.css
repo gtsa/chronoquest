@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Merriweather:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
+
 :root {
-  font-family: Raleway, Merriweather, Ubuntu, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Raleway, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

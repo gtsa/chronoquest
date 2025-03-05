@@ -1,5 +1,4 @@
 .card {
-  font-family: Ubuntu;
   width: 250px;
   height: 400px;
   position: relative;
@@ -8,7 +7,9 @@
   border: 1px solid black;
   border-radius: 20px;
   perspective: 1000px;
-  box-shadow: 7px 7px 10px #e564ff20;
+  /* box-shadow: 7px 7px 10px #e564ff20; */
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
 }
 
 .card:not(.flipped) {
@@ -16,6 +17,11 @@
   padding-bottom: 10px;
   padding-top: 7px;
   padding-right: 10px;
+}
+
+.card.flipped {
+  background-color: transparent;
+  border: none;
 }
 
 .card-inner {
@@ -79,43 +85,34 @@
 .event-name {
   margin: 13px;
   font-size: 20px;
+  word-break: break-word;
 }
 
 .event-hint {
   font-size: 16px;
 }
 
-
-
-
-
-
-
-
-
-
-
 .card-content {
   width: 100%;
   height: 100%;
-  border-radius: 20px; /* Smooth rounded corners */
-  overflow: hidden; /* Ensures children respect border-radius */
+  border-radius: 20px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .card-content hr {
-  margin: 0;  /* Removes margin */
-  padding: 0; /* Ensures no padding */
+  margin: 0;
+  padding: 0;
   background-color: #242424
 }
 
 .card-image {
   filter: brightness(85%) contrast(120%) saturate(130%) sepia(10%);  
   width: 100%;
-  height: 40%; /* Top section */
-  object-fit: cover; /* Ensures image covers area */
+  height: 40%;
+  object-fit: cover;
 }
 
 .card-name-back {
@@ -126,6 +123,10 @@
   font-size: 18px;
   font-weight: bold;
   color: white;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .card-date {
@@ -137,7 +138,7 @@
 }
 
 .card-details {
-  height: 30%; /* Bottom section */
+  height: 30%;
   background-color: #242424;
   padding: 10px;
   font-size: 14px;
@@ -148,7 +149,7 @@
 }
 
 .card-extra-info {
-  height: 5%; /* Bottom section */
+  height: 5%;
   padding: 10px;
   font-size: 10px;
   display: flex;
@@ -156,4 +157,5 @@
   justify-content: center;
   text-align: center;
   margin-top: auto;
+  font-weight: 100;
 }
