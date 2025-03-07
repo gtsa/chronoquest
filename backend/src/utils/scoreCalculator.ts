@@ -6,10 +6,8 @@ export function calculateScore(
   level: Level
 ): number {
   // Use gameConfig values dynamically
-  const numCards = gameConfig.numCardsPerLevel[level];
+  const numCards = gameConfig.numCards;
   const baseScore = gameConfig.baseScoreCoefficient * gameConfig.difficultyMultiplier[level];
-
-  console.log(`Calculating score with baseScore=${baseScore} and numCards=${numCards}`);
 
   // Count correctly placed cards
   let correctCount = 0;
