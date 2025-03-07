@@ -3,16 +3,17 @@ import { useDrag, useDrop } from "react-dnd";
 import "./Card.css";
 
 interface CardProps {
-  event: { id: number; name: string; date: string; description: string; imageurl: string };
+  event: { id: number; name: string; date: string; description: string; imageurl: string; riddle: string; wikipediaUrl: string };
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
   flipped: boolean;
   submitted: boolean;
   cardResults: Record<number, boolean>;
+  difficulty: string;
 }
 
 
-const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted }) => {
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted, difficulty }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop({
@@ -44,8 +45,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
     >
       <div className={`card-inner`}>
         <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
-          <div className={`event-name`}>{event.name}</div>
-          <div className={`event-hint`}>({event.date.split("-")[0]})</div>
+          <div className={`event-name`}>{difficulty === 'easy' ? event.name : event.riddle}</div>
         </div>
         <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
           <div className="card-content">

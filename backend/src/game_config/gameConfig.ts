@@ -7,7 +7,7 @@ export const gameConfig = {
   baseScoreCoefficient: 100,
   sameDateModeDefault: false,
   oneGamePerDayMode: false,
-  levelDefault: 'easy',
+  levelDefault: 'difficult',
   httpsOn: false,
 };
 
