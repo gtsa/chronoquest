@@ -2,26 +2,20 @@ import { Router } from 'express';
 import dayjs from 'dayjs';
 import pool from '../db';
 import { calculateScore } from '../utils/scoreCalculator';
-import { gameConfig, Level, validLevels } from '../game_config/gameConfig';
+import { gameConfig, Level } from '../game_config/gameConfig';
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const { level = gameConfig.levelDefault as Level } = req.query;
+  const level = (req.query.level === "easy" || req.query.level === "difficult") ? (req.query.level as Level) : gameConfig.levelDefault;
+
 
   // Get `sameDateMode` from query, but use default if not present
   const sameDateModeRaw = req.query.sameDateMode !== undefined ? req.query.sameDateMode : gameConfig.sameDateModeDefault;
   const sameDateMode = sameDateModeRaw === 'true';
 
-  const levelDefault = gameConfig.levelDefault as Level
-  const levelParam = level as Level;
-
-  // Ensure levelParam is valid
-  const selectedLevel: Level = validLevels.includes(levelParam as Level)
-    ? levelParam
-    : levelDefault;
-
-  const limit = gameConfig.numCardsPerLevel[selectedLevel];
+  // Fixed number of cards for all difficulty levels
+  const limit = gameConfig.numCards;
 
   try {
     let query = 'SELECT * FROM events ORDER BY RANDOM() LIMIT $1';
@@ -70,7 +64,7 @@ router.post('/validate_order', async (req, res) => {
     return res.status(400).json({ error: 'Invalid submission. Must provide an array of event objects.' });
   }
 
-  if (!validLevels.includes(level as Level)) {
+  if (level !== "easy" && level !== "difficult") {
     return res.status(400).json({ error: 'Invalid difficulty level.' });
   }
 
