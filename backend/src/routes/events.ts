@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
     }
 
     const result = await pool.query(query, params);
-    res.json(result.rows);
+    res.json({ level, events: result.rows });
   } catch (error) {
     console.error('Error fetching events:', error);
     res.status(500).json({ error: 'Failed to fetch events' });

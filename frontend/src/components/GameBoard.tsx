@@ -9,7 +9,7 @@ import "./GameBoard.css";
 Modal.setAppElement("#root");
 
 const GameBoard: React.FC = () => {
-  const [events, setEvents] = useState<{ id: number; name: string; date: string; description: string; imageurl: string }[]>(
+  const [events, setEvents] = useState<{ id: number; name: string; date: string; description: string; imageurl: string; riddle: string; wikipediaUrl: string }[]>(
     []
   );
   const [score, setScore] = useState<number | null>(null);
@@ -22,6 +22,8 @@ const GameBoard: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
   const [showCards, setShowCards] = useState<boolean>(false);
+  const [difficulty, setDifficulty] = useState<string>("");
+  // const [hintUsed, setHintUsed] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
@@ -35,18 +37,19 @@ const GameBoard: React.FC = () => {
           credentials: "include",
         });
 
-        const data = await response.json();
+        const check = await response.json();
         
         if (response.status === 403) {
-          setErrorMessage(data.message);
+          setErrorMessage(check.message);
           setLoading(false);
           return;
         }
 
         // ✅ If allowed to play, fetch events
         const eventsResponse = await fetch("http://localhost:5000/api/events");
-        const eventsData = await eventsResponse.json();
-        setEvents(eventsData);
+        const data = await eventsResponse.json();
+        setEvents(data.events);
+        setDifficulty(data.level);
         setTimeout(() => {
           setShowCards(true);
           setLoading(false);
@@ -133,7 +136,7 @@ const GameBoard: React.FC = () => {
           </div>
         ) : (
           <>
-            {!submitted && <h2>Reorder the Events</h2>}
+            {!submitted && <h2>Reorder the Events described on the cards</h2>}
             {submitted && !modalOpen && finalMessage && <h2>{finalMessage}</h2>}
             <div className="game-board">
               {showCards &&
@@ -146,6 +149,7 @@ const GameBoard: React.FC = () => {
                     flipped={flippedCards}
                     cardResults={cardResults}
                     submitted={submitted}
+                    difficulty={difficulty} 
                   />
                 ))}
             </div>
