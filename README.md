@@ -71,7 +71,7 @@ Since the database is empty, you must apply **all migrations** to recreate the r
 
 Run the following command to apply all migrations in the `migrations/` folder:
 ```sh
-docker exec -it $(docker ps -qf "name=backend") sh -c 'PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h db -f <(cat /app/migrations/*.sql)'
+docker exec -it $(docker ps -qf "name=backend") sh -c 'cat /app/migrations/*.sql | PGPASSWORD="$POSTGRES_PASSWORD" psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -h db'
 ```
 This will:
 

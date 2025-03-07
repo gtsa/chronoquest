@@ -7,95 +7,105 @@ async function seed() {
         (name, date, location, description, imageUrl, riddle, wikipediaUrl, details)
       VALUES
         (
-          'Moon Landing',
-          '1969-07-20 20:17:00',
-          'Moon',
-          'Apollo 11 landed on the moon',
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/800px-Aldrin_Apollo_11_original.jpg',
-          'Footprints in dusty seas—but not on Earth.',
-          'https://en.wikipedia.org/wiki/Apollo_11',
-          'These are the details for this event'
-        ),
-        (
-          'Fall of the Berlin Wall',
-          '1989-11-09 00:00:00',
-          'Berlin',
-          'The Berlin Wall fell, symbolizing the end of the Cold War',
-          'https://upload.wikimedia.org/wikipedia/commons/1/1c/West_and_East_Germans_at_the_Brandenburg_Gate_in_1989.jpg',
-          'A concrete divide once split East from West, until it didn’t.',
-          'https://en.wikipedia.org/wiki/Berlin_Wall#Fall',
-          'These are the details for this event'
-        ),
-        (
-          'Signing of the Declaration of Independence',
-          '1776-07-04 00:00:00',
-          'Philadelphia',
-          'The Declaration of Independence was adopted, marking the birth of the United States.',
-          'https://upload.wikimedia.org/wikipedia/commons/f/f9/Declaration_of_Independence_%281819%29%2C_by_John_Trumbull.jpg',
-          'We hold these truths to be self-evident, that all men are created equal...',
-          'https://en.wikipedia.org/wiki/United_States_Declaration_of_Independence',
-          'These are the details for this event'
-        ),
-        (
-          'Fall of Constantinople',
-          '1453-05-29 00:00:00',
-          'Istanbul',
-          'The Ottoman Empire captured Constantinople, ending the Byzantine Empire.',
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Benjamin-Constant-The_Entry_of_Mahomet_II_into_Constantinople-1876.jpg/800px-Benjamin-Constant-The_Entry_of_Mahomet_II_into_Constantinople-1876.jpg',
-          'An ancient stronghold bridging two continents finally fell.',
-          'https://en.wikipedia.org/wiki/Fall_of_Constantinople',
-          'These are the details for this event'
-        ),
-        (
-          'French Revolution Begins',
-          '1789-07-14 00:00:00',
-          'Paris',
-          'The storming of the Bastille marked the beginning of the French Revolution.',
-          'https://upload.wikimedia.org/wikipedia/commons/9/99/Prise_de_la_Bastille_IMG_2250.jpg',
-          'A fortress-prison was stormed, and kings began to tremble.',
-          'https://en.wikipedia.org/wiki/French_Revolution',
-          'These are the details for this event'
-        ),
-        (
-          'First Flight by the Wright Brothers',
-          '1903-12-17 00:00:00',
-          'Kitty Hawk',
-          'The Wright brothers achieved the first successful powered flight.',
-          'https://upload.wikimedia.org/wikipedia/commons/f/fe/Wright_First_Flight_1903Dec17_%28full_restore_115%29.jpg',
-          'Two siblings lifted humanity off the ground.',
-          'https://en.wikipedia.org/wiki/Wright_brothers',
-          'These are the details for this event'
+          'End of the First Punic War',
+          '241-03-10 00:00:00',
+          'Mediterranean Sea',
+          'Rome defeated Carthage in 241 BCE, securing control over Sicily and ending the First Punic War.',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Battle_of_Aegates_Islands.jpg/800px-Battle_of_Aegates_Islands.jpg',
+          'A decisive naval battle ended the first long war between two ancient powers.',
+          'https://en.wikipedia.org/wiki/Battle_of_the_Aegates',
+          'The Battle of the Aegates Islands details'
         ),
         (
           'Invention of the Telephone',
           '1876-03-10 00:00:00',
-          'Boston',
-          'Alexander Graham Bell made the first successful telephone call.',
+          'Boston, USA',
+          'Alexander Graham Bell made the first successful phone call, revolutionising global communication.',
           'https://www.protagon.gr/wp-content/uploads/2018/03/F4-GrahamBell.jpg',
-          'A call that rang out across the world bridging voices across hidden wires',
+          'A call that rang out across the world bridging voices across hidden wires.',
           'https://en.wikipedia.org/wiki/History_of_the_telephone',
-          'These are the details for this event'
+          'Invention of the Telephone details'
         ),
         (
-          'Discovery of Penicillin',
-          '1928-09-28 00:00:00',
-          'London',
-          'Alexander Fleming discovered penicillin, revolutionizing medicine.',
-          'https://assets2.cbsnewsstatic.com/hub/i/r/2014/09/26/55be927c-96fd-4869-9c98-1ededa41931e/thumbnail/1200x630/14b2521240a1767a0f0973b317f52eaa/alexander-fleming-petri-dish-penicillin.jpg',
-          'A moldy lab accident that saved countless lives.',
-          'https://en.wikipedia.org/wiki/History_of_penicillin,
-          'These are the details for this event'
+          'The Tokyo Firebombing',
+          '1945-03-10 00:00:00',
+          'Tokyo, Japan',
+          'U.S. bombers firebombed Tokyo, killing over 100,000 people, the deadliest air raid in history.',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Tokyo_1945-3-10-1.jpg/1280px-Tokyo_1945-3-10-1.jpg',
+          'The most destructive single air attack in human history.',
+          'https://en.wikipedia.org/wiki/Bombing_of_Tokyo',
+          'The Tokyo Firebombing: The Deadliest Air Raid in History details'
         ),
         (
-          'Creation of the World Wide Web',
-          '1990-12-25 00:00:00',
-          'CERN',
-          'Tim Berners-Lee invented the World Wide Web, changing global communication.',
-          'https://akm-img-a-in.tosshub.com/indiatoday/tim-berners-lee_647_060816113543.jpg',
-          'An idea in Europe’s hidden collider wove the globe into one network',
-          'https://en.wikipedia.org/wiki/World_Wide_Web',
-          'These are the details for this event'
-        )
+          'The Tibetan Uprising',
+          '1959-03-10 00:00:00',
+          'Lhasa, Tibet',
+          'Tibetans rose against Chinese rule, leading to the Dalai Lama''s exile to India.',
+          'https://ichef.bbci.co.uk/images/ic/640x360/p0162mb2.jpg',
+          'A people of high peaks and deep traditions rose but lost its leader to exile.',
+          'https://en.wikipedia.org/wiki/1959_Tibetan_uprising',
+          'The Tibetan Uprising details'
+        ),
+        (
+          'The Jupiter Effect',
+          '1982-03-10 00:00:00',
+          'Solar System',
+          'Planetary alignment had sparked doomsday predictions, but nothing catastrophic occurred.',
+          'https://upload.wikimedia.org/wikipedia/en/e/e7/The_Jupiter_Effect.jpg',
+          'Maybe the First “Scientific” Doomsday Prediction, planets aligned, but the world stayed still.',
+          'https://en.wikipedia.org/wiki/Jupiter_Effect',
+          'TheJupyter Effect details'
+        ),
+        (
+          'Roman Empire Bars Jews from Public Office',
+          '418-03-10 00:00:00',
+          'Western Roman Empire',
+          'In 418 AD, the Christianised Roman Empire barred Jews from public office, reinforcing its shift to Christian dominance.',
+          'https://www.heritage-history.com/books/church/jerusalem/zpage121.gif',
+          'A powerful empire barred a religious minority from holding public office.',
+          'https://en.wikipedia.org/wiki/History_of_the_Jews_in_the_Roman_Empire',
+          'Decree barring Jews details'
+        ),
+        (
+          'The Birth of the French Foreign Legion',
+          '1831-03-10 00:00:00',
+          'France',
+          'In 1831, France established the Foreign Legion, recruiting soldiers from around the world for military service.',
+          'https://fr.wikipedia.org/wiki/L%C3%A9gion_%C3%A9trang%C3%A8re#/media/Fichier:L%C3%A9gion_%C3%A9trang%C3%A8re_et_tirailleurs_indig%C3%A8nes.jpg',
+          'A band of outcasts, warriors, and wanderers found a new flag to fight for.',
+          'https://en.wikipedia.org/wiki/French_Foreign_Legion',
+          'The French Foreign Legion details'
+        ),
+        (
+          'The Dot-com Bubble Peaks',
+          '2000-03-10 00:00:00',
+          'United States',
+          'The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market.',
+          'https://moneymorning.com/wp-content/blogs.dir/1/files/2015/06/shutterstock_162413930.jpg',
+          'Click, invest, peak before collapse.',
+          'https://en.wikipedia.org/wiki/Dot-com_bubble',
+          'The dot-com bubble details'
+        ),
+        (
+          'Cuba''s Coup: Batista Seizes Power',
+          '1952-03-10 00:00:00',
+          'Cuba',
+          'General Batista led a coup in Cuba, overthrowing the government and establishing a dictatorship, sparking the Cuban Revolution.',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/BatistaDC1938.jpg/280px-BatistaDC1938.jpg',
+          'A military leader overthrew the government, setting the stage for revolution.',
+          'https://en.wikipedia.org/wiki/Fulgencio_Batista',
+          'Batista led a military coup in Cuba details'
+        ),
+        (
+          'The Sound of Silence - Simon & Garfunkel',
+          '1964-03-10 00:00:00',
+          'United States',
+          'Simon & Garfunkel recorded "The Sound of Silence," which became an iconic anthem of the 1960s.',
+          'https://68.media.tumblr.com/1ea0e0b9974786565c97e5bf57f8b641/tumblr_ol33ik4TiG1snb6qwo1_1280.jpg',
+          'Hello darkness, my old friend.',
+          'https://en.wikipedia.org/wiki/The_Sound_of_Silence',
+          'In 1964, Simon & Garfunkel recorded The Sound of Silence details'
+          )
       RETURNING *;
     `);
 
