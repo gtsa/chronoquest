@@ -1,3 +1,4 @@
+// src/components/GameBoard.tsx
 import { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -8,10 +9,20 @@ import "./GameBoard.css";
 
 Modal.setAppElement("#root");
 
-const GameBoard: React.FC = () => {
-  const [events, setEvents] = useState<{ id: number; name: string; date: string; description: string; imageurl: string; riddle: string; wikipediaUrl: string }[]>(
-    []
-  );
+type GameBoardProps = {
+  difficulty: "easy" | "hard"; // Receive from parent
+};
+
+const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
+  const [events, setEvents] = useState<Array<{
+    id: number;
+    name: string;
+    date: string;
+    description: string;
+    imageurl: string;
+    riddle: string;
+    wikipediaUrl: string;
+  }>>([]);
   const [score, setScore] = useState<number | null>(null);
   const [scoreMessage, setScoreMessage] = useState<string[]>(["Processing your results..."]);
   const [correctOrder, setCorrectOrder] = useState<number[]>([]);
@@ -22,34 +33,37 @@ const GameBoard: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
   const [showCards, setShowCards] = useState<boolean>(false);
-  const [difficulty, setDifficulty] = useState<string>("");
-  // const [hintUsed, setHintUsed] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
 
-  // 🔹 Check if the player is allowed to play today
+  // 🔹 Check if the player is allowed to play today and fetch events
   useEffect(() => {
     const checkGameAvailability = async () => {
       try {
+        // Optionally pass difficulty to your server if needed
         const response = await fetch("http://localhost:5000/api/game/start", {
           method: "POST",
           credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ difficulty }),
         });
 
         const check = await response.json();
-        
+
+        // If the server says we've already played, show an error
         if (response.status === 403) {
           setErrorMessage(check.message);
           setLoading(false);
           return;
         }
 
-        // ✅ If allowed to play, fetch events
+        // If allowed, fetch the actual events
         const eventsResponse = await fetch("http://localhost:5000/api/events");
         const data = await eventsResponse.json();
+        // We'll no longer setDifficulty from the server response
         setEvents(data.events);
-        setDifficulty(data.level);
+
         setTimeout(() => {
           setShowCards(true);
           setLoading(false);
@@ -62,19 +76,18 @@ const GameBoard: React.FC = () => {
     };
 
     checkGameAvailability();
-  }, []);
+  }, [difficulty]);
 
-  // 🔹 Drag and drop functionality
+  // 🔹 Drag and drop move
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     if (submitted) return;
-
     const updatedEvents = [...events];
     const [removed] = updatedEvents.splice(dragIndex, 1);
     updatedEvents.splice(hoverIndex, 0, removed);
     setEvents(updatedEvents);
   };
 
-  // 🔹 Submit order to check correctness
+  // 🔹 Submit to check correctness
   const submitOrder = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/events/validate_order", {
@@ -100,33 +113,33 @@ const GameBoard: React.FC = () => {
         correctnessMap[event.id] = result.correctOrder[index] === event.id;
       });
       setCardResults(correctnessMap);
+
     } catch (error) {
       console.error("Error submitting order:", error);
     }
   };
 
+  // 🔹 Close modal
   const closeModal = () => {
     setModalOpen(false);
-
     setTimeout(() => {
       setEvents((prevEvents) =>
-        correctOrder.map((id: number) => prevEvents.find((e: { id: number }) => e.id === id)!)
+        correctOrder.map((id: number) => prevEvents.find((e) => e.id === id)!)
       );
-
       setFlippedCards(false);
-
-      // Flip cards after a short delay
-      setTimeout(() => {
-        setFlippedCards(true);
-      }, 300);
+      setTimeout(() => setFlippedCards(true), 300);
     }, 300);
-
     setFinalMessage(`${scoreMessage[0]}... You scored ${score} points. See you tomorrow!`);
   };
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="game-board-container">
+        {/* TOP-RIGHT CORNER DIFFICULTY INDICATOR */}
+        <div className="difficulty-indicator">
+          Mode: {difficulty === "hard" ? "Hard" : "Easy"}
+        </div>
+
         {loading ? (
           <div className="loading-spinner"></div>
         ) : errorMessage ? (
@@ -138,6 +151,7 @@ const GameBoard: React.FC = () => {
           <>
             {!submitted && <h2>Reorder the Events described on the cards</h2>}
             {submitted && !modalOpen && finalMessage && <h2>{finalMessage}</h2>}
+
             <div className="game-board">
               {showCards &&
                 events.map((event, index) => (
@@ -149,7 +163,7 @@ const GameBoard: React.FC = () => {
                     flipped={flippedCards}
                     cardResults={cardResults}
                     submitted={submitted}
-                    difficulty={difficulty} 
+                    difficulty={difficulty}
                   />
                 ))}
             </div>
@@ -199,7 +213,7 @@ const GameBoard: React.FC = () => {
         </div>
       </Modal>
     </DndProvider>
-  );  
+  );
 };
 
 export default GameBoard;

@@ -7,7 +7,7 @@ import { gameConfig, Level } from '../game_config/gameConfig';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const level = (req.query.level === "easy" || req.query.level === "difficult") ? (req.query.level as Level) : gameConfig.levelDefault;
+  const level = (req.query.level === "easy" || req.query.level === "hard") ? (req.query.level as Level) : gameConfig.levelDefault;
 
 
   // Get `sameDateMode` from query, but use default if not present
@@ -64,7 +64,7 @@ router.post('/validate_order', async (req, res) => {
     return res.status(400).json({ error: 'Invalid submission. Must provide an array of event objects.' });
   }
 
-  if (level !== "easy" && level !== "difficult") {
+  if (level !== "easy" && level !== "hard") {
     return res.status(400).json({ error: 'Invalid difficulty level.' });
   }
 
