@@ -59,6 +59,13 @@ router.post('/', async (req, res) => {
 router.post('/validate_order', async (req, res) => {
   const submittedOrder = req.body.submittedOrder ?? req.body;
   const level = req.body.level ?? gameConfig.levelDefault;
+  const hint = req.body.hint;
+
+  console.log(1)
+  console.log(1)
+  console.log (req.body);
+  console.log(1)
+  console.log(1)
 
   if (!submittedOrder || !Array.isArray(submittedOrder) || submittedOrder.length === 0) {
     return res.status(400).json({ error: 'Invalid submission. Must provide an array of event objects.' });
@@ -85,7 +92,7 @@ router.post('/validate_order', async (req, res) => {
     const correctOrderIds = correctOrder.map(event => event.id);
 
     const isCorrect = JSON.stringify(eventIDs) === JSON.stringify(correctOrderIds);
-    const score = calculateScore(eventIDs, correctOrderIds, level as Level) * gameConfig.difficultyMultiplier[level as Level];
+    const score = calculateScore(eventIDs, correctOrderIds, level as Level, hint);
 
     res.json({
       correct: isCorrect,

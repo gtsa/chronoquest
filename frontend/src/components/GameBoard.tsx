@@ -1,4 +1,3 @@
-// src/components/GameBoard.tsx
 import { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -10,7 +9,7 @@ import "./GameBoard.css";
 Modal.setAppElement("#root");
 
 type GameBoardProps = {
-  difficulty: "easy" | "hard"; // Receive from parent
+  difficulty: "easy" | "hard";
 };
 
 const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
@@ -23,6 +22,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     riddle: string;
     wikipediaUrl: string;
   }>>([]);
+  const [hintUsed, setHintUsed] = useState<boolean>(false);
   const [score, setScore] = useState<number | null>(null);
   const [scoreMessage, setScoreMessage] = useState<string[]>(["Processing your results..."]);
   const [correctOrder, setCorrectOrder] = useState<number[]>([]);
@@ -36,12 +36,12 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
+  const [hintHighlightIds, setHintHighlightIds] = useState<number[]>([])
 
   // 🔹 Check if the player is allowed to play today and fetch events
   useEffect(() => {
     const checkGameAvailability = async () => {
       try {
-        // Optionally pass difficulty to your server if needed
         const response = await fetch("http://localhost:5000/api/game/start", {
           method: "POST",
           credentials: "include",
@@ -61,7 +61,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         // If allowed, fetch the actual events
         const eventsResponse = await fetch("http://localhost:5000/api/events");
         const data = await eventsResponse.json();
-        // We'll no longer setDifficulty from the server response
         setEvents(data.events);
 
         setTimeout(() => {
@@ -93,7 +92,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       const response = await fetch("http://localhost:5000/api/events/validate_order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(events),
+        body: JSON.stringify({
+          submittedOrder: events,
+          level: difficulty,
+          hint: hintUsed,
+        }),
       });
 
       if (!response.ok) {
@@ -106,7 +109,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       setIsCorrect(result.correct);
       setSubmitted(true);
       setModalOpen(true);
-      setScoreMessage(getScoreMessage(result.score));
+      setScoreMessage(getScoreMessage(result.score, hintUsed));
 
       const correctnessMap: Record<number, boolean> = {};
       events.forEach((event, index) => {
@@ -132,13 +135,29 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     setFinalMessage(`${scoreMessage[0]}... You scored ${score} points. See you tomorrow!`);
   };
 
+  // 🔹 Hint Button Handler 
+  const handleHintClick = () => {
+    
+    setHintUsed(true);
+
+    if (difficulty === "easy") {
+      
+      const sortedByDate = [...events].sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+      
+    const correctlyPlacedIds = events
+      .map((event, index) => (event.id === sortedByDate[index]?.id ? event.id : null))
+      .filter((id): id is number => id !== null);
+
+    setHintHighlightIds(correctlyPlacedIds);
+
+    }
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="game-board-container">
-        {/* TOP-RIGHT CORNER DIFFICULTY INDICATOR */}
-        <div className="difficulty-indicator">
-          Mode: {difficulty === "hard" ? "Hard" : "Easy"}
-        </div>
 
         {loading ? (
           <div className="loading-spinner"></div>
@@ -152,6 +171,54 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
             {!submitted && <h2>Reorder the Events described on the cards</h2>}
             {submitted && !modalOpen && finalMessage && <h2>{finalMessage}</h2>}
 
+            <div className="indicators-buttons-box">
+            <div className="difficulty-indicator">
+                Mode: {difficulty === "hard" ? "Hard" : "Easy"}
+              </div>
+
+              <div className="hint-container">
+                <button 
+                  onClick={handleHintClick} 
+                  disabled={hintUsed||submitted}
+                >
+                  {hintUsed ? "Hint Used" : "Use Hint"}
+                </button>
+              </div>
+
+
+              <div className="hint-container">
+                <button 
+                  onClick={handleHintClick} 
+                  disabled={hintUsed || submitted}
+                  onMouseEnter={() => !hintUsed && setShowTooltip(true)}
+                  onMouseLeave={() => setShowTooltip(false)}
+                >
+                  {hintUsed ? "Hint Used" : "Use Hint"}
+                </button>
+                
+                {!hintUsed && showTooltip && (
+                  <div className="hint-tooltip">
+                    {
+                      difficulty === 'easy' ? (
+                        <>
+                          See which cards are already in the correct position.
+                        </>
+                      ) : (
+                        <>
+                          Reveal a more direct event description.
+                        </>
+                      )
+                    }
+                    <br />
+                    <div className="penalty-notice">
+                      Using a hint will reduce the points per correct card by 50%.
+                    </div> 
+                  </div>
+                )}
+              </div>
+
+            </div>
+
             <div className="game-board">
               {showCards &&
                 events.map((event, index) => (
@@ -164,6 +231,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                     cardResults={cardResults}
                     submitted={submitted}
                     difficulty={difficulty}
+                    hintUsed={hintUsed}
+                    highlightIds={hintHighlightIds}
                   />
                 ))}
             </div>
@@ -198,13 +267,13 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
             </span>
           </p>
           {showTooltip && (
-            <div className="tooltip">
+            <div className="score-tooltip">
               <p><strong>Score Breakdown:</strong></p>
               <ul>
-                <li>✔️ <strong>Perfect Score Bonus:</strong> If all cards are correctly placed, your score doubles.</li>
-                <li><strong>Card Placement:</strong> Each correctly placed card adds points based on difficulty.</li>
-                <li><strong>Difficulty Scaling:</strong> Higher difficulty levels have greater scoring potential.</li>
-                <li><strong>Partial Accuracy:</strong> Even if not fully correct, you still earn proportional points.</li>
+                <li>✔️ <strong>Perfect Score Bonus:</strong> Earn an extra 100 points if all cards are placed correctly.</li>
+                <li><strong>Hint Penalty:</strong> Using a hint reduces the points earned per correct card by 50%.</li>
+                <li><strong>Difficulty Scaling:</strong> The hard mode offers 150% more points per correctly placed card.</li>
+                <li><strong>Partial Accuracy:</strong> Even if your placements aren’t perfect, you’ll still earn partial points based on accuracy.</li>
               </ul>
             </div>
           )}

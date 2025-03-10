@@ -38,6 +38,14 @@
   color: #888;
 }
 
+.game-options {
+  margin-bottom: 20px;
+}
+
+.start-button-container {
+  margin-top: 30px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

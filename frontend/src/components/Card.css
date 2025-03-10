@@ -157,3 +157,18 @@
   margin-top: auto;
   font-weight: 100;
 }
+
+.flash {
+  animation: flashBorder 1s ease-in-out;
+}
+
+@keyframes flashBorder {
+  from {
+    box-shadow: 0 0 10px 5px rgba(18, 78, 31, 0.6);
+    transform: scale(1.01);
+  }
+  to {
+    box-shadow: none;
+    transform: scale(1);
+  }
+}

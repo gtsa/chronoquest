@@ -21,14 +21,14 @@ function App() {
       <h1>ChronoQuest</h1>
 
       {!showGameBoard && (
-        <div style={{ marginBottom: "20px" }}>
+        <div className="game-options">
           <ToggleSwitch
             isChecked={difficulty === "hard"}
             onToggle={handleToggle}
             label={difficulty === "hard" ? "Hard Mode" : "Easy Mode"}
           />
 
-          <div style={{ marginTop: "30px" }}>
+          <div className="start-button-container">
             <button onClick={handleStartGame}>Start Game</button>
           </div>
         </div>
