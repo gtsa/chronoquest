@@ -10,10 +10,12 @@ interface CardProps {
   submitted: boolean;
   cardResults: Record<number, boolean>;
   difficulty: string;
+  hintUsed: boolean;
+  highlightIds: number[]
 }
 
 
-const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted, difficulty }) => {
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted, difficulty, hintUsed, highlightIds }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop({
@@ -40,12 +42,14 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
   return (
     <div
       ref={ref}
-      className={`card ${flipped ? "flipped" : ""}`}
+      className={
+        `card ${flipped ? "flipped" : ""}
+        ${highlightIds.includes(event.id) ? "flash" : ""}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
       <div className={`card-inner`}>
         <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
-          <div className={`event-name`}>{difficulty === 'easy' ? event.name : event.riddle}</div>
+          <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? event.riddle : event.name}</div>
         </div>
         <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
           <div className="card-content">

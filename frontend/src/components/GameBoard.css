@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.tooltip {
+.score-tooltip {
   position: absolute;
   background: #333;
   color: white;
@@ -151,13 +151,67 @@
   }
 }
 
-.difficulty-indicator {
+.indicators-buttons-box {
   position: absolute;
   top: 10px;
-  right: 10px;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.difficulty-indicator {
+  position: absolute;
+  left: 10px;
   color: #fff;
   font-weight: bold;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 8px;
+  cursor: default;
+}
+
+.hint-container {
+  position: absolute;
+  right: 10px;
+}
+
+.hint-container button {
+  right: 10px;
+  font-weight: bold;
+  color: #535bf2;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.hint-container button:hover {
+    transform: scale(1.05);
+    background: rgba(0, 0, 0, 1);
+}
+
+.hint-container button[disabled] {
+  opacity: 0.2;
+  color: #c1c4ff;
+  border-color: #a4a5c4;
+  cursor: not-allowed;
+  transform: none
+}
+
+.hint-tooltip {
+  position: absolute;
+  margin-top: 10px;
+  left: -65%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.penalty-notice {
+  font-style: italic;
+  color: #cacaca;
 }
