@@ -1,9 +1,21 @@
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { useTranslation } from "react-i18next";
 import "./Card.css";
 
 interface CardProps {
-  event: { id: number; name: string; date: string; description: string; imageurl: string; riddle: string; wikipediaUrl: string };
+  event: {
+    id: number;
+    name_en: string;
+    name_el: string;
+    date: string;
+    description_en: string;
+    description_el: string;
+    imageurl: string;
+    riddle_en: string;
+    riddle_el: string;
+    wikipediaUrl: string
+  };
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
   flipped: boolean;
@@ -17,6 +29,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted, difficulty, hintUsed, highlightIds }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const { i18n } = useTranslation();
 
   const [, drop] = useDrop({
     accept: "CARD",
@@ -39,6 +52,14 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
 
   drag(drop(ref));
 
+    const lang = i18n.language;
+
+    const eventName = event[`name_${lang}` as keyof typeof event] || event.name_en;
+    console.log(event)
+    console.log(eventName)
+    const eventDescription = event[`description_${lang}` as keyof typeof event] || event.description_en;
+    const eventRiddle = event[`riddle_${lang}` as keyof typeof event] || event.riddle_en;
+
   return (
     <div
       ref={ref}
@@ -49,20 +70,20 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
     >
       <div className={`card-inner`}>
         <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
-          <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? event.riddle : event.name}</div>
+          <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? eventRiddle : eventName}</div>
         </div>
         <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
           <div className="card-content">
               <img 
                 src={event.imageurl} 
-                alt={event.name} 
+                alt={String(eventName)} 
                 className="card-image"
               />
-            <div className={`card-name-back`}>{event.name}</div>
+            <div className={`card-name-back`}>{eventName}</div>
             <hr />
             <div className={`card-date`}>{event.date.split("-")[0]}</div>
             <hr />
-            <div className={`card-details`}>{event.description}</div>
+            <div className={`card-details`}>{eventDescription}</div>
             <hr />
             <div className={`card-extra-info`}>www.wikipedia.org/placeholder</div>
           </div>
