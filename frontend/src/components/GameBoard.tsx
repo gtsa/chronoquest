@@ -5,6 +5,7 @@ import Card from "./Card.tsx";
 import Modal from "react-modal";
 import { getScoreMessage } from "../utils/scoreFeedback";
 import "./GameBoard.css";
+import { useTranslation } from "react-i18next";
 
 Modal.setAppElement("#root");
 
@@ -13,13 +14,17 @@ type GameBoardProps = {
 };
 
 const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
+  const { t } = useTranslation();
   const [events, setEvents] = useState<Array<{
     id: number;
-    name: string;
+    name_en: string;
+    name_el: string;
     date: string;
-    description: string;
+    description_en: string;
+    description_el: string;
     imageurl: string;
-    riddle: string;
+    riddle_en: string;
+    riddle_el: string;
     wikipediaUrl: string;
   }>>([]);
   const [hintUsed, setHintUsed] = useState<boolean>(false);
@@ -122,7 +127,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     }
   };
 
-  // 🔹 Close modal
+    // 🔹 Close modal
   const closeModal = () => {
     setModalOpen(false);
     setTimeout(() => {
@@ -132,7 +137,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       setFlippedCards(false);
       setTimeout(() => setFlippedCards(true), 300);
     }, 300);
-    setFinalMessage(`${scoreMessage[0]}... You scored ${score} points. See you tomorrow!`);
+    setFinalMessage(`${scoreMessage[0]}... ${t("you_scored")} ${score} ${t("points")}. ${t("see_you_tomorrow")}`);
   };
 
   // 🔹 Hint Button Handler 
@@ -163,28 +168,18 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
           <div className="loading-spinner"></div>
         ) : errorMessage ? (
           <div className="error-message">
-            <h2>History unfolds one day at a time! Return tomorrow for new events from the past.</h2>
-            <p>Come back tomorrow to play again!</p>
+            <h2>{t("history_unfolds")}</h2>
+            <p>{t("come_back_tomorrow")}</p>
           </div>
         ) : (
           <>
-            {!submitted && <h2>Reorder the Events described on the cards</h2>}
+            {!submitted && <h2>{t("reorder_events")}</h2>}
             {submitted && !modalOpen && finalMessage && <h2>{finalMessage}</h2>}
 
             <div className="indicators-buttons-box">
-            <div className="difficulty-indicator">
-                Mode: {difficulty === "hard" ? "Hard" : "Easy"}
+              <div className="difficulty-indicator">
+                {t("mode")}: {difficulty === "hard" ? t("hard") : t("easy")}
               </div>
-
-              <div className="hint-container">
-                <button 
-                  onClick={handleHintClick} 
-                  disabled={hintUsed||submitted}
-                >
-                  {hintUsed ? "Hint Used" : "Use Hint"}
-                </button>
-              </div>
-
 
               <div className="hint-container">
                 <button 
@@ -193,7 +188,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                   onMouseEnter={() => !hintUsed && setShowTooltip(true)}
                   onMouseLeave={() => setShowTooltip(false)}
                 >
-                  {hintUsed ? "Hint Used" : "Use Hint"}
+                  {hintUsed ? t("hint_used") : t("use_hint")}
                 </button>
                 
                 {!hintUsed && showTooltip && (
@@ -201,17 +196,17 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                     {
                       difficulty === 'easy' ? (
                         <>
-                          See which cards are already in the correct position.
+                          {t("hint_correct_cards")}
                         </>
                       ) : (
                         <>
-                          Reveal a more direct event description.
+                          {t("hint_reveal_description")}
                         </>
                       )
                     }
                     <br />
                     <div className="penalty-notice">
-                      Using a hint will reduce the points per correct card by 50%.
+                      {t("hint_penalty_info")}
                     </div> 
                   </div>
                 )}
@@ -240,7 +235,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
             <div className="submit-container">
               {!submitted && (
                 <button className="submit-btn" onClick={submitOrder}>
-                  Submit Chronological Order
+                  {t("submit_order")}
                 </button>
               )}
             </div>
@@ -257,7 +252,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         <div className="modal-content">
           <h2>{scoreMessage[0]}</h2>
           <p>
-            Your Score: <strong>{score}</strong>
+            {t("your_score")}: <strong>{score}</strong>
             <span
               className="info-icon"
               onMouseEnter={() => setShowTooltip(true)}
@@ -268,17 +263,17 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
           </p>
           {showTooltip && (
             <div className="score-tooltip">
-              <p><strong>Score Breakdown:</strong></p>
+              <p><strong>{t("score_breakdown")}:</strong></p>
               <ul>
-                <li>✔️ <strong>Perfect Score Bonus:</strong> Earn an extra 100 points if all cards are placed correctly.</li>
-                <li><strong>Hint Penalty:</strong> Using a hint reduces the points earned per correct card by 50%.</li>
-                <li><strong>Difficulty Scaling:</strong> The hard mode offers 150% more points per correctly placed card.</li>
-                <li><strong>Partial Accuracy:</strong> Even if your placements aren’t perfect, you’ll still earn partial points based on accuracy.</li>
+                <li>✔️ <strong>{t("perfect_score_bonus")}:</strong> {t("perfect_score_bonus_desc")}</li>
+                <li><strong>{t("hint_penalty")}:</strong> {t("hint_penalty_desc")}</li>
+                <li><strong>{t("difficulty_scaling")}:</strong> {t("difficulty_scaling_desc")}</li>
+                <li><strong>{t("partial_accuracy")}:</strong> {t("partial_accuracy_desc")}</li>
               </ul>
             </div>
           )}
           <p>{scoreMessage[1]}</p>
-          <button className="close-btn" onClick={closeModal}>Close</button>
+          <button className="close-btn" onClick={closeModal}>{t("close")}</button>
         </div>
       </Modal>
     </DndProvider>

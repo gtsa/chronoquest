@@ -1,14 +1,16 @@
+import { t } from "i18next";
+
 export function getScoreMessage(score: number, hint: boolean): string[] {
-    if (score >= 90) {
-      return [`${hint ? '' : '🏆'} Historian Extraordinaire`, "Incredible! You have a historian's mind, perfectly placing events in time and space. The past holds no secrets from you!"];
-    } else if (score >= 100) {
-      return ["Time Travel Expert", "Fantastic work! You have a strong grasp of history and a great sense of time. Just a few tweaks, and you'll be a master!"];
+    if (score >= 100) {
+      return [`${hint ? '' : '🏆'} ${t("historian_extraordinaire")}`, t("historian_extraordinaire_desc")];
     } else if (score >= 80) {
-      return ["History Enthusiast", "Well done! You're developing a keen historical sense. A little more practice, and you'll be placing events like a pro!"];
+      return [t("time_traveller_expert"), t("time_traveller_expert_desc")];
+    } else if (score >= 60) {
+      return [t("history_enthusiast"), t("history_enthusiast_desc")];
     } else if (score >= 40) {
-      return ["History Explorer", "You're on your way! History is vast and complex, and every attempt sharpens your skills. Keep playing and learning!"];
+      return [t("history_explorer"), t("history_explorer_desc")];
     } else {
-      return ["Time Traveler in Training", "Don't be discouraged! Even the greatest historians had to start somewhere. Keep playing, and history will reveal its patterns to you!"];
+      return [t("time_traveler_training"), t("time_traveler_training_desc")];
     }
   }
   
