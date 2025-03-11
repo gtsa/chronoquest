@@ -191,7 +191,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                   {hintUsed ? t("hint_used") : t("use_hint")}
                 </button>
                 
-                {!hintUsed && showTooltip && (
+                {!hintUsed && !submitted && showTooltip && (
                   <div className="hint-tooltip">
                     {
                       difficulty === 'easy' ? (

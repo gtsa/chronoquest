@@ -196,7 +196,8 @@
   color: #c1c4ff;
   border-color: #a4a5c4;
   cursor: not-allowed;
-  transform: none
+  transform: none;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .hint-tooltip {
