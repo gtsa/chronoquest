@@ -97,8 +97,6 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
             <div className={`card-date`}>{formatDate(event.date)}</div>
             <hr />
             <div className={`card-details`}>{eventDescription}</div>
-            <hr />
-            <div className={`card-extra-info`}>www.wikipedia.org/placeholder</div>
           </div>
         </div>
       </div>

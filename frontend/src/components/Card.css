@@ -114,7 +114,7 @@
 }
 
 .card-name-back {
-  height: 15%; /* Middle section */
+  height: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,17 +133,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.card-details {
-  height: 30%;
-  background-color: #242424;
-  padding: 10px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 .card-extra-info {
