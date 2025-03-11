@@ -55,8 +55,6 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
     const lang = i18n.language;
 
     const eventName = event[`name_${lang}` as keyof typeof event] || event.name_en;
-    console.log(event)
-    console.log(eventName)
     const eventDescription = event[`description_${lang}` as keyof typeof event] || event.description_en;
     const eventRiddle = event[`riddle_${lang}` as keyof typeof event] || event.riddle_en;
 

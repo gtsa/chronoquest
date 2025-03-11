@@ -20,15 +20,7 @@ export function calculateScore(
   });
 
   // Partial score calculation (if hint used, the player take a penalty)
-  console.log('------------------------------------')
-  console.log(baseScore / numCards);
-  console.log(correctCount);
-  console.log(Math.round((baseScore / numCards) * correctCount));
-  console.log(hint);
-  console.log(hint ? 1 : 0);
-  console.log((hint ? 1 : 0) * gameConfig.hintPenalty);
   const partialScore = Math.round((baseScore / numCards) * correctCount) / (hint ? gameConfig.hintPenalty : 1);
-  console.log(partialScore)
   
   // Return score, with a bonus if player is fully correct
   return Math.round(partialScore) + (correctCount === numCards  ? 1 : 0) * gameConfig.allCorrectBonus;
