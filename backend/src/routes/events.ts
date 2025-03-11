@@ -61,12 +61,6 @@ router.post('/validate_order', async (req, res) => {
   const level = req.body.level ?? gameConfig.levelDefault;
   const hint = req.body.hint;
 
-  console.log(1)
-  console.log(1)
-  console.log (req.body);
-  console.log(1)
-  console.log(1)
-
   if (!submittedOrder || !Array.isArray(submittedOrder) || submittedOrder.length === 0) {
     return res.status(400).json({ error: 'Invalid submission. Must provide an array of event objects.' });
   }
