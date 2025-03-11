@@ -9,7 +9,7 @@ async function seed() {
         (
           'End of the First Punic War',
           'Τέλος του Πρώτου Καρχηδονιακού Πολέμου',
-          '241-03-10 00:00:00',
+          '241-03-10 BC 00:00:00',
           'Mediterranean Sea',
           'Rome defeated Carthage in 241 BCE, securing control over Sicily and ending the First Punic War.',
           'Η Ρώμη νίκησε την Καρχηδόνα το 241 π.Χ., εξασφαλίζοντας τον έλεγχο της Σικελίας και τερματίζοντας τον Πρώτο Καρχηδονιακό Πόλεμο.',
