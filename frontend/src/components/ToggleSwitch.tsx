@@ -21,7 +21,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ isChecked, onToggle, label 
 
       {/* If a label is passed, show it next to the toggle */}
       {label && (
-        <span className="toggle-label" style={{ marginLeft: "10px" }}>
+        <span className="toggle-label">
           {label}
         </span>
       )}

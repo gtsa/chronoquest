@@ -1,3 +1,5 @@
+@import url('../colors.css');
+
 .language-switcher {
   position: absolute;
   bottom: 10px;
@@ -12,7 +14,7 @@
   padding: 10px 15px;
   border: none;
   background-color: transparent;
-  color: #646cffaa;
+  color: var(--primary-light-version);
   font-weight: 200;
   font-size: 16px;
   border-radius: 5px;
@@ -24,6 +26,6 @@
 
 .language-switcher button:hover {
   background-color: transparent;
-  color: #61dafbaa;
+  color: var(--primary-extra-light-version);
   transform: rotate(-90deg) scale(1.1);
 }
