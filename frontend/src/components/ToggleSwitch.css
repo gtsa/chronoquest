@@ -1,4 +1,4 @@
-/* ToggleSwitch.css */
+@import url('../colors.css');
 
 /* Container for the switch */
 .switch {
@@ -23,7 +23,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc; /* Off-state color */
+    background-color: var(--white-color-grayer);
     transition: 0.4s;
     border-radius: 34px;
   }
@@ -36,14 +36,14 @@
     width: 22px;
     left: 3px;
     bottom: 3px;
-    background-color: #fff;
+    background-color: var(--primary-light-version);
     transition: 0.4s;
     border-radius: 50%;
   }
   
   /* When checked, move knob to the right & update track color */
   input:checked + .slider {
-    background-color: #646cff; /* On-state color */
+    background-color: var(--primary-color);
   }
   input:checked + .slider:before {
     transform: translateX(22px);
@@ -56,4 +56,8 @@
   .slider.round:before {
     border-radius: 50%;
   }
-  
+
+  .toggle-label {
+    margin-left: 10px;
+    vertical-align: text-top;
+  }

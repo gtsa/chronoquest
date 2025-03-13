@@ -4,6 +4,7 @@ import "./App.css";
 import ToggleSwitch from "./components/ToggleSwitch";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import logo from "./assets/favicon-192x192.png";
 
 function App() {
   const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
@@ -20,7 +21,10 @@ function App() {
 
   return (
     <div className="app">
-      <h1>ChronoQuest</h1>
+      <div className="header">
+        <img src={logo} alt="ChronoQuest Logo" className="logo" />
+        <h1>ChronoQuest</h1>
+      </div>
 
       {!showGameBoard && (
         <div className="game-options">
@@ -31,7 +35,7 @@ function App() {
           />
 
           <div className="start-button-container">
-            <button onClick={handleStartGame}>{t("play")}</button>
+            <button className="play-btn" onClick={handleStartGame}>{t("play")}</button>
           </div>
         </div>
       )}
