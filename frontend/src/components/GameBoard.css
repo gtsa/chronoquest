@@ -152,7 +152,7 @@
 .difficulty-indicator {
   position: absolute;
   left: 10px;
-  color: var(--button-details-color);
+  color: var(--primary-light-version);
   font-weight: bold;
   background: var(--black-extra-transparent);
   padding: 6px 12px;
