@@ -86,6 +86,11 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
           <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? eventRiddle : eventName}</div>
         </div>
         <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
+          {submitted && (
+            <div className={`card-badge ${cardResults[event.id] ? "correct" : "incorrect"}`}>
+              {cardResults[event.id] ? "✓" : "✕"}
+            </div>
+          )}
           <div className="card-content">
               <img 
                 src={event.imageurl} 
