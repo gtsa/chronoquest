@@ -19,6 +19,7 @@
   padding: 20px;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   z-index: 1;
 }
 
