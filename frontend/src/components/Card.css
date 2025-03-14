@@ -75,11 +75,11 @@
 }
 
 .correct-position {
-  border: 1px solid var(--correct-position);
+  border: 2px solid var(--correct-position-glare);
 }
 
 .false-position {
-  border: 1px solid var(--false-position);
+  border: 2px solid var(--false-position-glare);
 }
 
 .event-name {
@@ -163,3 +163,31 @@
     transform: scale(1);
   }
 }
+
+.card-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  line-height:0em;
+  font-size: 2em;
+  font-weight:bolder;
+  color: white;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgb(255, 255, 255, 0.2);
+  z-index: 1
+}
+
+.card-badge.correct {
+  background-color: var(--primary-light-version);
+}
+
+.card-badge.incorrect {
+  background-color: var(--false-position);
+}
+

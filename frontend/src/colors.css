@@ -16,10 +16,13 @@
     --used-grayed-out: #a4a5c4;
 
     --flash-correct: rgba(18, 78, 31, 0.6);
-    --correct-position: #124d1f;
-    --false-position: #7c1c26;
+    --correct-position:  #3e7a86;
+    --false-position: #813156;
+    --correct-position-glare:  #3e7a8635;
+    --false-position-glare: #81315635;
     --modal-success: #072200;
     --modal-failure: #22000e;
+    
     --text-color-primary: #fff;
     --text-color-secondary: #223b40;
     --white-color: #fff;
