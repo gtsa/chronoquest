@@ -4,16 +4,19 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()], // React plugin for Vite
   server: {
-    port: 3000, // Port for the development server
-    host: true, // Expose the server to all network interfaces (useful for Docker)
+    port: 4173, // Set the development server to use port 4173
+    host: "0.0.0.0", // Expose the server to all network interfaces (important for Docker)
+    watch: {
+      usePolling: false, // for Ubuntu
+    },
   },
   preview: {
-    port: 4173, // Port for the preview server
-    host: true, // Expose the preview server to all network interfaces
+    port: 4173, // Keep the preview server on 4173
+    host: "0.0.0.0", // Ensure it's accessible from Docker
     allowedHosts: [
       'chronoquest-frontend',
       'chronoquest-backend'
-    ] // Allow this hostname in the preview server
+    ],
   },
   build: {
     outDir: 'dist', // Output directory for the production build
