@@ -2,7 +2,7 @@ FROM node:18
 
 WORKDIR /app
 
-# Copy package.json first to optimize caching
+# Copy package.json first for better caching
 COPY frontend/package*.json ./
 
 RUN npm install
@@ -13,12 +13,8 @@ COPY frontend/ ./
 # Copy shared folder
 COPY shared /app/shared
 
-# 🚨 Fix: Delete old builds automatically on container start
-RUN rm -rf dist node_modules/.vite
-
-# Run Vite build before starting the server
-RUN npm run build
-
+# Expose your preferred port (4173)
 EXPOSE 4173
 
-CMD ["sh", "-c", "rm -rf dist node_modules/.vite && npm run build && npm run preview"]
+# Start Vite in development mode with port 4173
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "4173"]
