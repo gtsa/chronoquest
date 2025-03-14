@@ -26,6 +26,7 @@
     background-color: var(--white-color-grayer);
     transition: 0.4s;
     border-radius: 34px;
+    cursor: pointer;
   }
   
   /* The knob/circle */
