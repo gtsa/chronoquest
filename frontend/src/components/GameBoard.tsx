@@ -206,7 +206,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
               <div className="hint-container">
                 <button 
                   onClick={handleHintClick} 
-                  disabled={hintUsed || submitted}
+                  disabled={hintUsed || submitted}f
                 >
                   {hintUsed ? t("hint_used") : t("use_hint")}
                 </button>

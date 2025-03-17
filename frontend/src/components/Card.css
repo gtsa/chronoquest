@@ -64,11 +64,22 @@
   background-color: black;
 }
 
+.card-back {
+  transform: rotateY(180deg);
+  color: var(--text-color-primary);
+  cursor: pointer;
+  background-color: black;
+}
+
 .card-back hr {
   border: none;
   height: 2px;
   background-color: var(--primary-color);
   margin: 8px 0;
+}
+
+.card-front.flipped {
+  opacity: 0;
 }
 
 .card-image {
