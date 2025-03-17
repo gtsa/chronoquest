@@ -124,7 +124,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(12px, 1.8vw, 18px);
+  font-size: clamp(12px, 1.8vw, 16px);
   font-weight: bold;
   color: var(--text-color-primary);
   padding: 3px 10px;
