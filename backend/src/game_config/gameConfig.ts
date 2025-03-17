@@ -9,7 +9,7 @@ export const gameConfig = {
   baseScoreCoefficient: 100,
   sameDateModeDefault: false,
   restrictedNumberGamesPerDayMode: true,
-  maxAttempts: 10,
+  maxAttempts: 100,
   levelDefault: 'easy',
   httpsOn: false
 };
