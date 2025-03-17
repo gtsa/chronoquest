@@ -34,10 +34,13 @@
     "you_scored": "You scored",
     "points": "points",
     "see_you_tomorrow": "See you tomorrow!",
-    "history_unfolds": "History unfolds one day at a time! Return tomorrow for new events from the past.",
+    "history_unfolds": "The past reveals itself in three fragments each day... Υours have been used.",
     "come_back_tomorrow": "Come back tomorrow to play again!",
     "bce": "BCE",
     "read_more": "Read more",
-    "year": "Year"
+    "year": "Year",
+    "play_again": "Play Again",
+    "remaining_attempts": "{{count}} remaining attempts today."
+
   }
   
