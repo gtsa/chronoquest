@@ -10,7 +10,7 @@ i18n
   .init({
     fallbackLng: 'en',
     supportedLngs: ['en', 'el'],
-    debug: true,
+    debug: import.meta.env.DEV,
     interpolation: { escapeValue: false },
     backend: {
       loadPath: '/locales/{{lng}}.json',
