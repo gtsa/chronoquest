@@ -5,7 +5,7 @@
   height: 400px;
   position: relative;
   cursor: grab;
-  background-color: var(--background-dark);
+  background-color: black;
   border: 1px solid var(--background-extra-dark);
   border-radius: 20px;
   perspective: 1000px;
@@ -42,7 +42,6 @@
   height: 100%;
   position: absolute;
   border-radius: 20px;
-  background-color: var(--background-dark);
   border: 1px solid var(--primary-color);
   display: flex;
   flex-direction: column;
@@ -54,11 +53,15 @@
 
 .card-front {
   z-index: 2;
+  background: linear-gradient(45deg, var(--primary-color-front-card), var(--purple-front-card));
+  ;
 }
 
 .card-back {
   transform: rotateY(180deg);
   color: var(--text-color-primary);
+  cursor: pointer;
+  background-color: black;
 }
 
 .card-back hr {
@@ -109,44 +112,52 @@
 }
 
 .card-image {
-  filter: brightness(85%) contrast(120%) saturate(130%) sepia(10%);  
+  filter: brightness(85%) contrast(120%) saturate(130%) sepia(10%);
   width: 100%;
   height: 40%;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .card-name-back {
-  height: 25%;
+  height: 21%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: clamp(12px, 1.8vw, 18px);
   font-weight: bold;
   color: var(--text-color-primary);
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 3px 10px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
 }
 
 .card-date {
   width: 100%;
-  height: 10%;
+  height: 8%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: clamp(10px, 1.6vw, 16px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.card-extra-info {
-  height: 5%;
-  padding: 10px;
-  font-size: 10px;
+.card-details {
+  height: 31%;
+  background: var(--purple-dark);
+  padding: 2px;
+  font-size: clamp(10px, 1.4vw, 14px);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: auto;
-  font-weight: 100;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
 }
 
 .flash {
@@ -177,8 +188,8 @@
   line-height:0em;
   font-size: 2em;
   font-weight:bolder;
-  color: white;
-  background-color: #ffffff;
+  color: var(--white-color);
+  background-color: var(--white-color);
   box-shadow: 0 2px 5px rgb(255, 255, 255, 0.2);
   z-index: 1
 }

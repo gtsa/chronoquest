@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useTranslation } from "react-i18next";
 import "./Card.css";
+import { EventType } from "../types/eventTypes";
+import { formatDate } from "../utils/formatDate";
 
 interface CardProps {
   event: {
@@ -14,7 +16,9 @@ interface CardProps {
     imageurl: string;
     riddle_en: string;
     riddle_el: string;
-    wikipediaUrl: string
+    wikipediaurl: string;
+    details_en: string;
+    details_el: string;
   };
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
@@ -24,10 +28,10 @@ interface CardProps {
   difficulty: string;
   hintUsed: boolean;
   highlightIds: number[]
+  onCardClick: (event: EventType) => void;
 }
 
-
-const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted, difficulty, hintUsed, highlightIds }) => {
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted, difficulty, hintUsed, highlightIds, onCardClick }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { i18n, t } = useTranslation();
 
@@ -57,22 +61,6 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
   const eventDescription = event[`description_${lang}` as keyof typeof event] || event.description_en;
   const eventRiddle = event[`riddle_${lang}` as keyof typeof event] || event.riddle_en;
 
-  const formatDate = (dateStr: string): string => {
-    const date = new Date(dateStr);
-    let year = date.getFullYear();
-  
-    // Handle BC dates (assuming your database stores them as negative years)
-    if (dateStr.includes("BC") || year < 0) {
-      return `${Math.abs(year)} ${t("bce")}`;
-    }
-  
-    return `${year}`;
-  };
-  
-  // Inside your component:
-  <div className={`card-date`}>{formatDate(event.date)}</div>
-  
-
   return (
     <div
       ref={ref}
@@ -80,6 +68,11 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
         `card ${flipped ? "flipped" : ""}
         ${highlightIds.includes(event.id) ? "flash" : ""}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
+      onClick={() => {
+        if (flipped) {
+          onCardClick(event);
+        }
+      }} 
     >
       <div className={`card-inner`}>
         <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "false-position") : ""}`}>
@@ -106,6 +99,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
         </div>
       </div>
     </div>
+    
   );
 };
 

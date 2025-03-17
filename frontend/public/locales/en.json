@@ -11,15 +11,15 @@
     "easy": "Easy",
     "hard": "Hard",
     "historian_extraordinaire": "Historian Extraordinaire",
-    "historian_extraordinaire_desc": "Incredible! You have a historian's mind, perfectly placing events in time and space. The past holds no secrets from you!",
+    "historian_extraordinaire_desc": "Incredible!\nYou have a historian's mind, perfectly placing events in time and space.\nThe past holds no secrets from you!\n",
     "time_travel_expert": "Time Travel Expert",
-    "time_travel_expert_desc": "Fantastic work! You have a strong grasp of history and a great sense of time. Just a few tweaks, and you'll be a master!",
+    "time_travel_expert_desc": "Fantastic work!\nYou have a strong grasp of history and a great sense of time.\nJust a few tweaks, and you'll be a master!\n",
     "history_enthusiast": "History Enthusiast",
-    "history_enthusiast_desc": "Well done! You're developing a keen historical sense. A little more practice, and you'll be placing events like a pro!",
+    "history_enthusiast_desc": "Well done! You're developing a keen historical sense. \nA little more practice, and you'll be placing events like a pro!\n",
     "history_explorer": "History Explorer",
-    "history_explorer_desc": "You're on your way! History is vast and complex, and every attempt sharpens your skills. Keep playing and learning!",
+    "history_explorer_desc": "You're on your way!\nHistory is vast and complex, and every\n attempt sharpens your skills.\nKeep playing and learning!\n",
     "time_traveler_training": "Time Traveler in Training",
-    "time_traveler_training_desc": "Don't be discouraged! Even the greatest historians had to start somewhere. Keep playing, and history will reveal its patterns to you!",
+    "time_traveler_training_desc": "Don't be discouraged!\nEven the greatest historians had to start somewhere.\nKeep plnaying, and history will reveal its patterns to you!\n",
     "close": "Close",
     "score_breakdown": "Score Breakdown",
     "perfect_score_bonus": "Perfect Score Bonus",
@@ -36,6 +36,8 @@
     "see_you_tomorrow": "See you tomorrow!",
     "history_unfolds": "History unfolds one day at a time! Return tomorrow for new events from the past.",
     "come_back_tomorrow": "Come back tomorrow to play again!",
-    "bce": "BCE"
+    "bce": "BCE",
+    "read_more": "Read more",
+    "year": "Year"
   }
   
