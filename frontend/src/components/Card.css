@@ -135,7 +135,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(12px, 1.8vw, 16px);
+  font-size: clamp(12px, 1.8vw, 17px);
   font-weight: bold;
   color: var(--text-color-primary);
   padding: 3px 10px;
@@ -143,6 +143,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: wrap;
+}
+
+.card-name-back.lang_en {
+  font-size: clamp(12px, 1.8vw, 15px);
 }
 
 .card-date {
@@ -161,7 +165,7 @@
   height: 31%;
   background: var(--purple-dark);
   padding: 2px;
-  font-size: clamp(10px, 1.4vw, 14px);
+  font-size: clamp(10px, 1.4vw, 13px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,6 +173,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: wrap;
+}
+
+.card-details.lang_en {
+  font-size: clamp(10px, 1.4vw, 14px);
 }
 
 .flash {
