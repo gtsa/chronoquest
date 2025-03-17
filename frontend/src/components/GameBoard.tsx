@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "./Card.tsx";
+import { EventType } from "../types/eventTypes"; 
 import Modal from "react-modal";
 import { getScoreMessage } from "../utils/scoreFeedback";
 import "./GameBoard.css";
 import { useTranslation } from "react-i18next";
+import { formatDate } from "../utils/formatDate";
 
 Modal.setAppElement("#root");
 
@@ -14,7 +16,7 @@ type GameBoardProps = {
 };
 
 const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [events, setEvents] = useState<Array<{
     id: number;
     name_en: string;
@@ -25,14 +27,18 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     imageurl: string;
     riddle_en: string;
     riddle_el: string;
-    wikipediaUrl: string;
+    wikipediaurl: string;
+    details_en: string;
+    details_el: string;
   }>>([]);
   const [hintUsed, setHintUsed] = useState<boolean>(false);
   const [score, setScore] = useState<number | null>(null);
   const [scoreMessage, setScoreMessage] = useState<string[]>(["Processing your results..."]);
   const [correctOrder, setCorrectOrder] = useState<number[]>([]);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalFeedbackOpen, setModalFeedbackOpen] = useState<boolean>(false);
+  const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
+  const [modalEventOpen, setModalEventOpen] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [cardResults, setCardResults] = useState<Record<number, boolean>>({});
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
@@ -113,7 +119,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       setCorrectOrder(result.correctOrder);
       setIsCorrect(result.correct);
       setSubmitted(true);
-      setModalOpen(true);
+      setModalFeedbackOpen(true);
       setScoreMessage(getScoreMessage(result.score, hintUsed));
 
       const correctnessMap: Record<number, boolean> = {};
@@ -127,9 +133,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     }
   };
 
-    // 🔹 Close modal
-  const closeModal = () => {
-    setModalOpen(false);
+    // 🔹 Close Feedback Modal
+  const closeFeedbackModal = () => {
+    setModalFeedbackOpen(false);
     setTimeout(() => {
       setEvents((prevEvents) =>
         correctOrder.map((id: number) => prevEvents.find((e) => e.id === id)!)
@@ -160,6 +166,15 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     }
   };
 
+  const openEventModal = (event: EventType) => {
+    setSelectedEvent(event);
+    setModalEventOpen(true);
+  };
+
+  const closeEventModal = () => {
+    setModalEventOpen(false);
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="game-board-container">
@@ -174,7 +189,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         ) : (
           <>
             {!submitted && <h2>{t("reorder_events")}</h2>}
-            {submitted && !modalOpen && finalMessage && <h2>{finalMessage}</h2>}
+            {submitted && !modalFeedbackOpen && finalMessage && <h2>{finalMessage}</h2>}
 
             <div className="indicators-buttons-box">
               <div className="difficulty-indicator">
@@ -185,14 +200,18 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                 <button 
                   onClick={handleHintClick} 
                   disabled={hintUsed || submitted}
-                  onMouseEnter={() => !hintUsed && setShowTooltip(true)}
-                  onMouseLeave={() => setShowTooltip(false)}
                 >
                   {hintUsed ? t("hint_used") : t("use_hint")}
                 </button>
-                
+                <span
+                  className={`info-icon-hint ${hintUsed || submitted ? "hide" : ""}`}
+                  onMouseEnter={() => !hintUsed && submitted && (true)}
+                  onMouseLeave={() => setShowTooltip(false)}
+                >
+                  ⓘ
+                </span>               
                 {!hintUsed && !submitted && showTooltip && (
-                  <div className="hint-tooltip">
+                  <div className={`hint-tooltip ${showTooltip ? "show" : ""}`}>
                     {
                       difficulty === 'easy' ? (
                         <>
@@ -228,6 +247,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                     difficulty={difficulty}
                     hintUsed={hintUsed}
                     highlightIds={hintHighlightIds}
+                    onCardClick={openEventModal}
                   />
                 ))}
             </div>
@@ -243,22 +263,23 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         )}
       </div>
 
+      {/* Feedback Modal  */}
       <Modal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        className={`modal ${isCorrect ? "success" : "failure"}`}
+        isOpen={modalFeedbackOpen}
+        onRequestClose={closeFeedbackModal}
+        className={`modal-feedback ${isCorrect ? "success" : "failure"}`}
         overlayClassName="modal-overlay"
       >
-        <div className="modal-content">
+        <div className="modal-feedback-content">
           <h2>{scoreMessage[0]}</h2>
           <p>
             {t("your_score")}: <strong>{score}</strong>
             <span
-              className="info-icon"
+              className="info-icon-feedback"
               onMouseEnter={() => setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
             >
-              ℹ️
+              ⓘ
             </span>
           </p>
           {showTooltip && (
@@ -272,10 +293,82 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
               </ul>
             </div>
           )}
-          <p>{scoreMessage[1]}</p>
-          <button className="close-btn" onClick={closeModal}>{t("close")}</button>
+          <p>
+            {scoreMessage[1] 
+              ? scoreMessage[1].split("\n").map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    <br />
+                  </span>
+                ))
+              : "Loading..."}
+          </p>
+          <div className="close-btn-container">
+            <button className="close-btn" onClick={closeFeedbackModal}>{t("close")}</button>
+          </div>
         </div>
       </Modal>
+
+      <Modal
+        isOpen={modalEventOpen}
+        onRequestClose={closeEventModal}
+        className="modal-event"
+        overlayClassName="modal-overlay"
+      >
+       
+        <div className="modal-event-content">
+          {selectedEvent && (
+            <>
+              {(() => {
+                const lang = i18n.language
+                const eventName = selectedEvent[`name_${lang}` as keyof typeof event] || selectedEvent.name_en;
+                const eventDescription = selectedEvent[`description_${lang}` as keyof typeof selectedEvent] || selectedEvent.description_en;
+                const eventDetails = selectedEvent[`details_${lang}` as keyof typeof selectedEvent] || selectedEvent.details_en;
+                const eventWikiUrl = selectedEvent.wikipediaurl;
+
+
+                return (
+                  <>
+                    <div className="modal-event-content-up">
+                      <h2>{eventName}</h2>
+                      <p>{eventDescription}</p>
+                      <p><strong>{t("year")}: </strong>{formatDate(selectedEvent.date)}</p>
+                    </div>
+                    <img
+                      src={selectedEvent.imageurl}
+                      alt={eventName}
+                    />
+                    <div className="modal-event-content-down">
+                      <span>
+                        {eventDetails}
+                        <br/>
+                        <a
+                          href={eventWikiUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {t("read_more")}
+                        </a>
+                      </span>
+                      {/* <span> The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. <br/>  */}
+                    </div>
+                    <div className="close-btn-container">
+                      <button className="close-btn" onClick={closeEventModal}>
+                        {t("close")}
+                      </button>
+                    </div>
+                  </>
+                );
+              })()}
+            </>
+          )}
+        </div>
+
+
+
+
+      </Modal>
+
     </DndProvider>
   );
 };

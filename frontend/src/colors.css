@@ -2,6 +2,8 @@
     --primary-color: #223b40;
     --secondary-color: #103951;
     --primary-dark-version: #051f2e;
+    --primary-extra-dark-version: #040708;
+    --primary-color-front-card: #010f11;
     --primary-light-version: #3e7a86;
     --primary-extra-light-version: #61dafbaa;
 
@@ -14,19 +16,23 @@
 
     --white-extra-transparent: rgba(255, 255, 255, 0.3);
     --used-grayed-out: #a4a5c4;
+    --used-extra-grayed-out:rgb(46, 46, 49);
 
     --flash-correct: rgba(18, 78, 31, 0.6);
     --correct-position:  #3e7a86;
     --false-position: #813156;
-    --correct-position-glare:  #3e7a8635;
-    --false-position-glare: #81315635;
-    --modal-success: #072200;
-    --modal-failure: #22000e;
+    --correct-position-glare:  #3e7a8655;
+    --false-position-glare: #af105b55;
+    --modal-feedback-success: #072200;
+    --modal-feedback-failure: #22000e;
     
     --text-color-primary: #fff;
     --text-color-secondary: #223b40;
     --white-color: #fff;
     --white-color-grayer: #ccc;
-    --button-details-color: #4a2867;
-    --purple-shadow: #4a2867a2;
+
+    --purple-primary: #4a2867;
+    --purple-front-card: #0a0113;
+    --purple-dark: #191a24e5;
+    --purple-shadow: #271b31a2;
   }
