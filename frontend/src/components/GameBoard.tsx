@@ -212,7 +212,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                 </button>
                 <span
                   className={`info-icon-hint ${hintUsed || submitted ? "hide" : ""}`}
-                  onMouseEnter={() => !hintUsed && submitted && (true)}
+                  onMouseEnter={() => !hintUsed && !submitted && setShowTooltip(true)}
                   onMouseLeave={() => setShowTooltip(false)}
                 >
                   ⓘ

@@ -170,18 +170,6 @@
   }
 }
 
-.info-icon-hint {
-  cursor: pointer;
-  margin-top: 0.2em;
-  margin-left: -0.5em;
-  position: absolute;
-  z-index: 5000;
-}
-
-.info-icon-hint.hide {
-  color: var(--used-extra-grayed-out)
-}
-
 .info-icon-feedback {
   margin-left: 8px;
   cursor: pointer;
@@ -273,26 +261,25 @@
   padding: 4px;
   border-radius: 4px;
   font-size: 14px;
-
-  /* Initial state: invisible */
-  opacity: 0;
-  visibility: hidden;
-
-  /* Apply transition only to opacity */
-  transition: opacity 1s ease-in-out;
 }
 
-.hint-tooltip.show {
-  opacity: 1;
-  visibility: visible;
+.info-icon-hint {
+  cursor: pointer;
+  margin-top: 0.2em;
+  margin-left: -0.4em;
+  position: absolute;
+  z-index: 5000;
+  cursor: default
 }
 
+.info-icon-hint.hide {
+  color: var(--used-extra-grayed-out);
+}
 
 .penalty-notice {
   font-style: italic;
   color: var(--text-color-primary);
 }
-
 
 .play-again-btn {
   padding: 12px 24px;
