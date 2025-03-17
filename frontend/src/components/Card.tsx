@@ -84,17 +84,18 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
               {cardResults[event.id] ? "✓" : "✕"}
             </div>
           )}
-          <div className="card-content">
+          
+          <div className={`card-content`}>
               <img 
                 src={event.imageurl} 
                 alt={String(eventName)} 
                 className="card-image"
               />
-            <div className={`card-name-back`}>{eventName}</div>
+            <div className={`card-name-back ${lang === 'en' ? 'lang_en' : ""}`}>{eventName}</div>
             <hr />
             <div className={`card-date`}>{formatDate(event.date)}</div>
             <hr />
-            <div className={`card-details`}>{eventDescription}</div>
+            <div className={`card-details ${lang === 'en' ? 'lang_en' : ""}`}>{eventDescription}</div>
           </div>
         </div>
       </div>
