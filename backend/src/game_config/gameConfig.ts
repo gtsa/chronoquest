@@ -8,9 +8,10 @@ export const gameConfig = {
   allCorrectBonus: 100,
   baseScoreCoefficient: 100,
   sameDateModeDefault: false,
-  oneGamePerDayMode: false,
+  restrictedNumberGamesPerDayMode: true,
+  maxAttempts: 10,
   levelDefault: 'easy',
-  httpsOn: false,
+  httpsOn: false
 };
 
 export type Level = "easy" | "hard";

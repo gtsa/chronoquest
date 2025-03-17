@@ -31,8 +31,8 @@ async function getOrCreateGuestId(req: Request, res: Response) {
  * Middleware to check if the player has already played today
  */
 async function canPlayToday(req: Request, res: Response, next: NextFunction) {
-    if (!gameConfig.oneGamePerDayMode) { // ⬅️ Bypass restriction if disabled
-        console.log("One game per day mode is OFF. Skipping check.");
+    if (!gameConfig.restrictedNumberGamesPerDayMode) { // ⬅️ Bypass restriction if disabled
+        console.log("Restricted number of games per day mode is OFF. Skipping check.");
         return next();
     }
 
@@ -45,8 +45,8 @@ async function canPlayToday(req: Request, res: Response, next: NextFunction) {
 
     const playCount = parseInt(result.rows[0].count, 10);
     
-    if (playCount !== 0) {
-        return res.status(403).json({ message: "You have already played today! Come back tomorrow." });
+    if (playCount >= gameConfig.maxAttempts) {
+        return res.status(403).json({ message: "You have already played the maximum times today! Come back tomorrow." });
     }
 
     next();
@@ -57,14 +57,17 @@ async function canPlayToday(req: Request, res: Response, next: NextFunction) {
  */
 router.post("/start", canPlayToday, async (req, res) => {
     const guestId = await getOrCreateGuestId(req, res);
+    let playCount = 0
 
-    if (gameConfig.oneGamePerDayMode) {
+    if (gameConfig.restrictedNumberGamesPerDayMode) {
         await pool.query(`INSERT INTO game_attempts (guest_id) VALUES ($1)`, [guestId]);
+        const result = await pool.query(`SELECT COUNT(*) FROM game_attempts WHERE guest_id = $1`, [guestId]);
+        playCount = parseInt(result.rows[0].count, 10);
     } else {
         console.log("Skipping game attempt logging since oneGamePerDayMode is OFF.");
     }
 
-    res.json({ message: "Game started!" });
+    res.json({ message: "Game started!", attempts: playCount, maxAttempts: gameConfig.maxAttempts});
 });
 
 export default router;

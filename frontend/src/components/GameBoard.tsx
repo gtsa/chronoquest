@@ -39,6 +39,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   const [modalFeedbackOpen, setModalFeedbackOpen] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
   const [modalEventOpen, setModalEventOpen] = useState<boolean>(false);
+  const [playAttempts, setPlayAttempts] = useState<number>(0);
+  const [maxAttempts, setMaxAttempts] = useState<number>(0);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [cardResults, setCardResults] = useState<Record<number, boolean>>({});
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
@@ -59,21 +61,25 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ difficulty }),
         });
-
-        const check = await response.json();
-
-        // If the server says we've already played, show an error
+  
+        const data = await response.json();
+  
+        // Handle play limit
         if (response.status === 403) {
-          setErrorMessage(check.message);
+          setErrorMessage(data.message);
           setLoading(false);
           return;
         }
-
-        // If allowed, fetch the actual events
+  
+        // ✅ Set the number of attempts from backend response
+        setPlayAttempts(data.attempts || 0);
+        setMaxAttempts(data.maxAttempts);
+  
+        // ✅ Fetch the actual events
         const eventsResponse = await fetch("http://localhost:5000/api/events");
-        const data = await eventsResponse.json();
-        setEvents(data.events);
-
+        const eventsData = await eventsResponse.json();
+        setEvents(eventsData.events);
+  
         setTimeout(() => {
           setShowCards(true);
           setLoading(false);
@@ -84,9 +90,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         setLoading(false);
       }
     };
-
+  
     checkGameAvailability();
   }, [difficulty]);
+  
 
   // 🔹 Drag and drop move
   const moveCard = (dragIndex: number, hoverIndex: number) => {
@@ -143,7 +150,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       setFlippedCards(false);
       setTimeout(() => setFlippedCards(true), 300);
     }, 300);
-    setFinalMessage(`${scoreMessage[0]}... ${t("you_scored")} ${score} ${t("points")}. ${t("see_you_tomorrow")}`);
+    setFinalMessage(`${scoreMessage[0]}... ${t("you_scored")} ${score} ${t("points")}.`);
   };
 
   // 🔹 Hint Button Handler 
@@ -253,12 +260,27 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
             </div>
 
             <div className="submit-container">
-              {!submitted && (
+              {!submitted ? (
                 <button className="submit-btn" onClick={submitOrder}>
                   {t("submit_order")}
                 </button>
+              ) : playAttempts < maxAttempts ? (
+                <div className="play-again-wrapper">
+                  <button className="play-again-btn" onClick={() => window.location.reload()}>
+                    {t("play_again")}
+                  </button>
+                  <p><br/>{t("remaining_attempts", { count: maxAttempts-playAttempts, plural: true  })}</p>
+
+                </div>
+              ) : (
+                <p>{t("see_you_tomorrow")}</p>
               )}
             </div>
+
+
+
+
+
           </>
         )}
       </div>
