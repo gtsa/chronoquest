@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS events (
   location VARCHAR(255) NOT NULL,
   description_en TEXT,
   description_el TEXT,
-  imageUrl VARCHAR(255) NOT NULL,
+  image_path VARCHAR(255) NOT NULL,
   riddle_en TEXT,
   riddle_el TEXT,
-  wikipediaUrl TEXT,
+  wikipedia_url TEXT,
   details_en TEXT,
   details_el TEXT
 );

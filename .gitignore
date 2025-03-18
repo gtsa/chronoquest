@@ -7,3 +7,6 @@ dist/
 **/.dockerignore
 .vscode/
 backend/cookies.txt
+
+backend/public/images/*
+!public/images/.gitkeep 
