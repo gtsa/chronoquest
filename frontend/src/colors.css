@@ -19,10 +19,11 @@
     --used-extra-grayed-out:rgb(46, 46, 49);
 
     --flash-correct: rgba(18, 78, 31, 0.6);
-    --correct-position:  #3e7a86;
-    --false-position: #813156;
+    --correct-position:  #1faa5e;
+    --wrong-position: #813131;
+    --wrong-position2: #9b5656;
     --correct-position-glare:  #3e7a8655;
-    --false-position-glare: #af105b55;
+    --wrong-position-glare: #af105b55;
     --modal-feedback-success: #072200;
     --modal-feedback-failure: #22000e;
     
@@ -35,4 +36,6 @@
     --purple-front-card: #0a0113;
     --purple-dark: #191a24e5;
     --purple-shadow: #271b31a2;
+    --purple-shadow-dront-card: #4c365ea2;
+    --purple-logo: #7e1ecc93;
   }
