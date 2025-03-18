@@ -3,12 +3,19 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import eventRoutes from "./routes/events";
 import gameAttemptsRoutes from "./routes/gameAttempts";
-import path from 'path';
+import path from "path";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+const PROTOCOL = process.env.PROTOCOL
+const DOMAIN = process.env.DOMAIN
 
 // Enable CORS for frontend requests
-const allowedOrigins = ["http://localhost:4173", "http://localhost:5173"];
+const allowedOrigins = [`${PROTOCOL}://${DOMAIN}:4173`, `${PROTOCOL}://${DOMAIN}:5173`];
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -35,8 +42,7 @@ app.get("/", (req, res) => {
 app.use("/api/events", eventRoutes);
 app.use("/api/game", gameAttemptsRoutes);
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-  console.log(`Serving images from http://localhost:${port}/images/`);
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PROTOCOL}://${DOMAIN}:${PORT}`);
+  console.log(`Serving images from ${PROTOCOL}://${DOMAIN}:${PORT}/images/`);
 });

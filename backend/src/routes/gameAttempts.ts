@@ -3,9 +3,12 @@ import { Request, Response, NextFunction } from "express";
 import { gameConfig } from "../game_config/gameConfig";
 import pool from '../db';
 import { v4 as uuidv4 } from "uuid";
-import { log } from "console";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const router = express.Router();
+const isProduction = process.env.NODE_ENV === "production";
 
 /**
  * Get or create a unique guest ID
@@ -18,7 +21,7 @@ async function getOrCreateGuestId(req: Request, res: Response) {
         guestId = uuidv4();
         res.cookie("guest_id", guestId, {
             httpOnly: true,
-            secure: gameConfig.httpsOn? true : false,
+            secure: isProduction,
             sameSite: "strict",
             path: "/"
         });

@@ -9,6 +9,8 @@ import "./GameBoard.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../utils/formatDate";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; 
+
 Modal.setAppElement("#root");
 
 type GameBoardProps = {
@@ -31,6 +33,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     details_en: string;
     details_el: string;
   }>>([]);
+
   const [hintUsed, setHintUsed] = useState<boolean>(false);
   const [score, setScore] = useState<number | null>(null);
   const [scoreMessage, setScoreMessage] = useState<string[]>(["Processing your results..."]);
@@ -49,13 +52,13 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
-  const [hintHighlightIds, setHintHighlightIds] = useState<number[]>([])
+  const [hintHighlightIds, setHintHighlightIds] = useState<number[]>([]);
 
   // 🔹 Check if the player is allowed to play today and fetch events
   useEffect(() => {
     const checkGameAvailability = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/game/start", {
+        const response = await fetch(`${API_BASE_URL}/api/game/start`, {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
@@ -64,19 +67,16 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   
         const data = await response.json();
   
-        // Handle play limit
         if (response.status === 403) {
           setErrorMessage(data.message);
           setLoading(false);
           return;
         }
   
-        // ✅ Set the number of attempts from backend response
         setPlayAttempts(data.attempts || 0);
         setMaxAttempts(data.maxAttempts);
   
-        // ✅ Fetch the actual events
-        const eventsResponse = await fetch("http://localhost:5000/api/events");
+        const eventsResponse = await fetch(`${API_BASE_URL}/api/events`);
         const eventsData = await eventsResponse.json();
         setEvents(eventsData.events);
   
@@ -92,10 +92,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     };
   
     checkGameAvailability();
-  }, [difficulty]);
+  }, [API_BASE_URL, difficulty]);
   
 
-  // 🔹 Drag and drop move
+  // 🔹 Drag & Drop move
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     if (submitted) return;
     const updatedEvents = [...events];
@@ -107,7 +107,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   // 🔹 Submit to check correctness
   const submitOrder = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/events/validate_order", {
+      const response = await fetch(`${API_BASE_URL}/api/events/validate_order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -140,12 +140,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     }
   };
 
-    // 🔹 Close Feedback Modal
+  // 🔹 Close Feedback Modal
   const closeFeedbackModal = () => {
     setModalFeedbackOpen(false);
     setTimeout(() => {
       setEvents((prevEvents) =>
-        correctOrder.map((id: number) => prevEvents.find((e) => e.id === id)!)
+        correctOrder.map((id: number) =>
+          prevEvents.find((e) => e.id === id)!
+        )
       );
       setFlippedCards(false);
       setTimeout(() => setFlippedCards(true), 300);
@@ -155,21 +157,18 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
 
   // 🔹 Hint Button Handler 
   const handleHintClick = () => {
-    
     setHintUsed(true);
 
     if (difficulty === "easy") {
-      
       const sortedByDate = [...events].sort(
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
       );
       
-    const correctlyPlacedIds = events
-      .map((event, index) => (event.id === sortedByDate[index]?.id ? event.id : null))
-      .filter((id): id is number => id !== null);
+      const correctlyPlacedIds = events
+        .map((event, index) => (event.id === sortedByDate[index]?.id ? event.id : null))
+        .filter((id): id is number => id !== null);
 
-    setHintHighlightIds(correctlyPlacedIds);
-
+      setHintHighlightIds(correctlyPlacedIds);
     }
   };
 
@@ -206,7 +205,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
               <div className="hint-container">
                 <button 
                   onClick={handleHintClick} 
-                  disabled={hintUsed || submitted}f
+                  disabled={hintUsed || submitted}
                 >
                   {hintUsed ? t("hint_used") : t("use_hint")}
                 </button>
@@ -219,17 +218,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                 </span>               
                 {!hintUsed && !submitted && showTooltip && (
                   <div className={`hint-tooltip ${showTooltip ? "show" : ""}`}>
-                    {
-                      difficulty === 'easy' ? (
-                        <>
-                          {t("hint_correct_cards")}
-                        </>
-                      ) : (
-                        <>
-                          {t("hint_reveal_description")}
-                        </>
-                      )
-                    }
+                    {difficulty === 'easy' ? (
+                      <>{t("hint_correct_cards")}</>
+                    ) : (
+                      <>{t("hint_reveal_description")}</>
+                    )}
                     <br />
                     <div className="penalty-notice">
                       {t("hint_penalty_info")}
@@ -269,18 +262,12 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                   <button className="play-again-btn" onClick={() => window.location.reload()}>
                     {t("play_again")}
                   </button>
-                  <p><br/>{t("remaining_attempts", { count: maxAttempts-playAttempts, plural: true  })}</p>
-
+                  <p><br />{t("remaining_attempts", { count: maxAttempts-playAttempts, plural: true  })}</p>
                 </div>
               ) : (
                 <p>{t("see_you_tomorrow")}</p>
               )}
             </div>
-
-
-
-
-
           </>
         )}
       </div>
@@ -337,58 +324,51 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         className="modal-event"
         overlayClassName="modal-overlay"
       >
-       
         <div className="modal-event-content">
-          {selectedEvent && (
-            <>
-              {(() => {
-                const lang = i18n.language
-                const eventName = selectedEvent[`name_${lang}` as keyof typeof event] || selectedEvent.name_en;
-                const eventDescription = selectedEvent[`description_${lang}` as keyof typeof selectedEvent] || selectedEvent.description_en;
-                const eventDetails = selectedEvent[`details_${lang}` as keyof typeof selectedEvent] || selectedEvent.details_en;
-                const eventWikiUrl = selectedEvent.wikipedia_url;
+          {selectedEvent && (() => {
+            const lang = i18n.language;
+            const eventName =
+              selectedEvent[`name_${lang}` as keyof typeof selectedEvent] ||
+              selectedEvent.name_en;
+            const eventDescription =
+              selectedEvent[`description_${lang}` as keyof typeof selectedEvent] ||
+              selectedEvent.description_en;
+            const eventDetails =
+              selectedEvent[`details_${lang}` as keyof typeof selectedEvent] ||
+              selectedEvent.details_en;
+            const eventWikiUrl = selectedEvent.wikipedia_url;
 
-                return (
-                  <>
-                    <div className="modal-event-content-up">
-                      <h2>{eventName}</h2>
-                      <p>{eventDescription}</p>
-                      <p><strong>{t("year")}: </strong>{formatDate(selectedEvent.date)}</p>
-                    </div>
-                    <img
-                      src={selectedEvent.image_path}
-                      alt={eventName}
-                    />
-                    <div className="modal-event-content-down">
-                      <span>
-                        {eventDetails}
-                        <br/>
-                        <a
-                          href={eventWikiUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {t("read_more")}
-                        </a>
-                      </span>
-                    </div>
-                    <div className="close-btn-container">
-                      <button className="close-btn" onClick={closeEventModal}>
-                        {t("close")}
-                      </button>
-                    </div>
-                  </>
-                );
-              })()}
-            </>
-          )}
+            return (
+              <>
+                <div className="modal-event-content-up">
+                  <h2>{eventName}</h2>
+                  <p>{eventDescription}</p>
+                  <p><strong>{t("year")}:</strong> {formatDate(selectedEvent.date)}</p>
+                </div>
+                <img src={selectedEvent.image_path} alt={eventName} />
+                <div className="modal-event-content-down">
+                  <span>
+                    {eventDetails}
+                    <br />
+                    <a
+                      href={eventWikiUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t("read_more")}
+                    </a>
+                  </span>
+                </div>
+                <div className="close-btn-container">
+                  <button className="close-btn" onClick={closeEventModal}>
+                    {t("close")}
+                  </button>
+                </div>
+              </>
+            );
+          })()}
         </div>
-
-
-
-
       </Modal>
-
     </DndProvider>
   );
 };
