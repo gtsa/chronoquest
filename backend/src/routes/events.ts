@@ -3,18 +3,33 @@ import dayjs from 'dayjs';
 import pool from '../db';
 import { calculateScore } from '../utils/scoreCalculator';
 import { gameConfig, Level } from '../game_config/gameConfig';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+
+// We’re defaulting to "http" & "localhost" if they aren’t found in .env
+const PROTOCOL = process.env.PROTOCOL || 'http';
+const DOMAIN = process.env.DOMAIN || 'localhost';
+const BACKEND_PORT = process.env.PORT || '5000';
+
+// Construct the backend URL from these values.
+const BACKEND_URL = `${PROTOCOL}://${DOMAIN}:${BACKEND_PORT}`;
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const level = (req.query.level === "easy" || req.query.level === "hard") ? (req.query.level as Level) : gameConfig.levelDefault;
+  const level = (req.query.level === "easy" || req.query.level === "hard")
+    ? (req.query.level as Level)
+    : gameConfig.levelDefault;
 
-
-  // Get `sameDateMode` from query, but use default if not present
-  const sameDateModeRaw = req.query.sameDateMode !== undefined ? req.query.sameDateMode : gameConfig.sameDateModeDefault;
+  // Decide if sameDateMode is enabled
+  const sameDateModeRaw = req.query.sameDateMode !== undefined
+    ? req.query.sameDateMode
+    : gameConfig.sameDateModeDefault;
   const sameDateMode = sameDateModeRaw === 'true';
 
-  // Fixed number of cards for all difficulty levels
+  // Fixed number of cards
   const limit = gameConfig.numCards;
 
   try {
@@ -22,22 +37,27 @@ router.get('/', async (req, res) => {
     let params: any[] = [limit];
 
     if (sameDateMode === true) {
-
       // Get today's day and month
       const today = dayjs();
       const day = today.date();
       const month = today.month() + 1;
 
-      query = `SELECT * FROM events WHERE EXTRACT(DAY FROM date) = $2 AND EXTRACT(MONTH FROM date) = $3 ORDER BY RANDOM() LIMIT $1`;
+      query = `SELECT * FROM events
+               WHERE EXTRACT(DAY FROM date) = $2
+                 AND EXTRACT(MONTH FROM date) = $3
+               ORDER BY RANDOM()
+               LIMIT $1`;
       params = [limit, day, month];
     }
 
     const result = await pool.query(query, params);
 
+    // Build full image path using the dynamic BACKEND_URL
     const events = result.rows.map(event => ({
       ...event,
-      image_path: `http://localhost:5000/images/${event.image_path}`,
+      image_path: `${BACKEND_URL}/images/${event.image_path}`,
     }));
+
     res.json({ level, events });
   } catch (error) {
     console.error('Error fetching events:', error);
