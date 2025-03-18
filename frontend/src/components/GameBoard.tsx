@@ -48,8 +48,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   const [cardResults, setCardResults] = useState<Record<number, boolean>>({});
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
-  const [showCards, setShowCards] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [showCards, setShowCards] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
   const [hintHighlightIds, setHintHighlightIds] = useState<number[]>([]);
@@ -94,14 +94,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     checkGameAvailability();
   }, [API_BASE_URL, difficulty]);
   
-
-  // 🔹 Drag & Drop move
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     if (submitted) return;
-    const updatedEvents = [...events];
-    const [removed] = updatedEvents.splice(dragIndex, 1);
-    updatedEvents.splice(hoverIndex, 0, removed);
-    setEvents(updatedEvents);
+    setEvents((prevEvents) => {
+      const updatedEvents = [...prevEvents];
+      const [removed] = updatedEvents.splice(dragIndex, 1);
+      updatedEvents.splice(hoverIndex, 0, removed);
+      return updatedEvents;
+    });
   };
 
   // 🔹 Submit to check correctness
@@ -149,8 +149,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
           prevEvents.find((e) => e.id === id)!
         )
       );
-      setFlippedCards(false);
-      setTimeout(() => setFlippedCards(true), 300);
+
+      setTimeout(() => setFlippedCards(true), 600);
     }, 300);
     setFinalMessage(`${scoreMessage[0]}... ${t("you_scored")} ${score} ${t("points")}.`);
   };
@@ -195,6 +195,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         ) : (
           <>
             {!submitted && <h2>{t("reorder_events")}</h2>}
+            {submitted && modalFeedbackOpen && <h2>&nbsp;</h2>}
             {submitted && !modalFeedbackOpen && finalMessage && <h2>{finalMessage}</h2>}
 
             <div className="indicators-buttons-box">
@@ -276,7 +277,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       <Modal
         isOpen={modalFeedbackOpen}
         onRequestClose={closeFeedbackModal}
-        className={`modal-feedback ${isCorrect ? "success" : "failure"}`}
+        className={`modal-feedback ${isCorrect ? "success" : "failure"} ${modalFeedbackOpen ? "show" : "hide"}`}
         overlayClassName="modal-overlay"
       >
         <div className="modal-feedback-content">
@@ -345,7 +346,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                   <p>{eventDescription}</p>
                   <p><strong>{t("year")}:</strong> {formatDate(selectedEvent.date)}</p>
                 </div>
-                <img src={selectedEvent.image_path} alt={eventName} />
+                <img src={selectedEvent.image_path} alt={eventName as string} />
                 <div className="modal-event-content-down">
                   <span>
                     {eventDetails}
