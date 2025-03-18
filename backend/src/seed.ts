@@ -139,7 +139,7 @@ async function seed() {
           'Ηνωμένες Πολιτείες',
           'Simon & Garfunkel recorded "The Sound of Silence," which became an iconic anthem of the 1960s.',
           'Οι Simon & Garfunkel ηχογράφησαν το "The Sound of Silence," το οποίο έγινε εμβληματικός ύμνος της δεκαετίας του 1960.',
-          'backend/public03_10_sound_of_silence.jpg',
+          '03_10_sound_of_silence.jpg',
           'Hello darkness, my old friend.',
           'Hello darkness, my old friend.',
           'https://en.wikipedia.org/wiki/The_Sound_of_Silence',
