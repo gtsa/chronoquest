@@ -33,7 +33,12 @@ router.get('/', async (req, res) => {
     }
 
     const result = await pool.query(query, params);
-    res.json({ level, events: result.rows });
+
+    const events = result.rows.map(event => ({
+      ...event,
+      image_path: `http://localhost:5000/images/${event.image_path}`,
+    }));
+    res.json({ level, events });
   } catch (error) {
     console.error('Error fetching events:', error);
     res.status(500).json({ error: 'Failed to fetch events' });
@@ -42,11 +47,11 @@ router.get('/', async (req, res) => {
 
 // POST /events - create a new event
 router.post('/', async (req, res) => {
-  const { name, date, location, description, imageUrl } = req.body;
+  const { name, date, location, description, image_path } = req.body;
   try {
     const result = await pool.query(
-      'INSERT INTO events (name, date, location, description, imageUrl) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [name, date, location, description, imageUrl]
+      'INSERT INTO events (name, date, location, description, image_path) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [name, date, location, description, image_path]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {

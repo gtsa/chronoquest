@@ -5,10 +5,10 @@ export interface EventType {
     date: string;
     description_en: string;
     description_el: string;
-    imageurl: string;
+    image_path: string;
     riddle_en: string;
     riddle_el: string;
-    wikipediaurl: string;
+    wikipedia_url: string;
     details_en: string;
     details_el: string;
   }

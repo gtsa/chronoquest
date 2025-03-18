@@ -24,10 +24,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     date: string;
     description_en: string;
     description_el: string;
-    imageurl: string;
+    image_path: string;
     riddle_en: string;
     riddle_el: string;
-    wikipediaurl: string;
+    wikipedia_url: string;
     details_en: string;
     details_el: string;
   }>>([]);
@@ -346,8 +346,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                 const eventName = selectedEvent[`name_${lang}` as keyof typeof event] || selectedEvent.name_en;
                 const eventDescription = selectedEvent[`description_${lang}` as keyof typeof selectedEvent] || selectedEvent.description_en;
                 const eventDetails = selectedEvent[`details_${lang}` as keyof typeof selectedEvent] || selectedEvent.details_en;
-                const eventWikiUrl = selectedEvent.wikipediaurl;
-
+                const eventWikiUrl = selectedEvent.wikipedia_url;
 
                 return (
                   <>
@@ -357,7 +356,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                       <p><strong>{t("year")}: </strong>{formatDate(selectedEvent.date)}</p>
                     </div>
                     <img
-                      src={selectedEvent.imageurl}
+                      src={selectedEvent.image_path}
                       alt={eventName}
                     />
                     <div className="modal-event-content-down">
@@ -372,7 +371,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                           {t("read_more")}
                         </a>
                       </span>
-                      {/* <span> The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. The dot-com bubble peaked, leading to the collapse of tech stocks and a burst in the internet market. <br/>  */}
                     </div>
                     <div className="close-btn-container">
                       <button className="close-btn" onClick={closeEventModal}>
