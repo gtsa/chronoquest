@@ -103,7 +103,7 @@
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px var(--black-extra-transparent);
   z-index: 1001;
   text-align: center;
 }
@@ -239,8 +239,8 @@
 }
 
 .hint-container button:hover {
-    transform: scale(1.05);
-    background: var(--background-extra-dark);
+  transform: scale(1.05);
+  background: var(--background-extra-dark);
 }
 
 .hint-container button[disabled] {
@@ -310,5 +310,5 @@
 
 .play-again-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 6px 10px var(--black-extra-transparent);
 }
