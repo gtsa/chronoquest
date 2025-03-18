@@ -52,7 +52,7 @@
   
   /* Optional 'round' styling for the track */
   .slider.round {
-    border-radius: 34px;
+    border-radius: 30em;
   }
   .slider.round:before {
     border-radius: 50%;

@@ -19,7 +19,6 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ isChecked, onToggle, label 
         <span className="slider round"></span>
       </label>
 
-      {/* If a label is passed, show it next to the toggle */}
       {label && (
         <span className="toggle-label">
           {label}
