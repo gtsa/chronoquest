@@ -39,7 +39,7 @@
     "bce": "π.Χ.",
     "read_more": "Μάθε περισσσότερα",
     "year": "Χρονιά",
-    "remaining_attempts_one": "Απομένει {{count}} προσπάθεια σήμερα.",
-    "remaining_attempts_other": "Απομένουν {{count}} προσπάθειες σήμερα."
+    "remaining_attempts_one": "Απομένει {{count}} προσπάθεια σήμερα",
+    "remaining_attempts_other": "Απομένουν {{count}} προσπάθειες σήμερα"
   }
   
