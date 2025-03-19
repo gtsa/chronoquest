@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: -10px;
+  margin-top: -20px;
 }
 
 .game-board {
@@ -16,11 +16,13 @@
   justify-content: center;
   position: relative;
   gap: clamp(-30px, 2vw, 15px);
+  margin-top: -20px;
   padding: 20px;
   flex-wrap: nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
   z-index: 1;
+  max-width: min(90vw, 1600px);
 }
 
 .submit-container {
@@ -169,6 +171,7 @@
   align-items: center;
   position: absolute;
   width: 100%;
+  margin-left: -10px;
 }
 
 .close-btn {
@@ -180,8 +183,6 @@
   cursor: pointer;
   position: relative;
 }
-
-
 
 .close-btn:hover {
   background-color: var(--secondary-color);
@@ -212,6 +213,9 @@
   font-size: 14px;
   box-shadow: 0px 2px 10px var(--black-extra-transparent);
   max-width: 250px;
+  z-index: 1;
+  border-radius: 8px;
+  border: 1px solid var(--primary-extra-light-version)
 }
 
 .loading-spinner {
@@ -253,6 +257,7 @@
   position: absolute;
   top: 5px;
   right: 20px;
+  z-index: 2;
 }
 
 .hint-container button {
@@ -288,8 +293,12 @@
   background-color: var(--background-extra-dark);
   color: var(--text-color-primary);
   padding: 4px;
-  border-radius: 4px;
   font-size: 14px;
+  z-index: 3;
+  border-radius: 8px;
+  border: 1px solid var(--primary-extra-light-version);
+  text-wrap-mode: wrap;
+  background-color: var(--primary-light-version);
 }
 
 .info-icon-hint {
@@ -297,8 +306,9 @@
   margin-top: 0.2em;
   margin-left: -0.4em;
   position: absolute;
-  z-index: 5000;
+  z-index: 5;
   cursor: default;
+  opacity: 0.3;
 }
 
 .info-icon-hint.hide {
@@ -325,6 +335,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  z-index: 2;
 }
 
 .submit-btn {
@@ -335,9 +346,135 @@
   transition: transform 0.2s, box-shadow 0.2s;
   font-weight: bold;
   padding: 12px 24px;
+  z-index: 2;
 }
 
 .play-again-btn:hover {
   transform: scale(1.1);
   box-shadow: 0px 6px 10px var(--black-extra-transparent);
+}
+
+/* Responsive Adjustments */
+
+@media (max-width: 600px) {
+  .game-board {
+    transform: scale(110%);
+    padding-top: 80px;
+    padding-bottom: 100px;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    align-items: center;
+  }
+  .modal-feedback, .modal-event {
+    width: 90%;
+    max-width: 400px;
+    padding: 10px;
+  }
+  .submit-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 40px;
+  }
+  .flipped-cards-mark :is(.game-board) {
+    transform: scale(100%);
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .flipped-cards-mark :is(.submit-btn) {
+    bottom: 40px;
+  }
+  .flipped-cards-mark :is(.play-again-btn) {
+    bottom: 52px;
+  }
+  .flipped-cards-mark :is(.remaining-attempts) {
+    margin-top: 18px;
+  }
+  .submitted-mark.not-flipped-cards-mark :is(.remaining-attempts) {
+    margin-top: -30px;
+  }
+  .game-board.submitted-mark.not-flipped-cards-mark {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .game-board.submitted-mark {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .flipped-cards-mark :is(.game-board.submitted-mark) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .difficulty-indicator {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    display: inline-block;
+    margin-top: 12rem;
+    margin-left: -3.5rem;
+  }
+  .hint-container {
+    transform: rotate(90deg);
+    white-space: nowrap;
+    display: inline-block;
+    margin-top: 10rem;
+    margin-right: -2.5rem;
+  }
+  .hint-tooltip {
+    transform: rotate(-90deg);
+    position: absolute;
+    bottom: -130px;
+    width: 200%;
+    height: 360%;
+    margin-left: 130px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .game-board {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    align-items: center;
+  }
+  .modal-feedback, .modal-event {
+    max-width: 500px;
+  }
+  .flipped-cards-mark :is(.game-board) {
+    transform: scale(90%);
+    padding-top: 0px;
+    padding-bottom: 10px;   
+  }
+  .flipped-cards-mark :is(.play-again-btn) {
+    margin-top: -20px;
+  }
+  .flipped-cards-mark :is(.game-board) {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .game-board.submitted-mark.feedback-closed.not-flipped-cards-mark {
+    padding-left: 10px;
+    padding-bottom: 50px;
+  }
+  .game-board.submitted-mark.feedback-open.not-flipped-cards-mark {
+    padding-bottom: 50px;
+  }
+  .flipped-cards-mark :is(.game-board) {
+    padding-left: 54px;
+    padding-bottom: 0px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .game-board {
+    max-width: 1800px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .game-board {
+    max-width: 2000px;
+  }
 }
