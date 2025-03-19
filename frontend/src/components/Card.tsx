@@ -82,7 +82,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
           }
         }} 
       >
-        <div className={`card-inner`}>
+        <div className={`card-inner ${flipped ? "flipped" : ""}`}>
           <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""} ${flipped ? "flipped" : ""}`}>
             <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? eventRiddle : eventName}</div>
           </div>
@@ -93,17 +93,19 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
               </div>
             )}
             
-            <div className={`card-content`}>
-                <img 
-                  src={event.image_path} 
-                  alt={String(eventName)} 
-                  className="card-image"
-                />
-              <div className={`card-name-back ${lang === 'en' ? 'lang_en' : ""}`}>{eventName}</div>
-              <hr />
-              <div className={`card-date`}>{formatDate(event.date)}</div>
-              <hr />
-              <div className={`card-details ${lang === 'en' ? 'lang_en' : ""}`}>{eventDescription}</div>
+            <div className={`card-content ${flipped ? "flipped" : ""}`}>
+              <img 
+                src={event.image_path} 
+                alt={String(eventName)} 
+                className="card-image"
+              />
+              <div className="card-back-low">
+                <div className={`card-name-back ${lang === 'en' ? 'lang_en' : ""}`}>{eventName}</div>
+                <hr />
+                <div className={`card-date`}>{formatDate(event.date)}</div>
+                <hr />
+                <div className={`card-details ${lang === 'en' ? 'lang_en' : ""}`}>{eventDescription}</div>
+              </div>
             </div>
           </div>
         </div>

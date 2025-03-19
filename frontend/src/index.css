@@ -28,15 +28,18 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
   background: url("/background.webp") center/cover no-repeat fixed;
   background-blend-mode: darken;
   background-color: var(--background-overlay);
 }
+
 h1 {
-  font-size: 3.2em;
+  font-size: clamp(2em, 4vw, 3.2em);
   line-height: 1.1;
 }
 
@@ -57,4 +60,19 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  body {
+    background-size: cover;
+    background-attachment: scroll;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  button {
+    font-size: 0.9em;
+    padding: 0.4em 1em;
+  }
 }

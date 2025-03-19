@@ -3,15 +3,15 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  
 }
 
 .game-options {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 80px;
 }
 
 .start-button-container {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .play-btn {
@@ -21,6 +21,8 @@
   cursor: pointer;
   box-shadow: 0px 4px 6px var(--black-extra-transparent);
   transition: transform 0.2s, box-shadow 0.2s;
+  padding: 12px 24px;
+  border-radius: 8px;
 }
 
 .header {
@@ -34,4 +36,24 @@
   width: 72px;
   height: auto;
   filter: drop-shadow(0px 0px 10px var(--purple-logo));
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  #root {
+    padding: 1rem;
+  }
+  .play-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  .logo {
+    width: 50px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  #root {
+    max-width: 90%;
+  }
 }

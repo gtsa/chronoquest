@@ -183,7 +183,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="game-board-container">
+      <div className={`game-board-container ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
 
         {loading ? (
           <div className="loading-spinner"></div>
@@ -194,9 +194,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
           </div>
         ) : (
           <>
-            {!submitted && <h2>{t("reorder_events")}</h2>}
-            {submitted && modalFeedbackOpen && <h2>&nbsp;</h2>}
-            {submitted && !modalFeedbackOpen && finalMessage && <h2>{finalMessage}</h2>}
+            {!submitted && <h3>{t("reorder_events")}</h3>}
+            {submitted && modalFeedbackOpen && <h3>&nbsp;</h3>}
+            {submitted && !modalFeedbackOpen && finalMessage && <h3>{finalMessage}</h3>}
 
             <div className="indicators-buttons-box">
               <div className="difficulty-indicator">
@@ -234,7 +234,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
 
             </div>
 
-            <div className="game-board">
+            <div className={`game-board ${submitted ? "submitted-mark" : ""} ${modalFeedbackOpen ? "feedback-open" : "feedback-closed"} ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
               {showCards &&
                 events.map((event, index) => (
                   <Card
@@ -263,7 +263,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                   <button className="play-again-btn" onClick={() => window.location.reload()}>
                     {t("play_again")}
                   </button>
-                  <p><br />{t("remaining_attempts", { count: maxAttempts-playAttempts, plural: true  })}</p>
+                  <p className="remaining-attempts"><br />{t("remaining_attempts", { count: maxAttempts-playAttempts, plural: true  })}</p>
                 </div>
               ) : (
                 <p>{t("see_you_tomorrow")}</p>

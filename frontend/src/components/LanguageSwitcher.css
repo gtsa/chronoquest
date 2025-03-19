@@ -29,3 +29,16 @@
   color: var(--primary-extra-light-version);
   transform: rotate(-90deg) scale(1.1);
 }
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .language-switcher {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    display: flex;
+    text-orientation: sideways;
+    flex-direction: column;
+    transform: translateY(-20%);
+  }
+}
