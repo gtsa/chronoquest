@@ -497,9 +497,10 @@
     max-width: 500px;
   }
   .flipped-cards-mark :is(.game-board) {
-    transform: scale(90%);
+    width: 90%; /* Reduce size without scaling */
+    max-width: 90vw;
     padding-top: 0px;
-    padding-bottom: 10px;   
+    padding-bottom: 10px;
   }
   .flipped-cards-mark :is(.play-again-btn) {
     margin-top: -20px;
@@ -518,8 +519,10 @@
     padding-bottom: 50px;
   }
   .flipped-cards-mark :is(.game-board) {
+    padding-top: 10px;
     padding-left: 54px;
     padding-bottom: 0px;
+    height: 628px;
   }
 }
 
