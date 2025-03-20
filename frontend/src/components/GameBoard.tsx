@@ -360,14 +360,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                     </a>
                   </span>
                 </div>
-                <div className="close-btn-container">
-                  <button className="close-btn" onClick={closeEventModal}>
-                    {t("close")}
-                  </button>
-                </div>
               </>
             );
           })()}
+        </div>
+        <div className="close-btn-container">
+          <button className="close-btn" onClick={closeEventModal}>
+            {t("close")}
+          </button>
         </div>
       </Modal>
     </DndProvider>
