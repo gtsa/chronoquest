@@ -141,9 +141,8 @@
   margin-bottom: -10px
 }
 
-.modal-event p{
+.modal-event-subtitle{
   line-height: 1.3;
-  /* margin-top: -10px */
 }
 
 .modal-event-content {
@@ -206,7 +205,6 @@
   text-align:justify;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  text-indent: 2em;
 }
 
 .close-btn-container {
