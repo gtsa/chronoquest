@@ -343,14 +343,13 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
               <>
                 <div className="modal-event-content-up">
                   <h2>{eventName}</h2>
-                  <p>{eventDescription}</p>
-                  <p><strong>{t("year")}:</strong> {formatDate(selectedEvent.date)}</p>
+                  <p className="modal-event-subtitle">{eventDescription}</p>
+                  <p className="modal-event-subtitle"><strong>{t("year")}:</strong> {formatDate(selectedEvent.date)}</p>
                 </div>
                 <img src={selectedEvent.image_path} alt={eventName as string} />
                 <div className="modal-event-content-down">
                   <span>
-                    {eventDetails}
-                    <br />
+                    <p dangerouslySetInnerHTML={{ __html: eventDetails }} />
                     <a
                       href={eventWikiUrl}
                       target="_blank"
