@@ -7,14 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
-// We’re defaulting to "http" & "localhost" if they aren’t found in .env
-const PROTOCOL = process.env.PROTOCOL || 'http';
-const DOMAIN = process.env.DOMAIN || 'localhost';
-const BACKEND_PORT = process.env.PORT || '5000';
-
-// Construct the backend URL from these values.
-const BACKEND_URL = `${PROTOCOL}://${DOMAIN}:${BACKEND_PORT}`;
+const PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:4173';
 
 const router = Router();
 
@@ -55,7 +48,7 @@ router.get('/', async (req, res) => {
     // Build full image path using the dynamic BACKEND_URL
     const events = result.rows.map(event => ({
       ...event,
-      image_path: `${BACKEND_URL}/images/${event.image_path}`,
+      image_path: `${PUBLIC_URL}/api/images/${event.image_path}`,
     }));
 
     res.json({ level, events });

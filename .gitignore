@@ -10,3 +10,5 @@ backend/cookies.txt
 
 backend/public/images/*
 !public/images/.gitkeep 
+shared/images/*
+!shared/images/.gitkeep

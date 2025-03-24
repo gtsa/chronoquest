@@ -15,7 +15,10 @@ const PROTOCOL = process.env.PROTOCOL
 const DOMAIN = process.env.DOMAIN
 
 // Enable CORS for frontend requests
-const allowedOrigins = [`${PROTOCOL}://${DOMAIN}:4173`, `${PROTOCOL}://${DOMAIN}:5173`];
+const allowedOrigins = [
+  `${PROTOCOL}://${DOMAIN}:4173`, 
+  `${PROTOCOL}://${DOMAIN}:5173`,
+  `${PROTOCOL}://${DOMAIN}`];
 
 app.use(cors({
     origin: function (origin, callback) {
@@ -27,11 +30,12 @@ app.use(cors({
     },
     credentials: true // ⬅️ Allow cookies and authentication headers
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
 // ✅ Serve images from the public folder
-app.use("/images", express.static(path.join(__dirname, "../public/images")));
+app.use("/api/images", express.static(path.join(__dirname, "../shared/images")));
 
 // Root route
 app.get("/", (req, res) => {
