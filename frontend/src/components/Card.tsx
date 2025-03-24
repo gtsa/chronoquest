@@ -63,19 +63,20 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
   const eventRiddle = event[`riddle_${lang}` as keyof typeof event] || event.riddle_en;
 
   return (
+
     <motion.div
-      layout
       transition={{ type: "spring", stiffness: 200, damping: 50 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
     >
+
       <div
         ref={ref}
         className={
           `card ${flipped ? "flipped" : ""}
-          ${highlightIds.includes(event.id) ? "flash" : ""}`}
-        style={{ opacity: isDragging ? 0.5 : 1 }}
+          ${highlightIds.includes(event.id) ? "flash" : ""}
+          ${isDragging ? "dragged" : ""}`}
         onClick={() => {
           if (flipped) {
             onCardClick(event);
