@@ -62,6 +62,15 @@
   ;
 }
 
+.card.dragged {
+  opacity: 0.5;
+  transform: scale(1.05)
+}
+
+.dragged :is(.card-front) {
+  border: 2px solid var(--purple-primary)
+}
+
 .card-back {
   transform: rotateY(180deg);
   color: var(--text-color-primary);

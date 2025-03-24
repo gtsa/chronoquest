@@ -1,7 +1,7 @@
 {
     "play": "Play",
     "submit_order": "Submit Chronological Order",
-    "reorder_events": "Reorder the Events described on the cards",
+    "reorder_events": "Drag the cards into chronological order",
     "use_hint": "Use Hint",
     "hint_used": "Hint Used",
     "hint_correct_cards": "See which cards are already in the correct position.",

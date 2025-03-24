@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 import Card from "./Card.tsx";
 import { EventType } from "../types/eventTypes"; 
 import Modal from "react-modal";
@@ -181,8 +182,15 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     setModalEventOpen(false);
   };
 
+  const isTouchDevice = () =>
+    typeof window !== "undefined" &&
+    ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
+  const backend = isTouchDevice() ? TouchBackend : HTML5Backend;
+  const backendOptions = isTouchDevice() ? { delayTouchStart: 3 } : undefined;
+
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={backend} options={backendOptions}>
       <div className={`game-board-container ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
 
         {loading ? (
