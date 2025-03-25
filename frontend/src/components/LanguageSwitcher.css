@@ -30,6 +30,11 @@
   transform: rotate(-90deg) scale(1.1);
 }
 
+.language-switcher button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 600px) {
   .language-switcher {
