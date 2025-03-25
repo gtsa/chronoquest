@@ -1,0 +1,33 @@
+.difficulty-toggle-wrapper {
+  display: inline-flex;
+  border: 1px solid var(--purple-primary);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 10px auto 10px;
+}
+
+.difficulty-option {
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.difficulty-option:not(:last-child) {
+  border-right: 1px solid var(--purple-primary);
+}
+
+.difficulty-option.active {
+  background: linear-gradient(90deg, var(--primary-color), var(--purple-primary));
+  color: #fff;
+  font-weight: 600;
+}
+
+.difficulty-option:focus {
+  outline: none;
+  box-shadow: none;
+}

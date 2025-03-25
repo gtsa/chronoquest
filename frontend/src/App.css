@@ -38,6 +38,10 @@
   filter: drop-shadow(0px 0px 10px var(--purple-logo));
 }
 
+.difficulty-label {
+  opacity: 0.8;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 600px) {
   #root {
