@@ -244,6 +244,26 @@
   transition: animation 0.3s;
 }
 
+.close-icon {
+  position: absolute;
+  left: auto;
+  top: 0px;
+  right: 0px;
+  font-size: 38px;
+  color: var(--primary-color);
+  cursor: pointer;
+  z-index: 1100;
+  padding: 0px 2.5px 3.5px 3.5px;
+  line-height: 0.6;
+  background: inherit;
+  border-radius: 50%;
+  transition: color 0.2s ease;
+}
+
+.close-icon:hover {
+  color: var(--primary-light-version);
+}
+
 @keyframes pulse {
   0% { opacity: 1; }
   50% { opacity: 0.5; }
