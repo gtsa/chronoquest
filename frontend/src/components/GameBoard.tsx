@@ -339,6 +339,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         className="modal-event"
         overlayClassName="modal-overlay"
       >
+         <div className="close-icon" onClick={closeEventModal}>
+          &times;
+        </div>
         <div className="modal-event-content">
           {selectedEvent && (() => {
             const lang = i18n.language;
