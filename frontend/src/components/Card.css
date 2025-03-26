@@ -230,21 +230,19 @@
 
 .card-badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 1.1em;
-  height: 1.1em;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  line-height:0em;
+  top: -2px;
+  right: -2px;
+  width: 75px;
+  height: 75px;
+  border-top-right-radius: inherit;
+  line-height: 1.5;
   font-size: 2em;
-  font-weight:bolder;
+  font-weight: bolder;
   color: var(--white-color);
-  background-color: var(--white-color);
   box-shadow: 0 2px 5px rgb(255, 255, 255, 0.2);
-  z-index: 1
+  z-index: 1;
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  text-indent: 1em;
 }
 
 .card-badge.correct {
@@ -357,9 +355,21 @@
   }
 
   .card-badge {
-    width: 0.8em;
-    height: 0.8em;
-    font-size: 1.8em;
-    z-index: 1
+    left: -2px;
+    clip-path: polygon(0% 0%, 0% 100%, 100% 0%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 1.2em;
+    font-size: 1.4em;
+    text-indent: -0.7em;
+  }
+
+  .card-back {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    margin: -8px -10px -10px -9px;
   }
 }
