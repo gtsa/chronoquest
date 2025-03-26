@@ -24,6 +24,7 @@ interface CardProps {
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
   flipped: boolean;
+  clickable: boolean;
   submitted: boolean;
   cardResults: Record<number, boolean>;
   difficulty: string;
@@ -32,7 +33,7 @@ interface CardProps {
   onCardClick: (event: EventType) => void;
 }
 
-const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResults, submitted, difficulty, hintUsed, highlightIds, onCardClick }) => {
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable, cardResults, submitted, difficulty, hintUsed, highlightIds, onCardClick }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { i18n } = useTranslation();
 
@@ -76,7 +77,8 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, cardResult
         className={
           `card ${flipped ? "flipped" : ""}
           ${highlightIds.includes(event.id) ? "flash" : ""}
-          ${isDragging ? "dragged" : ""}`}
+          ${isDragging ? "dragged" : ""}
+          ${clickable ? "clickable" : ""}`}
         onClick={() => {
           if (flipped) {
             onCardClick(event);
