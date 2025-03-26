@@ -231,6 +231,26 @@
   background-color: var(--secondary-color);
 }
 
+.instruction-message {
+  font-size: 16px;
+  color: #bbb;
+  margin: 0px;
+  margin-top: -20px;
+  opacity: 0;
+}
+
+.instruction-message.clickable {
+  animation: pulse 1.5s infinite;
+  transition: animation 0.3s;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;

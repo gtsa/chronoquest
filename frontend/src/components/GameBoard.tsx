@@ -49,6 +49,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   const [cardResults, setCardResults] = useState<Record<number, boolean>>({});
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
+  const [clickableCards, setClickableCards] = useState<boolean>(false);
   const [showCards, setShowCards] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -152,6 +153,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       );
 
       setTimeout(() => setFlippedCards(true), 600);
+      setTimeout(() => setClickableCards(true), 1500);
     }, 300);
     setFinalMessage(`${scoreMessage[0]}... ${t("you_scored")} ${score} ${t("points")}.`);
   };
@@ -239,8 +241,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                   </div>
                 )}
               </div>
-
             </div>
+
+            
+            <p className= {`instruction-message ${clickableCards ? "clickable" : ""}`}>Click on the cards to reveal historical details</p>
+            
 
             <div className={`game-board ${submitted ? "submitted-mark" : ""} ${modalFeedbackOpen ? "feedback-open" : "feedback-closed"} ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
               {showCards &&
@@ -251,6 +256,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                     index={index}
                     moveCard={moveCard}
                     flipped={flippedCards}
+                    clickable={clickableCards}
                     cardResults={cardResults}
                     submitted={submitted}
                     difficulty={difficulty}
