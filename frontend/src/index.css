@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
 @import url('./colors.css');
 
+body::before {
+  content: "Laptop Active";
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: lime;
+  color: black;
+  font-size: 1rem;
+  z-index: 9999;
+}
+
 :root {
   font-family: Raleway, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -39,7 +50,8 @@ body {
 }
 
 h1 {
-  font-size: clamp(2em, 4vw, 3.2em);
+  /* font-size: clamp(2em, 4vw, 3.2em); */
+  font-size: clamp(2em, 3em, 4em);
   line-height: 1.1;
 }
 
@@ -63,7 +75,9 @@ button:focus-visible {
 }
 
 /* Responsive Adjustments */
-@media (max-width: 600px) {
+
+
+/* @media (max-width: 600px) {
   body {
     background-attachment: scroll;
   }
@@ -74,4 +88,79 @@ button:focus-visible {
     font-size: 0.9em;
     padding: 0.4em 1em;
   }
+} */
+
+/* Mobile (Taller) Portrait */
+@media 
+       /*screen and (device-width: 448px) and (device-height: 998px) and (orientation: portrait)  Pixel 8 Pro */ 
+       screen and (min-width: 401px) and (max-width: 480px) and (orientation: portrait)
+       {
+  body::before {
+    content: "Mobile Portrait Active";
+  }
+  body {
+    background-attachment: scroll;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  button {
+    font-size: 0.9em;
+    padding: 0.4em 1em;
+  }
+}
+
+/* Mobile Landscape */
+@media screen and (min-width: 481px) and (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) {
+  body::before {
+    content: "Mobile Landscape Active";
+  }
+}
+
+/* Compact Mobile Portrait */
+/* @media screen and (min-width: 360px) and (max-width: 400px) and (orientation: portrait) {} */
+@media screen and (device-width: 375px) and (device-height: 667px) and (orientation: portrait), /* iPhone 8 */
+       screen and (device-width: 375px) and (device-height: 812px) and (orientation: portrait), /* iPhone 11 Pro */
+       screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait), /* iPhone 13 mini */
+       screen and (device-width: 393px) and (device-height: 851px) and (orientation: portrait), /* Pixel 5 */
+       screen and (device-width: 360px) and (device-height: 760px) and (orientation: portrait), /* Galaxy S10e */
+       screen and (device-width: 393px) and (device-height: 830px) and (orientation: portrait), /* Pixel 4 */
+       screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait)  /* iPhone 12 mini */ {
+  body::before {
+    content: "Compact Mobile Portrait Active";
+  }
+}
+
+/* iPad / Tablet Portrait */
+@media screen and (device-width: 744px) and (device-height: 1133px) and (orientation: portrait), /* iPad Mini */
+       screen and (device-width: 820px) and (device-height: 1180px) and (orientation: portrait), /* iPad Air 11" */
+      screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait), /* iPad Air 13" */
+       screen and (device-width: 1032px) and (device-height: 1376px) and (orientation: portrait), /* iPad Pro 13" */
+       screen and (device-width: 834px) and (device-height: 1194px) and (orientation: portrait), /* iPad Pro 11" */
+       screen and (device-width: 800px) and (device-height: 1280px) and (orientation: portrait), /* Pixel Tablet, Fire HD 10 */
+       screen and (device-width: 533px) and (device-height: 893px) and (orientation: portrait), /* Lenovo Tab M9 */
+       screen and (device-width: 533px) and (device-height: 853px) and (orientation: portrait), /* Fire HD 8 */
+       screen and (device-width: 1067px) and (device-height: 1707px) and (orientation: portrait), /* Galaxy Tab S7 / S8 */
+       screen and (device-width: 1102px) and (device-height: 1866px) and (orientation: portrait), /* Galaxy Tab S8+ */
+       screen and (device-width: 960px) and (device-height: 1440px) and (orientation: portrait)  /* Surface Pro 9 */ {
+  body::before {
+    content: "iPad/Tablet Portrait Active";
+  }  
+}
+
+/* iPad / Tablet Landscape */
+@media screen and (device-width: 1133px) and (device-height: 744px) and (orientation: landscape), /* iPad Mini */
+       screen and (device-width: 1180px) and (device-height: 820px) and (orientation: landscape), /* iPad Air 11" */
+       screen and (device-width: 1366px) and (device-height: 1024px) and (orientation: landscape), /* iPad Air 13" */
+       screen and (device-width: 1376px) and (device-height: 1032px) and (orientation: landscape), /* iPad Pro 13" */
+       screen and (device-width: 1194px) and (device-height: 834px) and (orientation: landscape), /* iPad Pro 11" */
+       screen and (device-width: 1280px) and (device-height: 800px) and (orientation: landscape), /* Pixel Tablet, Fire HD 10 */
+       screen and (device-width: 893px) and (device-height: 533px) and (orientation: landscape), /* Lenovo Tab M9 */
+       screen and (device-width: 853px) and (device-height: 533px) and (orientation: landscape), /* Fire HD 8 */
+       screen and (device-width: 1707px) and (device-height: 1067px) and (orientation: landscape), /* Galaxy Tab S7 / S8 */
+       screen and (device-width: 1866px) and (device-height: 1102px) and (orientation: landscape), /* Galaxy Tab S8+ */
+       screen and (device-width: 1440px) and (device-height: 960px) and (orientation: landscape)  /* Surface Pro 9 */ {
+  body::before {
+    content: "iPad/Tablet Landscape Active";
+  }  
 }

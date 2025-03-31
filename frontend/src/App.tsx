@@ -1,7 +1,6 @@
 import { useState } from "react";
 import GameBoard from "./components/GameBoard";
 import "./App.css";
-// import ToggleSwitch from "./components/ToggleSwitch";
 import DifficultySelector from "./components/DifficultySelector";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
@@ -29,11 +28,6 @@ function App() {
 
       {!showGameBoard && (
         <div className="game-options">
-          {/* <ToggleSwitch
-            isChecked={difficulty === "hard"}
-            onToggle={handleToggle}
-            label={difficulty === "hard" ? `${t("hard")} ${t("mode")}` : `${t("easy")} ${t("mode")}`}
-          /> */}
           <div className="difficulty-label">{t("select_difficulty")}:</div>
           <div className="difficulty-selector">
             <DifficultySelector difficulty={difficulty} onChange={setDifficulty} />

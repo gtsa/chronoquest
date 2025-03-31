@@ -204,10 +204,17 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
           </div>
         ) : (
           <>
-            {!submitted && <h3>{t("reorder_events")}</h3>}
-            {submitted && modalFeedbackOpen && <h3>&nbsp;</h3>}
-            {submitted && !modalFeedbackOpen && finalMessage && <h3>{finalMessage}</h3>}
-
+            {!submitted && (
+              <div className="reorder-instruction">
+                <h3>{t("reorder_events")}</h3>
+              </div>
+            )}
+            {/* {submitted && modalFeedbackOpen && <h3>&nbsp;</h3>} */}
+            {submitted && !modalFeedbackOpen && finalMessage && (
+              <div className="final-message-wrapper">
+                <h3>{finalMessage}</h3>
+              </div>
+            )}
             <div className="indicators-buttons-box">
               <div className="difficulty-indicator">
                 {t("mode")}: {difficulty === "hard" ? t("hard") : t("easy")}
@@ -219,14 +226,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                   disabled={hintUsed || submitted}
                 >
                   {hintUsed ? t("hint_used") : t("use_hint")}
-                </button>
-                <span
-                  className={`info-icon-hint ${hintUsed || submitted ? "hide" : ""}`}
-                  onMouseEnter={() => !hintUsed && !submitted && setShowTooltip(true)}
-                  onMouseLeave={() => setShowTooltip(false)}
-                >
-                  ⓘ
-                </span>               
+                  <span
+                    className={`info-icon-hint ${hintUsed || submitted ? "hide" : ""}`}
+                    onMouseEnter={() => !hintUsed && !submitted && setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                  >
+                    ⓘ
+                  </span>   
+                </button>            
                 {!hintUsed && !submitted && showTooltip && (
                   <div className={`hint-tooltip ${showTooltip ? "show" : ""}`}>
                     {difficulty === 'easy' ? (
@@ -267,11 +274,12 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                 ))}
             </div>
 
-            <div className="submit-container">
               {!submitted ? (
-                <button className="submit-btn" onClick={submitOrder}>
-                  {t("submit_order")}
-                </button>
+                <div className="submit-container">
+                  <button className="submit-btn" onClick={submitOrder}>
+                    {t("submit_order")}
+                  </button>
+                </div>
               ) : playAttempts < maxAttempts ? (
                 <div className="play-again-wrapper">
                   <button className="play-again-btn" onClick={() => window.location.reload()}>
@@ -282,7 +290,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
               ) : (
                 <p>{t("see_you_tomorrow")}</p>
               )}
-            </div>
           </>
         )}
       </div>

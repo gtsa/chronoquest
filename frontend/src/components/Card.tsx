@@ -71,43 +71,44 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
     >
-
-      <div
-        ref={ref}
-        className={
-          `card ${flipped ? "flipped" : ""}
-          ${highlightIds.includes(event.id) ? "flash" : ""}
-          ${isDragging ? "dragged" : ""}
-          ${clickable ? "clickable" : ""}`}
-        onClick={() => {
-          if (flipped) {
-            onCardClick(event);
-          }
-        }} 
-      >
-        <div className={`card-inner ${flipped ? "flipped" : ""}`}>
-          <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""} ${flipped ? "flipped" : ""}`}>
-            <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? eventRiddle : eventName}</div>
-          </div>
-          <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""}`}>
-            {submitted && (
-              <div className={`card-badge ${cardResults[event.id] ? "correct" : "incorrect"}`}>
-                {cardResults[event.id] ? "✓" : "✕"}
-              </div>
-            )}
-            
-            <div className={`card-content ${flipped ? "flipped" : ""}`}>
-              <img 
-                src={event.image_path} 
-                alt={String(eventName)} 
-                className="card-image"
-              />
-              <div className="card-back-low">
-                <div className={`card-name-back ${lang === 'en' ? 'lang_en' : ""}`}>{eventName}</div>
-                <hr />
-                <div className={`card-date`}>{formatDate(event.date)}</div>
-                <hr />
-                <div className={`card-details ${lang === 'en' ? 'lang_en' : ""}`}>{eventDescription}</div>
+      <div className="card-container">
+        <div
+          ref={ref}
+          className={
+            `card ${flipped ? "flipped" : ""}
+            ${highlightIds.includes(event.id) ? "flash" : ""}
+            ${isDragging ? "dragged" : ""}
+            ${clickable ? "clickable" : ""}`}
+          onClick={() => {
+            if (flipped) {
+              onCardClick(event);
+            }
+          }} 
+        >
+          <div className={`card-inner ${flipped ? "flipped" : ""}`}>
+            <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""} ${flipped ? "flipped" : ""}`}>
+              <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? eventRiddle : eventName}</div>
+            </div>
+            <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""}`}>
+              {submitted && (
+                <div className={`card-badge ${cardResults[event.id] ? "correct" : "incorrect"}`}>
+                  {cardResults[event.id] ? "✓" : "✕"}
+                </div>
+              )}
+              
+              <div className={`card-content ${flipped ? "flipped" : ""}`}>
+                <img 
+                  src={event.image_path} 
+                  alt={String(eventName)} 
+                  className="card-image"
+                />
+                <div className="card-back-low">
+                  <div className={`card-name-back ${lang === 'en' ? 'lang_en' : ""}`}>{eventName}</div>
+                  <hr />
+                  <div className={`card-date`}>{formatDate(event.date)}</div>
+                  <hr />
+                  <div className={`card-details ${lang === 'en' ? 'lang_en' : ""}`}>{eventDescription}</div>
+                </div>
               </div>
             </div>
           </div>
