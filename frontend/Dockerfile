@@ -17,4 +17,5 @@ COPY shared /app/shared
 EXPOSE 4173
 
 # Start Vite in development mode with port 4173
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "4173"]
+CMD ["node", "node_modules/vite/bin/vite.js", "--host", "0.0.0.0", "--port", "4173"]
+

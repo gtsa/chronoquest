@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
       hmr: {
         protocol: 'wss',
         host: hostname,
-        port: 443,
+        clientPort: 443,
       },
       allowedHosts: [
         hostname,
