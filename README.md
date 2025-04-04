@@ -102,7 +102,7 @@ docker-compose up -d
 #### **Step 2: Run the Seed Script**
 Once the containers are up, execute the following command to seed the database:
 ```sh
-docker exec -it $(docker ps -qf "name=backend") yarn ts-node /app/backend/src/seed.ts
+docker exec -it $(docker ps -qf "name=backend") node -r ts-node/register src/seed.ts
 ```
 This will:
 - Insert predefined historical events into the database.
