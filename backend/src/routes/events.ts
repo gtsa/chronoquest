@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:4173';
+const PUBLIC_URL = process.env.PUBLIC_URL || `${process.env.PROTOCOL}://${process.env.DOMAIN}` || 'http://localhost:4173';
 
 const router = Router();
 
@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
     // Build full image path using the dynamic BACKEND_URL
     const events = result.rows.map(event => ({
       ...event,
-      image_path: `${PUBLIC_URL}/api/images/${event.image_path}`,
+      image_path: `${PUBLIC_URL}/images/${event.image_path}`,
     }));
 
     res.json({ level, events });
