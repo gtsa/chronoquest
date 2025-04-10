@@ -1,12 +1,17 @@
 @import url('../colors.css');
 
+/* Main geometry structure elements */
 .game-board-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin-top: -20px;
+  width: 99vw;
+  max-width: 99vw;
+  height:  fit-content;
+  min-height: 580px;
+  background-color: red;
+  margin: 0px
 }
 
 .game-board {
@@ -16,40 +21,200 @@
   justify-content: center;
   position: relative;
   gap: clamp(-30px, 2vw, 15px);
-  margin-top: -20px;
-  padding: 20px;
   flex-wrap: nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
   z-index: 1;
-  max-width: min(90vw, 1600px);
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .submit-container {
   display: flex;
-  justify-content: center;
   width: 100%;
   margin-top: 20px;
-}
-
-.play-again-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 0.2;
+  margin-bottom: 10px;
+  justify-content: center;
 }
 
 .submit-btn {
+  font-size: 18px;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
   color: var(--text-color-primary);
-  font-size: 18px;
   cursor: pointer;
   box-shadow: 0px 4px 6px var(--black-extra-transparent);
   transition: transform 0.2s, box-shadow 0.2s;
   font-weight: bold;
   padding: 12px 24px;
+  z-index: 2;
 }
 
+.play-again-wrapper {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.2;
+}
+
+.play-again-btn {
+  font-size: 18px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary) );
+  color: var(--text-color-primary);
+  cursor: pointer;
+  box-shadow: 0px 4px 6px var(--black-extra-transparent);
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: bold;
+  padding: 12px 24px;
+  z-index: 2;
+  transform-origin: center;
+
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.play-again-btn:hover {
+  overflow: visible;
+  transform: scale(1.1);
+  box-shadow: 0px 6px 10px var(--black-extra-transparent);
+}
+
+.instruction-message {
+  font-size: 16px;
+  color: #bbb;
+  margin: 0px;
+  margin-top: -20px;
+  opacity: 0;
+}
+
+.instruction-message.clickable {
+  animation: pulse 1.5s infinite;
+  transition: animation 0.3s;
+}
+
+.final-message-wrapper h3 {
+  margin-top: 8px;
+}
+
+/* Responsive Adjustments */
+
+/* Compact Mobile Portrait */
+/* @media screen and (min-width: 360px) and (max-width: 400px) and (orientation: portrait) {} */
+@media screen and (device-width: 375px) and (device-height: 667px) and (orientation: portrait), /* iPhone 8 */
+       screen and (device-width: 375px) and (device-height: 812px) and (orientation: portrait), /* iPhone 11 Pro */
+       screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait), /* iPhone 13 mini */
+       screen and (device-width: 393px) and (device-height: 851px) and (orientation: portrait), /* Pixel 5 */
+       screen and (device-width: 360px) and (device-height: 760px) and (orientation: portrait), /* Galaxy S10e */
+       screen and (device-width: 393px) and (device-height: 830px) and (orientation: portrait), /* Pixel 4 */
+       screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait)  /* iPhone 12 mini */ {
+/*   .game-board {
+    flex-direction: column;
+    gap: -120px !important
+  }
+  .game-board-container {
+    height:  41rem;
+    background-color: brown;
+    gap: 0px
+  }
+  .submit-container {
+    position: absolute;
+    bottom: 0px;
+  }
+  .instruction-message {
+    margin-bottom: 0px;
+  } */
+  .game-board {
+    flex-direction: column;
+    gap: clamp(-30px, 2vw, 5px);
+  }
+  .game-board-container {
+    height: 35rem;
+  }
+  .reorder-instruction h3 {
+    background-color: green;
+    margin: 4px;
+    font-size: 0.9rem
+  }
+  .final-message-wrapper h3 {
+    margin-top: 8px;
+    font-size: 0.9rem
+  }
+  .instruction-message {
+    font-size: 0.8rem;
+    opacity: 0;
+}
+}
+
+/* Mobile (Taller) Portrait */
+@media 
+       /*screen and (device-width: 448px) and (device-height: 998px) and (orientation: portrait)  Pixel 8 Pro */ 
+       screen and (min-width: 394px) and (max-width: 480px) and (orientation: portrait)
+       {
+  .game-board {
+    flex-direction: column;
+    gap: clamp(-30px, 2vw, 5px);
+  }
+  .game-board-container {
+    height:  45rem;
+  }
+  .reorder-instruction h3 {
+    background-color: green;
+    margin: 4px
+  }
+}
+
+/* Mobile Landscape */
+@media screen and (min-width: 481px) and (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
+  .game-board {
+    flex-direction: row;
+  }
+}
+
+/* iPad / Tablet Portrait */
+@media screen and (device-width: 744px) and (device-height: 1133px) and (orientation: portrait), /* iPad Mini */
+       screen and (device-width: 820px) and (device-height: 1180px) and (orientation: portrait), /* iPad Air 11" */
+      screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait), /* iPad Air 13" */
+       screen and (device-width: 1032px) and (device-height: 1376px) and (orientation: portrait), /* iPad Pro 13" */
+       screen and (device-width: 834px) and (device-height: 1194px) and (orientation: portrait), /* iPad Pro 11" */
+       screen and (device-width: 800px) and (device-height: 1280px) and (orientation: portrait), /* Pixel Tablet, Fire HD 10 */
+       screen and (device-width: 533px) and (device-height: 893px) and (orientation: portrait), /* Lenovo Tab M9 */
+       screen and (device-width: 533px) and (device-height: 853px) and (orientation: portrait), /* Fire HD 8 */
+       screen and (device-width: 1067px) and (device-height: 1707px) and (orientation: portrait), /* Galaxy Tab S7 / S8 */
+       screen and (device-width: 1102px) and (device-height: 1866px) and (orientation: portrait), /* Galaxy Tab S8+ */
+       screen and (device-width: 960px) and (device-height: 1440px) and (orientation: portrait)  /* Surface Pro 9 */ {
+  .game-board {
+    flex-direction: column;
+    min-height: 820px;
+    gap: clamp(-12px, 2vw, 18px);
+  }
+}
+
+/* iPad / Tablet Landscape */
+@media screen and (device-width: 1133px) and (device-height: 744px) and (orientation: landscape), /* iPad Mini */
+       screen and (device-width: 1180px) and (device-height: 820px) and (orientation: landscape), /* iPad Air 11" */
+       screen and (device-width: 1366px) and (device-height: 1024px) and (orientation: landscape), /* iPad Air 13" */
+       screen and (device-width: 1376px) and (device-height: 1032px) and (orientation: landscape), /* iPad Pro 13" */
+       screen and (device-width: 1194px) and (device-height: 834px) and (orientation: landscape), /* iPad Pro 11" */
+       screen and (device-width: 1280px) and (device-height: 800px) and (orientation: landscape), /* Pixel Tablet, Fire HD 10 */
+       screen and (device-width: 893px) and (device-height: 533px) and (orientation: landscape), /* Lenovo Tab M9 */
+       screen and (device-width: 853px) and (device-height: 533px) and (orientation: landscape), /* Fire HD 8 */
+       screen and (device-width: 1707px) and (device-height: 1067px) and (orientation: landscape), /* Galaxy Tab S7 / S8 */
+       screen and (device-width: 1866px) and (device-height: 1102px) and (orientation: landscape), /* Galaxy Tab S8+ */
+       screen and (device-width: 1440px) and (device-height: 960px) and (orientation: landscape)  /* Surface Pro 9 */ {
+  .game-board {
+    flex-direction: row;
+  }
+}
+
+
+
+/* Rest UI */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -155,7 +320,6 @@
   text-align: center;
   z-index: 1001;
 
-
   /* Hide scrollbar */
   scrollbar-width: none; /* Firefox */
   -m+s-overflow-style: none; /* Internet Explorer/Edge */
@@ -189,12 +353,10 @@
   background-color: transparent;
   z-index: 20;
 }
-
 .modal-event-content-up {
   padding-left: 0.2em;
   padding-right: 0.2em;
 }
-
 .modal-event-content-down {
   margin:10px;
   text-align:justify;
@@ -210,7 +372,6 @@
   width: 100%;
   margin-left: -10px;
 }
-
 .close-btn {
   padding: 8px 16px;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
@@ -221,60 +382,8 @@
   position: relative;
   z-index: 1000;
 }
-
 .close-btn:hover {
   background-color: var(--secondary-color);
-}
-
-.instruction-message {
-  font-size: 16px;
-  color: #bbb;
-  margin: 0px;
-  margin-top: -20px;
-  opacity: 0;
-}
-
-.instruction-message.clickable {
-  animation: pulse 1.5s infinite;
-  transition: animation 0.3s;
-}
-
-.close-icon {
-  position: absolute;
-  left: auto;
-  top: 0px;
-  right: 0px;
-  font-size: 38px;
-  color: var(--primary-color);
-  cursor: pointer;
-  z-index: 1100;
-  padding: 0px 2.5px 3.5px 3.5px;
-  line-height: 0.6;
-  background: inherit;
-  border-radius: 50%;
-  transition: color 0.2s ease;
-}
-
-.close-icon:hover {
-  color: var(--primary-light-version);
-}
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -55%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
 }
 
 .modal-event :is(.close-btn-container) {
@@ -285,7 +394,6 @@
   width: 100%;
   max-height: 300px;
   object-fit: cover;
-  margin: ;
 }
 
 .info-icon-feedback {
@@ -392,16 +500,14 @@
 
 .info-icon-hint {
   cursor: pointer;
-  margin-top: 0.2em;
-  margin-left: -0.4em;
-  position: absolute;
-  z-index: 5;
-  cursor: default;
-  opacity: 0.3;
+  margin-left: 0.2em;
+  margin-right: -5px;
+  line-height: 1;
+  opacity: 0.8;
 }
 
 .info-icon-hint.hide {
-  color: var(--used-extra-grayed-out);
+  color: var(--used-grayed-out);
 }
 
 .penalty-notice {
@@ -409,164 +515,39 @@
   color: var(--text-color-primary);
 }
 
-.play-again-btn {
-  padding: 12px 24px;
-  border: none;
-  background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary) );
-  color: var(--text-color-primary);
-  box-shadow: 0px 4px 6px var(--black-extra-transparent);
-  font-weight: bold;
-  font-size: 18px;
+.close-icon {
+  position: absolute;
+  left: auto;
+  top: 0px;
+  right: 0px;
+  font-size: 38px;
+  color: var(--primary-color);
   cursor: pointer;
-  text-transform: uppercase;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  z-index: 2;
+  z-index: 1100;
+  padding: 0px 2.5px 3.5px 3.5px;
+  line-height: 0.6;
+  background: inherit;
+  border-radius: 50%;
+  transition: color 0.2s ease;
 }
 
-.submit-btn {
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  color: var(--text-color-primary);
-  cursor: pointer;
-  box-shadow: 0px 4px 6px var(--black-extra-transparent);
-  transition: transform 0.2s, box-shadow 0.2s;
-  font-weight: bold;
-  padding: 12px 24px;
-  z-index: 2;
+.close-icon:hover {
+  color: var(--primary-light-version);
 }
 
-.play-again-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 6px 10px var(--black-extra-transparent);
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
-/* Responsive Adjustments */
-
-@media (max-width: 600px) {
-  .game-board {
-    transform: scale(110%);
-    padding-top: 80px;
-    padding-bottom: 100px;
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    align-items: center;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
   }
-  .modal-feedback, .modal-event {
-    width: 90%;
-    max-width: 400px;
-    padding: 10px;
-  }
-  .submit-btn {
-    font-size: 16px;
-    padding: 10px 20px;
-    position: absolute;
-    bottom: 40px;
-  }
-  .flipped-cards-mark :is(.game-board) {
-    transform: scale(100%);
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .flipped-cards-mark :is(.submit-btn) {
-    bottom: 40px;
-  }
-  .flipped-cards-mark :is(.play-again-btn) {
-    bottom: 52px;
-  }
-  .flipped-cards-mark :is(.remaining-attempts) {
-    margin-top: 18px;
-  }
-  .submitted-mark.not-flipped-cards-mark :is(.remaining-attempts) {
-    margin-top: -30px;
-  }
-  .game-board.submitted-mark.not-flipped-cards-mark {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .game-board.submitted-mark {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-  .flipped-cards-mark :is(.game-board.submitted-mark) {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .difficulty-indicator {
-    transform: rotate(-90deg);
-    white-space: nowrap;
-    display: inline-block;
-    margin-top: 12rem;
-    margin-left: -3.5rem;
-  }
-  .hint-container {
-    transform: rotate(90deg);
-    white-space: nowrap;
-    display: inline-block;
-    margin-top: 10rem;
-    margin-right: -2.5rem;
-  }
-  .hint-tooltip {
-    transform: rotate(-90deg);
-    position: absolute;
-    bottom: -130px;
-    width: 200%;
-    height: 360%;
-    margin-left: 130px;
-  }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) {
-  .game-board {
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    align-items: center;
-  }
-  .modal-feedback, .modal-event {
-    max-width: 500px;
-  }
-  .flipped-cards-mark :is(.game-board) {
-    width: 90%; /* Reduce size without scaling */
-    max-width: 90vw;
-    padding-top: 0px;
-    padding-bottom: 10px;
-  }
-  .flipped-cards-mark :is(.play-again-btn) {
-    margin-top: -20px;
-  }
-  .flipped-cards-mark :is(.game-board) {
-    padding-bottom: 50px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .game-board.submitted-mark.feedback-closed.not-flipped-cards-mark {
-    padding-left: 10px;
-    padding-bottom: 50px;
-  }
-  .game-board.submitted-mark.feedback-open.not-flipped-cards-mark {
-    padding-bottom: 50px;
-  }
-  .flipped-cards-mark :is(.game-board) {
-    padding-top: 10px;
-    padding-left: 54px;
-    padding-bottom: 0px;
-    height: 628px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .game-board {
-    max-width: 1800px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .game-board {
-    max-width: 2000px;
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
   }
 }

@@ -28,14 +28,14 @@ app.use(cors({
             callback(new Error("Not allowed by CORS"));
         }
     },
-    credentials: true // ⬅️ Allow cookies and authentication headers
+    credentials: true // Allow cookies and authentication headers
 }));
 
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Serve images from the public folder
-app.use("/api/images", express.static(path.join(__dirname, "../shared/images")));
+// Serve images from the public folder
+app.use("/images", express.static(path.join(__dirname, "../shared/images")));
 
 // Root route
 app.get("/", (req, res) => {
