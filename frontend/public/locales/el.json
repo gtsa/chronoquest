@@ -42,6 +42,7 @@
     "bce": "π.Χ.",
     "read_more": "Μάθε περισσσότερα",
     "year": "Χρονιά",
+    "play_again": "Ξαναπαίξε",
     "remaining_attempts_one": "Απομένει {{count}} προσπάθεια σήμερα",
     "remaining_attempts_other": "Απομένουν {{count}} προσπάθειες σήμερα"
   }

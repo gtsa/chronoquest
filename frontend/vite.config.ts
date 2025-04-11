@@ -14,9 +14,9 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       port: 4173,
       hmr: {
-        protocol: 'wss',
+        protocol: env.VITE_PUBLIC_URL.startsWith("https") ? "wss" : "ws",
         host: hostname,
-        clientPort: 443,
+        clientPort: env.VITE_PUBLIC_URL.startsWith("https") ? 443 : 4173,
       },
       allowedHosts: [
         hostname,
