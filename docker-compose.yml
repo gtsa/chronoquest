@@ -2,7 +2,7 @@ services:
   db:
     image: postgres:13
     ports:
-      - "${DATABASE_PORT}:5432"
+      - "127.0.0.1:${DATABASE_PORT}:5432"
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -11,6 +11,7 @@ services:
       - .env
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     restart: unless-stopped
     networks:
       otterverse-net:
