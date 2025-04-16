@@ -118,6 +118,8 @@ If you see event records, seeding was successful.
 #### **❗ Important Notes**
 - **Seeding should only be done when needed** to avoid duplicate entries.
 - If you reset the database (`docker-compose down -v`), you’ll need to **reseed manually**.
+- See [SECURITY.md](./SECURITY.md) for production database hardening.
+
 
 ## Contribution
 Contributions are welcome! Please submit issues and pull requests to help improve the game.
