@@ -51,7 +51,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
   const [clickableCards, setClickableCards] = useState<boolean>(false);
   const [showCards, setShowCards] = useState<boolean>(true);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
   const [hintHighlightIds, setHintHighlightIds] = useState<number[]>([]);
