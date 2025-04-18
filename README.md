@@ -104,6 +104,10 @@ Once the containers are up, execute the following command to seed the database:
 ```sh
 docker exec -it $(docker ps -qf "name=backend") node -r ts-node/register src/seed.ts
 ```
+or (if ```seed``` is set as script in ```backend/package.json``` ): 
+```sh
+docker exec -it $(docker ps -qf "name=backend") npm run seed
+```
 This will:
 - Insert predefined historical events into the database.
 - Ensure the database is initialized for use.
