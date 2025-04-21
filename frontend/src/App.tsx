@@ -3,12 +3,18 @@ import GameBoard from "./components/GameBoard";
 import "./App.css";
 import DifficultySelector from "./components/DifficultySelector";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import SettingsPanel from "./components/SettingsPanel";
 import { useTranslation } from "react-i18next";
 import logo from "./assets/favicon-192x192.png";
 
 function App() {
   const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
   const [showGameBoard, setShowGameBoard] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [musicOn, setMusicOn] = useState(true);
+  const [soundOn, setSoundOn] = useState(true);
+  const [hintUsed, setHintUsed] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const { t } = useTranslation();
 
   const handleToggle = () => {
@@ -21,6 +27,20 @@ function App() {
 
   return (
     <div className="app">
+      <SettingsPanel
+        difficulty={difficulty}
+        darkMode={darkMode}
+        musicOn={musicOn}
+        soundOn={soundOn}
+        showGameBoard={showGameBoard}    
+        hintUsed={hintUsed}
+        onHintUsed={() => setHintUsed(true)}
+        submitted={submitted}
+        toggleDarkMode={() => setDarkMode((prev) => !prev)}
+        toggleMusic={() => setMusicOn((prev) => !prev)}
+        toggleSound={() => setSoundOn((prev) => !prev)}
+      />
+
       <div className="header">
         <img src={logo} alt="ChronoQuest Logo" className="logo" />
         <h1>ChronoQuest</h1>
@@ -39,7 +59,14 @@ function App() {
         </div>
       )}
 
-      {showGameBoard && <GameBoard difficulty={difficulty} />}
+      {showGameBoard && (
+        <GameBoard 
+          difficulty={difficulty}
+          hintUsed={hintUsed}
+          submitted={submitted}
+          onSubmit={() => setSubmitted(true)}
+        />
+      )}
       <LanguageSwitcher />
     </div>
   );

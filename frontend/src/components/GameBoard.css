@@ -436,89 +436,8 @@
   }
 }
 
-.indicators-buttons-box {
-  position: absolute;
-  top: 10px;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
 
-.difficulty-indicator {
-  position: absolute;
-  left: 10px;
-  color: var(--primary-light-version);
-  font-weight: bold;
-  background: var(--black-extra-transparent);
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: default;
-}
 
-.hint-container {
-  position: absolute;
-  top: 5px;
-  right: 20px;
-  z-index: 2;
-}
-
-.hint-container button {
-  right: 10px;
-  font-weight: bold;
-  background: var(--black-extra-transparent);
-  color: var(--text-color-primary);
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.hint-container button:hover {
-  transform: scale(1.05);
-  background: var(--background-extra-dark);
-}
-
-.hint-container button[disabled] {
-  opacity: 0.2;
-  color: var(--text-color-primary);
-  border-color: var(--used-grayed-out);
-  cursor: not-allowed;
-  transform: none;
-  background: var(--black-extra-transparent);
-}
-
-.hint-tooltip {
-  position: absolute;
-  margin-top: 10px;
-  left: -65%;
-  background-color: var(--background-extra-dark);
-  color: var(--text-color-primary);
-  padding: 4px;
-  font-size: 14px;
-  z-index: 3;
-  border-radius: 8px;
-  border: 1px solid var(--primary-extra-light-version);
-  text-wrap-mode: wrap;
-  background-color: var(--primary-light-version);
-}
-
-.info-icon-hint {
-  cursor: pointer;
-  margin-left: 0.2em;
-  margin-right: -5px;
-  line-height: 1;
-  opacity: 0.8;
-}
-
-.info-icon-hint.hide {
-  color: var(--used-grayed-out);
-}
-
-.penalty-notice {
-  font-style: italic;
-  color: var(--text-color-primary);
-}
 
 .close-icon {
   position: absolute;
