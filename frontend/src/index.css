@@ -69,11 +69,6 @@ button:hover {
   transform: scale(1.05);
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 /* Responsive Adjustments */
 
 

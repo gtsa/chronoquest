@@ -9,6 +9,7 @@ import { getScoreMessage } from "../utils/scoreFeedback";
 import "./GameBoard.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../utils/formatDate";
+import { div } from "framer-motion/client";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; 
 
@@ -16,9 +17,12 @@ Modal.setAppElement("#root");
 
 type GameBoardProps = {
   difficulty: "easy" | "hard";
+  hintUsed: boolean;
+  submitted: boolean;
+  onSubmit: () => void;
 };
 
-const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
+const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, onSubmit }) => {
   const { i18n, t } = useTranslation();
   const [events, setEvents] = useState<Array<{
     id: number;
@@ -35,7 +39,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
     details_el: string;
   }>>([]);
 
-  const [hintUsed, setHintUsed] = useState<boolean>(false);
   const [score, setScore] = useState<number | null>(null);
   const [scoreMessage, setScoreMessage] = useState<string[]>(["Processing your results..."]);
   const [correctOrder, setCorrectOrder] = useState<number[]>([]);
@@ -45,7 +48,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
   const [modalEventOpen, setModalEventOpen] = useState<boolean>(false);
   const [playAttempts, setPlayAttempts] = useState<number>(0);
   const [maxAttempts, setMaxAttempts] = useState<number>(0);
-  const [submitted, setSubmitted] = useState<boolean>(false);
   const [cardResults, setCardResults] = useState<Record<number, boolean>>({});
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
   const [flippedCards, setFlippedCards] = useState<boolean>(false);
@@ -92,9 +94,28 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
         setLoading(false);
       }
     };
-  
     checkGameAvailability();
   }, [API_BASE_URL, difficulty]);
+
+  // 🔹 Hint Button Handler 
+  const handleHintClick = () => {
+    if (difficulty === "easy") {
+      const sortedByDate = [...events].sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+      const correctlyPlacedIds = events
+        .map((event, index) => (event.id === sortedByDate[index]?.id ? event.id : null))
+        .filter((id): id is number => id !== null);
+      setHintHighlightIds(correctlyPlacedIds);
+    }
+  };
+
+  useEffect(() => {
+    if (hintUsed) {
+      handleHintClick();
+    }
+  }, [hintUsed]);
+  
   
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     if (submitted) return;
@@ -127,7 +148,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       setScore(result.score);
       setCorrectOrder(result.correctOrder);
       setIsCorrect(result.correct);
-      setSubmitted(true);
+      onSubmit();
       setModalFeedbackOpen(true);
       setScoreMessage(getScoreMessage(result.score, hintUsed));
 
@@ -156,23 +177,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
       setTimeout(() => setClickableCards(true), 1500);
     }, 300);
     setFinalMessage(`${scoreMessage[0]}... ${t("you_scored")} ${score} ${t("points")}.`);
-  };
-
-  // 🔹 Hint Button Handler 
-  const handleHintClick = () => {
-    setHintUsed(true);
-
-    if (difficulty === "easy") {
-      const sortedByDate = [...events].sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-      );
-      
-      const correctlyPlacedIds = events
-        .map((event, index) => (event.id === sortedByDate[index]?.id ? event.id : null))
-        .filter((id): id is number => id !== null);
-
-      setHintHighlightIds(correctlyPlacedIds);
-    }
   };
 
   const openEventModal = (event: EventType) => {
@@ -215,41 +219,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty }) => {
                 <h3>{finalMessage}</h3>
               </div>
             )}
-            <div className="indicators-buttons-box">
-              <div className="difficulty-indicator">
-                {t("mode")}: {difficulty === "hard" ? t("hard") : t("easy")}
-              </div>
-
-              <div className="hint-container">
-                <button 
-                  onClick={handleHintClick} 
-                  disabled={hintUsed || submitted}
-                >
-                  {hintUsed ? t("hint_used") : t("use_hint")}
-                  <span
-                    className={`info-icon-hint ${hintUsed || submitted ? "hide" : ""}`}
-                    onMouseEnter={() => !hintUsed && !submitted && setShowTooltip(true)}
-                    onMouseLeave={() => setShowTooltip(false)}
-                  >
-                    ⓘ
-                  </span>   
-                </button>            
-                {!hintUsed && !submitted && showTooltip && (
-                  <div className={`hint-tooltip ${showTooltip ? "show" : ""}`}>
-                    {difficulty === 'easy' ? (
-                      <>{t("hint_correct_cards")}</>
-                    ) : (
-                      <>{t("hint_reveal_description")}</>
-                    )}
-                    <br />
-                    <div className="penalty-notice">
-                      {t("hint_penalty_info")}
-                    </div> 
-                  </div>
-                )}
-              </div>
-            </div>
-
             
             <p className= {`instruction-message ${clickableCards ? "clickable" : ""}`}>Click on the cards to reveal historical details</p>
             

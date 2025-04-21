@@ -44,6 +44,14 @@
     "year": "Χρονιά",
     "play_again": "Ξαναπαίξε",
     "remaining_attempts_one": "Απομένει {{count}} προσπάθεια σήμερα",
-    "remaining_attempts_other": "Απομένουν {{count}} προσπάθειες σήμερα"
+    "remaining_attempts_other": "Απομένουν {{count}} προσπάθειες σήμερα",
+    "coming_soon": "Λειτουργία υπό ανάπτυξη, σύντομα διαθέσιμη.",
+    "instructions": "Οδηγίες",
+    "music_on": "Μουσική Ενεργή",
+    "music_off": "Μουσική Ανενεργή",
+    "dark_mode": "Σκοτεινή Λειτουργία",
+    "bright_mode": "Φωτεινή Λειτουργία",
+    "sounds_on": "Ήχοι Ενεργοί",
+    "sounds_off": "Ήχοι Ανενεργοί"
   }
   

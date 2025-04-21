@@ -43,7 +43,14 @@
     "read_more": "Read more",
     "year": "Year",
     "play_again": "Play Again",
-    "remaining_attempts": "{{count}} remaining attempts today"
-
+    "remaining_attempts": "{{count}} remaining attempts today",
+    "coming_soon": "Feature coming soon!",
+    "instructions": "Instructions",
+    "music_on": "Music On",
+    "music_off": "Music Off",
+    "dark_mode": "Dark Mode",
+    "bright_mode": "Bright Mode",
+    "sounds_on": "Sounds On",
+    "sounds_off": "Sounds Off"
   }
   
