@@ -416,18 +416,23 @@
 }
 
 .loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid var(--white-extra-transparent);
-  border-top-color: var(--white-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 20px auto;
+  width: auto;
+  height: 35rem;
+  aspect-ratio: 1 / 1;
+  opacity: 0.05;
+  background-image: url('/favicon-512x512-spinning.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  mix-blend-mode: color-dodge;
+  animation: spin 2s linear infinite;
+  z-index: 1;
 }
+
 
 @keyframes spin {
   to {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 }
 
