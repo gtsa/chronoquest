@@ -45,12 +45,61 @@
     "play_again": "Play Again",
     "remaining_attempts": "{{count}} remaining attempts today",
     "coming_soon": "Feature coming soon!",
-    "instructions": "Instructions",
+    "instructions_label": "Instructions",
     "music_on": "Music On",
     "music_off": "Music Off",
     "dark_mode": "Dark Mode",
     "bright_mode": "Bright Mode",
     "sounds_on": "Sounds On",
-    "sounds_off": "Sounds Off"
+    "sounds_off": "Sounds Off",
+    "instructions": {
+      "title": "How to Play",
+      "objective_title": "Objective",
+      "objective_text": "Drag and reorder 5 historical event cards in the correct chronological order. You only get <0>one shot per game</0>—and up to <1>three games per day</1>.",
+      
+      "gameplay_title": "🎮 Gameplay",
+      "gameplay_today": "Each day, the cards are based on events that happened on that same calendar date in different years — for example, in today’s game, all events took place on a <1>{{today}}</1> from the past.",
+      "gameplay_note": "(Note: This feature is coming soon. Currently, events span different dates.)",
+      "gameplay_instructions": "Drag the cards horizontally to arrange them from earliest to latest, then hit <0>Submit</0> to lock in your order.",
+
+      "difficulty_title": "🧩 Difficulty",
+      "difficulty_easy": "<0>Easy Mode:</0> Cards show clear event titles.",
+      "difficulty_hard": "<0>Hard Mode:</0> Cards use playful or cryptic descriptions.",
+
+      "hint_title": "💡 Hint",
+      "hint_info": "You get <0>one hint per game</0>, and it works differently based on difficulty:",
+      "hint_easy": "<0>Easy Mode:</0> Highlights all cards already in the correct position.",
+      "hint_hard": "<0>Hard Mode:</0> Reveals clearer, straightforward event descriptions.",
+      "hint_penalty": "Using a hint reduces your score per correct card by 50%.",
+
+      "submit_title": "✅ Submitting",
+      "submit_info": "You only get <0>one attempt</0>. After submitting:",
+      "submit_reveal": "The correct order is revealed.",
+      "submit_flip": "Cards flip to show title, year, description, and image.",
+      "submit_modal": "You can <0>click any card</0> to open a modal with more info and links.",
+
+      "scoring_title": "🏅 Scoring",
+      "scoring_correctness": "Correctness: Points per correctly placed card.",
+      "scoring_difficulty": "Difficulty: Hard mode gives more points.",
+      "scoring_hint_penalty": "Hint Penalty: Using a hint cuts per-card points in half.",
+      "scoring_perfect": "Perfect Bonus: Get a bonus if you place all 5 cards correctly.",
+
+      "aftergame_title": "📚 After the Game",
+      "aftergame_info": "Click any card to explore extended event info, images, and learning links.",
+
+      "daily_title": "🔒 Daily Limit",
+      "daily_info": "You can play up to <0>3 games per day</0>. New cards drop every day!",
+
+      "features_title": "⚙️ Features & Settings",
+      "features_sounds": "🎵 Toggle sounds and music",
+      "features_theme": "🌙 Bright/Dark mode switch",
+      "features_lang": "🌐 Languages",
+      "features_roadmap": "🗺️ Timeline and map placement – <0>coming soon</0>",
+
+      "tips_title": "🚀 Tips",
+      "tips_1": "Check the ⓘ icon after each round to see your score breakdown.",
+      "tips_2": "You earn partial points even if your order isn’t perfect.",
+      "tips_3": "Each round sharpens your sense of history. Keep going!"
+    }
   }
   
