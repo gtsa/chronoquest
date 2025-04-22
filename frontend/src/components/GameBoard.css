@@ -221,7 +221,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--black-transparent);
+  background: var(--background-overlay);
   display: flex;
   align-items: center;
   justify-content: center;

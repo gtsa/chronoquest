@@ -145,7 +145,6 @@
     justify-content: center;
     align-items: center;
     padding-left: 5px;
-    margin-top: -4px; 
   }
 
   .bar-btn-label,
@@ -248,3 +247,119 @@
   }
 }
 
+
+/* -----------------------------
+   Instructions Modal
+----------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-instructions {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background-dark);
+  padding: 1em;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal-instructions h3{
+  line-height: 1.2;
+  margin-bottom: -0.4em;
+}
+
+.modal-instructions-subtitle{
+  line-height: 1.3;
+}
+
+.modal-instructions-content {
+  width: 99.5%;
+  height: auto;
+  background-color: none;
+  padding-bottom: 1rem;
+  border: 1.8px solid transparent;
+  border-radius: 8px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px var(--black-extra-transparent);
+  z-index: 1001;
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -m+s-overflow-style: none; /* Internet Explorer/Edge */
+}
+
+.modal-instructions-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Fade effect at the bottom to indicate more content */
+.modal-instructions-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, var(--background-dark), rgba(0, 0, 0, 0));
+  pointer-events: none;
+  z-index: 10;
+  border-radius: 8px;
+}
+.modal-instructions-content::before {
+  content: "";
+  position: absolute;
+  top:0.6em;
+  left: 0.6em;
+  right: 0.5em;
+  bottom: 0.5em;  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  background-color: transparent;
+  z-index: 20;
+}
+.modal-instructions-content-up {
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+.modal-instructions-content-down {
+  margin:10px;
+  text-align:justify;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+.close-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  margin-left: -15px;
+  margin-top: -8px;
+}
+.close-btn {
+  padding: 8px 16px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-color-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1000;
+}
+.close-btn:hover {
+  background-color: var(--secondary-color);
+}

@@ -10,9 +10,9 @@
     --background-dark: #1a1a1a;
     --background-extra-dark: #0c0c0c;
     --background-light: #242424;
-    --black-transparent: rgba(0, 0, 0, 0.6);
+    --black-transparent: rgba(0, 0, 0, 0.774);
     --black-extra-transparent: rgba(0, 0, 0, 0.3);
-    --background-overlay: #0f111285;;
+    --background-overlay: #0f1112de;;
 
     --white-extra-transparent: rgba(255, 255, 255, 0.3);
     --used-grayed-out: #a4a5c4;
