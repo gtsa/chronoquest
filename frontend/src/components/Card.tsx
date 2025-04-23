@@ -66,6 +66,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
   return (
 
     <motion.div
+      layout
       transition={{ type: "spring", stiffness: 200, damping: 50 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
