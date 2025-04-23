@@ -1,4 +1,5 @@
-@import url('../colors.css');
+@import url('../themes/theme-dark.css');
+@import url('../themes/theme-bright.css');
 
 /* Main geometry structure elements */
 .game-board-container {
@@ -10,7 +11,7 @@
   max-width: 99vw;
   height:  fit-content;
   min-height: 580px;
-  background-color: red;
+  background-color: var(--test-color-1);
   margin: 0px
 }
 
@@ -41,8 +42,8 @@
 
 .submit-btn {
   font-size: 18px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  color: var(--text-color-primary);
+  background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary));
+  color: var(--text-color-dark-button);
   cursor: pointer;
   box-shadow: 0px 4px 6px var(--black-extra-transparent);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -63,7 +64,7 @@
 .play-again-btn {
   font-size: 18px;
   background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary) );
-  color: var(--text-color-primary);
+  color: var(--text-color-dark-button);
   cursor: pointer;
   box-shadow: 0px 4px 6px var(--black-extra-transparent);
   transition: transform 0.2s, box-shadow 0.2s;
@@ -87,7 +88,7 @@
 
 .instruction-message {
   font-size: 16px;
-  color: #bbb;
+  color: var(--text-instruction-message);
   margin: 0px;
   margin-top: -20px;
   opacity: 0;
@@ -137,7 +138,6 @@
     height: 35rem;
   }
   .reorder-instruction h3 {
-    background-color: green;
     margin: 4px;
     font-size: 0.9rem
   }
@@ -164,7 +164,6 @@
     height:  45rem;
   }
   .reorder-instruction h3 {
-    background-color: green;
     margin: 4px
   }
 }
@@ -284,6 +283,7 @@
 }
 
 .modal-event {
+  color: var(--text-color-primary);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -374,8 +374,8 @@
 }
 .close-btn {
   padding: 8px 16px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  color: var(--text-color-primary);
+  background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary));
+  color: var(--text-color-dark-button);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -419,12 +419,19 @@
   width: auto;
   height: 35rem;
   aspect-ratio: 1 / 1;
-  opacity: 0.05;
+  opacity: var(--loading-spinner-opacity);
+  mix-blend-mode: var(--loading-spinner-mix-blend-mode);
+  /* opacity: 0.1;
+  mix-blend-mode: multiply; */
+  /* opacity: 0.05;
+  mix-blend-mode: color-dodge; */
   background-image: url('/favicon-512x512-spinning.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  mix-blend-mode: color-dodge;
+
+/* mix-blend-mode: overlay; */
+/* mix-blend-mode: soft-light; */
   animation: spin 2s linear infinite;
   z-index: 1;
 }
