@@ -3,7 +3,7 @@
     --secondary-color: #103951;
     --primary-dark-version: #051f2e;
     --primary-extra-dark-version: #040708;
-    --primary-color-front-card: #00d8ff2e;
+    --primary-color-front-card: white;
     --primary-light-version: #3e7a86;
     --primary-extra-light-version: #61dafbaa;
 
@@ -35,11 +35,16 @@
     --text-color-dark-button: #d2d0dd;
 
     --purple-primary: #4a2867;
-    --purple-front-card: #8d39e021;
+    --secondary-color-front-card: white;
     --purple-dark: #ffffffe5;
     --purple-shadow: #271b31a2;
     --purple-shadow-front-card: #4c365ea2;
     --purple-logo: #7e1ecc93;
+
+    --primary-color-front-card-ext: #ebf9fc;
+    --secondary-color-front-card-ext: #f6edfd;
+    --front-card-border-ext: rgba(0, 0, 0, 0.336);
+    --front-card-border-int: rgba(0, 0, 0, 0.7);
 
     /* --test-color-1: red;
     --test-color-2: blue;

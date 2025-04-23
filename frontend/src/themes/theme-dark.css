@@ -35,12 +35,17 @@
     --text-color-dark-button: #d2d0dd;
 
     --purple-primary: #4a2867;
-    --purple-front-card: #0a0113;
+    --secondary-color-front-card: #0a0113;
     --purple-dark: #191a24e5;
     --purple-shadow: #271b31a2;
     --purple-shadow-front-card: #4c365ea2;
     --purple-logo: #7e1ecc93;
 
+    --primary-color-front-card-ext: #011518;
+    --secondary-color-front-card-ext: #140125;
+    --front-card-border-ext: rgba(255, 255, 255, 0.103);
+    --front-card-border-int: rgba(255, 255, 255, 0.07);
+    
     /* --test-color-1: red;
     --test-color-2: blue;
     --test-color-3: orange;
@@ -49,6 +54,6 @@
     --background-image: url("/background-dark.webp");
     --background-blend-mode: darken;
 
-    --loading-spinner-opacity: 0.1;
-    --loading-spinner-mix-blend-mode: multiply;
+    --loading-spinner-opacity: 0.01;
+    --loading-spinner-mix-blend-mode: lighten;
   }
