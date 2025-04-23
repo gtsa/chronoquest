@@ -10,7 +10,7 @@
   height: 400px;
   position: relative;
   cursor: grab;
-  background: linear-gradient(45deg, var(--primary-color-front-card-ext), var(--secondary-color-front-card-ext));
+  background: var(--primary-color-front-card-ext);
   border: 1px solid var(--front-card-border-ext);
   border-radius: 20px;
   perspective: 1000px;
