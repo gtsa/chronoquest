@@ -12,36 +12,33 @@ import {
 import Modal from "react-modal";
 import { Trans, useTranslation } from "react-i18next"
 import './SettingsPanel.css';
+import { useTheme } from "../context/theme-context";
 
-  
 interface SettingsPanelProps {
   difficulty: "easy" | "hard";
-  darkMode: boolean;
   musicOn: boolean;
   soundOn: boolean;
   showGameBoard: boolean;
   hintUsed: boolean;
   onHintUsed: () => void;
   submitted: boolean;
-  toggleDarkMode: () => void;
   toggleMusic: () => void;
   toggleSound: () => void;
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({
   difficulty,
-  darkMode,
   musicOn,
   soundOn,
   showGameBoard,
   hintUsed,
   onHintUsed,
   submitted,
-  toggleDarkMode,
   toggleMusic,
   toggleSound,
 }) => {
   const { t, i18n } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
   const [modalInstructionsOpen, setModalInstructionsOpen] = useState<boolean>(false);
   const [showHintTooltip, setShowHintTooltip] = useState<boolean>(false);
 
@@ -121,12 +118,11 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
             <button
               className="settings-bar-btn"
               onClick={() => {
-                toggleDarkMode();
-                handlePlaceholderClick("Bright/Dark Mode");
+                toggleTheme(); // ← from your useTheme() hook
               }}
             >
-              {darkMode ? <Moon className="icon-large"/> : <Sun className="icon-large"/>}
-                <span className="bar-btn-label">{darkMode ? t("dark_mode") : t("bright_mode")}</span>
+              {theme === 'darkMode' ? <Moon className="icon-large"/> : <Sun className="icon-large"/>}
+                <span className="bar-btn-label">{theme === 'darkMode' ? t("dark_mode") : t("bright_mode")}</span>
             </button>
           </div>
 
@@ -219,11 +215,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
           <button
             className="settings-bar-btn"
             onClick={() => {
-              toggleDarkMode();
-              handlePlaceholderClick("Bright/Dark Mode");
+
             }}
           >
-            {darkMode ? <Moon className="icon-large"/> : <Sun className="icon-large"/>}
+            {/* {darkMode ? <Moon className="icon-large"/> : <Sun className="icon-large"/>} */}
           </button>
 
           {/* Info/Instructions Button */}  

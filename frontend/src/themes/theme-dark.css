@@ -1,4 +1,4 @@
-:root {
+:root[data-theme="darkMode"] {
     --primary-color: #223b40;
     --secondary-color: #103951;
     --primary-dark-version: #051f2e;
@@ -12,7 +12,7 @@
     --background-light: #242424;
     --black-transparent: rgba(0, 0, 0, 0.774);
     --black-extra-transparent: rgba(0, 0, 0, 0.3);
-    --background-overlay: #0f1112de;;
+    --background-overlay: #0d0e0fc5;
 
     --white-extra-transparent: rgba(255, 255, 255, 0.3);
     --used-grayed-out: #a4a5c4;
@@ -31,6 +31,8 @@
     --text-color-secondary: #223b40;
     --white-color: #fff;
     --white-color-grayer: #ccc;
+    --text-instruction-message: #bbb;
+    --text-color-dark-button: #d2d0dd;
 
     --purple-primary: #4a2867;
     --purple-front-card: #0a0113;
@@ -38,4 +40,15 @@
     --purple-shadow: #271b31a2;
     --purple-shadow-front-card: #4c365ea2;
     --purple-logo: #7e1ecc93;
+
+    /* --test-color-1: red;
+    --test-color-2: blue;
+    --test-color-3: orange;
+    --test-color-4: lime; */
+
+    --background-image: url("/background-dark.webp");
+    --background-blend-mode: darken;
+
+    --loading-spinner-opacity: 0.1;
+    --loading-spinner-mix-blend-mode: multiply;
   }

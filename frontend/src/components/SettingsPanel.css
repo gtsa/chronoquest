@@ -80,7 +80,8 @@
 }
 
 .hint-btn {
-  background:var(--primary-color);
+  background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary));
+  color: var(--text-color-dark-button);
 }
 
 .difficulty-btn-label {
@@ -173,8 +174,6 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    /* background-color: #0f0f0f; */
-    box-shadow: 0 2px 5px var(--black-extra-transparent);
     z-index: 100;
     position: fixed;
     top: 0;
@@ -352,8 +351,8 @@
 }
 .close-btn {
   padding: 8px 16px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  color: var(--text-color-primary);
+  background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary));
+  color: var(--text-color-dark-button);
   border: none;
   border-radius: 6px;
   cursor: pointer;
