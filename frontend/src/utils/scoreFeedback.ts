@@ -4,7 +4,7 @@ export function getScoreMessage(score: number, hint: boolean): string[] {
     if (score >= 100) {
       return [`${hint ? '' : '🏆'} ${t("historian_extraordinaire")}`, t("historian_extraordinaire_desc")];
     } else if (score >= 80) {
-      return [t("time_traveller_expert"), t("time_traveller_expert_desc")];
+      return [t("time_travel_expert"), t("time_travel_expert_desc")];
     } else if (score >= 60) {
       return [t("history_enthusiast"), t("history_enthusiast_desc")];
     } else if (score >= 40) {
