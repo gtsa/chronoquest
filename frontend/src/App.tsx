@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import logo from "./assets/favicon-192x192.png";
 
 function App() {
-  const [difficulty, setDifficulty] = useState<"easy" | "hard">("easy");
   const [showGameBoard, setShowGameBoard] = useState(false);
   const [musicOn, setMusicOn] = useState(true);
   const [soundOn, setSoundOn] = useState(true);
@@ -17,9 +16,11 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const { t } = useTranslation();
 
-  const handleToggle = () => {
-    setDifficulty((prev) => (prev === "easy" ? "hard" : "easy"));
+  const getInitialDifficulty = (): "easy" | "hard" => {
+    const saved = localStorage.getItem("difficulty");
+    return saved === "hard" ? "hard" : "easy";
   };
+  const [difficulty, setDifficulty] = useState<"easy" | "hard">(getInitialDifficulty);
 
   const handleStartGame = () => {
     setShowGameBoard(true);
@@ -49,7 +50,13 @@ function App() {
         <div className="game-options">
           <div className="difficulty-label">{t("select_difficulty")}:</div>
           <div className="difficulty-selector">
-            <DifficultySelector difficulty={difficulty} onChange={setDifficulty} />
+            <DifficultySelector
+              difficulty={difficulty}
+              onChange={(level) => {
+                setDifficulty(level);
+                localStorage.setItem("difficulty", level);
+              }}
+          />
           </div>
 
           <div className="start-button-container">
