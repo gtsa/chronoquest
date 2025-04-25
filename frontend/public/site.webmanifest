@@ -3,18 +3,17 @@
     "short_name": "ChronoQuest",
     "icons": [
       {
-        "src": "/favicon-192x192.png",
+        "src": "/favicon-192x192.png?v=0",
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "/favicon-512x512.png",
+        "src": "/favicon-512x512.png?v=0",
         "type": "image/png",
         "sizes": "512x512"
       }
     ],
-    "theme_color": "#000000",
-    "background_color": "#10021e",
+    "background_color": "#07000f",
     "display": "standalone"
   }
   

@@ -11,7 +11,7 @@ const isMobileOrTablet = () => {
 
 const PWAInstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [showPrompt, setShowPrompt] = useState(true);
+  const [showPrompt, setShowPrompt] = useState(false);
   const [localizedMessage, setLocalizedMessage] = useState<{
     installLine1: string;
     installLine2: string;
