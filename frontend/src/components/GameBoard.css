@@ -309,20 +309,27 @@
   width: 99.5%;
   height: auto;
   background-color: none;
-  text-align:center;
   padding-bottom: 1rem;
   border: 1.8px solid transparent;
   border-radius: 8px;
   max-height: 80vh;
   overflow-y: auto;
   box-shadow: 0 4px 10px var(--black-extra-transparent);
-  z-index: 1001;
   text-align: center;
   z-index: 1001;
 
   /* Hide scrollbar */
   scrollbar-width: none; /* Firefox */
   -m+s-overflow-style: none; /* Internet Explorer/Edge */
+}
+
+.modal-event-content a {
+  position: relative;
+  z-index: 100;
+}
+
+.modal-event-content a:hover {
+  color: var(--purple-logo);
 }
 
 .modal-event-content::-webkit-scrollbar {
@@ -342,6 +349,7 @@
   z-index: 10;
   border-radius: 8px;
 }
+
 .modal-event-content::before {
   content: "";
   position: absolute;
@@ -352,6 +360,7 @@
   border-radius: 8px;
   background-color: transparent;
   z-index: 20;
+  pointer-events: none
 }
 .modal-event-content-up {
   padding-left: 0.2em;
