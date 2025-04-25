@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GameBoard from "./components/GameBoard";
 import "./App.css";
+import PWAInstallPrompt from './components/PWAInstallPrompt';
 import DifficultySelector from "./components/DifficultySelector";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import SettingsPanel from "./components/SettingsPanel";
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <div className="app">
+      <PWAInstallPrompt />
       <SettingsPanel
         difficulty={difficulty}
         musicOn={musicOn}
