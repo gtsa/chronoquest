@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GameBoard from "./components/GameBoard";
 import "./App.css";
 import PWAInstallPrompt from './components/PWAInstallPrompt';
@@ -26,8 +26,26 @@ function App() {
     setShowGameBoard(true);
   };
 
+  const [pageReady, setPageReady] = useState(false);
+
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+
+    setVh();
+    window.addEventListener('resize', setVh);
+
+    window.scrollTo(0, 0);
+
+    setTimeout(() => setPageReady(true), 50);
+
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
+
+
   return (
-    <div className="app">
+    <div className={`app ${pageReady ? 'fade-in' : 'fade-out'}`}>
       <PWAInstallPrompt />
       <SettingsPanel
         difficulty={difficulty}
