@@ -14,6 +14,8 @@
       }
     ],
     "background_color": "#07000f",
-    "display": "standalone"
+    "display": "standalone",
+    "description": "Reorder historical events, learn, and test your knowledge with ChronoQuest!",
+    "start_url": "/?source=pwa"
   }
   
