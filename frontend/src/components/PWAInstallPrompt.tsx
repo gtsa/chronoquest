@@ -1,103 +1,134 @@
 import { useEffect, useState } from "react";
 import "./PWAInstallPrompt.css";
 
-const isMobileOrTablet = () => {
-  return (
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    /android|iphone|ipad|ipod|opera mini|iemobile|mobile/i.test(navigator.userAgent)
-  );
-};
 
-const PWAInstallPrompt = () => {
+/* ---------- helpers ---------- */
+
+// `isAndroid` – detects Android devices based on userAgent.
+const isAndroid = () => /android/i.test(navigator.userAgent);
+
+
+// `isPWAInstalled` detect...
+
+async function isPWAInstalled(): Promise<boolean> {
+  // ...if the app is installed via standalone mode or WebAPK, or
+  if (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    (navigator as any).standalone === true || // iOS
+    document.referrer?.startsWith("android-app://")
+  ) {
+    return true;
+  }
+
+  // ...if the app is running as an installed standalone (installed PWA or WebAPK)
+  const getRelated = (navigator as any).getInstalledRelatedApps;
+  if (typeof getRelated === "function") {
+    try {
+      const apps = await getRelated();
+      if (apps?.length) return true;
+    } catch {/* ignore */}
+  }
+  return false;
+}
+
+// `isChromeMobile` – detects Chrome/Brave mobile browsers that support real install banners.
+const isBrave =
+  !!(navigator as any).brave ||
+  (navigator as any).userAgentData?.brands?.some((b: any) => /Brave/i.test(b.brand));
+
+const isChromeMobile = () =>
+  /Chrome\/[.0-9]* Mobile/i.test(navigator.userAgent) &&
+  !/EdgA|OPR|YaApp|SamsungBrowser/i.test(navigator.userAgent) &&
+  !isBrave;
+
+type BannerMode = "install" | null;
+
+export default function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [showPrompt, setShowPrompt] = useState(false);
-  const [localizedMessage, setLocalizedMessage] = useState<{
-    installLine1: string;
-    installLine2: string;
-    installButton: string;
-    laterButton: string;
-  }>({
+  const [mode, setMode] = useState<BannerMode>(null);
+  const [locale, setLocale] = useState({
     installLine1: "Install",
     installLine2: "for a better fullscreen experience!",
     installButton: "Install",
-    laterButton: "Maybe Later",
-  });
+    laterButton: "Maybe Later",});
 
+  /* ---------- localisation ---------- */
+
+// Runs once; picks strings for fr / el / es — defaults remain EN.
   useEffect(() => {
     const language = navigator.language || navigator.languages[0];
-
-    if (language.startsWith("fr")) {
-      setLocalizedMessage({
+    
+    if (language.startsWith("fr"))
+      setLocale({
         installLine1: "Installez",
         installLine2: "pour une meilleure expérience plein écran !",
         installButton: "Installer",
         laterButton: "Plus tard",
       });
-    } else if (language.startsWith("el")) {
-      setLocalizedMessage({
+    else if (language.startsWith("el"))
+      setLocale({
         installLine1: "Εγκαταστήστε το",
         installLine2: "για καλύτερη εμπειρία πλήρους οθόνης!",
         installButton: "Εγκατάσταση",
         laterButton: "Ίσως αργότερα",
       });
-    } else if (language.startsWith("es")) {
-      setLocalizedMessage({
+    else if (language.startsWith("es"))
+      setLocale({
         installLine1: "Instala",
         installLine2: "para una mejor experiencia a pantalla completa!",
         installButton: "Instalar",
         laterButton: "Quizás más tarde",
       });
-    }
-    // Add more languages easily here if needed
-
   }, []);
 
   useEffect(() => {
-    const handleBeforeInstallPrompt = (e: any) => {
-      if (!isMobileOrTablet()) return;
-      e.preventDefault();
-      setDeferredPrompt(e);
-      setShowPrompt(true);
-    };
+    if (!isAndroid()) return;
 
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-    return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    (async () => {
+      /* hide banner if the PWA (or A2HS shortcut) is already present */
+      if (await isPWAInstalled()) {
+        setMode(null);
+        return;
+      }
+
+      /* Chrome path — use beforeinstallprompt */
+      if (isChromeMobile()) {
+        const handler = (e: any) => {
+          e.preventDefault();
+          setDeferredPrompt(e);
+          setMode("install");
+        };
+        window.addEventListener("beforeinstallprompt", handler);
+        return () => window.removeEventListener("beforeinstallprompt", handler);
+      }
+    })();
   }, []);
 
-  const handleInstallClick = async () => {
+
+  /* ---------- click handlers ---------- */
+  // `onInstall` only exists in Chrome path. We still
+  // log the outcome for debugging.
+  const onInstall = async () => {
     if (!deferredPrompt) return;
-
     deferredPrompt.prompt();
-
-    const choiceResult = await deferredPrompt.userChoice;
-    if (choiceResult.outcome === "accepted") {
-      console.log("✅ User accepted install");
-    } else {
-      console.log("❌ User dismissed install");
-    }
-    setShowPrompt(false);
+    const res = await deferredPrompt.userChoice;
+    console.log(res.outcome === "accepted" ? "✅ installed" : "❌ dismissed");
+    setMode(null);
   };
 
-  const handleMaybeLater = () => {
-    console.log("🔔 User chose 'Maybe later'");
-    setShowPrompt(false);
-  };
+  if (mode === null) return null;
 
-  if (!showPrompt) return null;
-
+  /* ---------- UI ---------- */
   return (
     <div className="install-banner">
       <p>
-        {localizedMessage.installLine1} <strong>ChronoQuest</strong> <br />
-        {localizedMessage.installLine2}
+        {locale.installLine1} <strong>ChronoQuest</strong> <br />
+        {locale.installLine2}
       </p>
       <div className="install-buttons">
-        <button onClick={handleInstallClick}>{localizedMessage.installButton}</button>
-        <button onClick={handleMaybeLater}>{localizedMessage.laterButton}</button>
+        <button onClick={onInstall}>{locale.installButton}</button>
+        <button onClick={() => setMode(null)}>{locale.laterButton}</button>
       </div>
     </div>
   );
-};
-
-export default PWAInstallPrompt;
+}
