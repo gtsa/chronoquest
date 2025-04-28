@@ -215,10 +215,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
           <button
             className="settings-bar-btn"
             onClick={() => {
-
+              toggleTheme(); // ← from your useTheme() hook
             }}
           >
-            {/* {darkMode ? <Moon className="icon-large"/> : <Sun className="icon-large"/>} */}
+            {theme === 'darkMode' ? <Moon className="icon-large"/> : <Sun className="icon-large"/>}
           </button>
 
           {/* Info/Instructions Button */}  
