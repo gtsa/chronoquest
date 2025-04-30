@@ -207,8 +207,12 @@
   font-size: clamp(10px, 1.4vw, 14px);
 }
 
-.flash {
-  animation: flashBorder 1s ease-in-out;
+.hint-used.flash-correct {
+  animation: flashBorderCorrect 2s ease-in-out;
+}
+
+.hint-used.flash-wrong {
+  animation: flashBorderWrong 2s ease-in-out;
 }
 
 .card.clickable {
@@ -221,14 +225,27 @@
   transition: all 0.3s ease;
 }
 
-@keyframes flashBorder {
-  from {
-    box-shadow: 0 0 10px 5px var(--flash-correct);
-    transform: scale(1.01);
-  }
-  to {
+@keyframes flashBorderCorrect {
+  0%, 100% {
     box-shadow: none;
-    transform: scale(1);
+  }
+  25%, 75% {
+    box-shadow: 0 0 10px 5px var(--flash-correct);
+  }
+  50% {
+    box-shadow: none;
+  }
+}
+
+@keyframes flashBorderWrong {
+  0%, 100% {
+    box-shadow: none;
+  }
+  25%, 75% {
+    box-shadow: 0 0 10px 5px var(--flash-wrong);
+  }
+  50% {
+    box-shadow: none;
   }
 }
 
@@ -282,11 +299,11 @@
     padding: 1em;
   }
   .card-inner {
-    width: 95%;
-    height: 85%;
+    width: 231px;
+    height: 60px;
     flex-direction: row;
-    margin-top: -4px;
-    margin-left: -4px;
+    margin-top: -5px;
+    margin-left: -5px;
   }
   .card-inner.flipped {
     width: 100%;
@@ -298,7 +315,7 @@
     padding: 10px;
   }
   .card-content.flipped {
-    border-radius: 18.5px;
+    /* border-radius: 18.5px;
     display: flex;
     flex-direction: column;
     box-shadow: 4px 4px 10px var(--black-extra-transparent);
@@ -306,7 +323,7 @@
     left: -1.5px;
     top: -4px;
     width: 96%;
-    height: 89%;
+    height: 89%; */
     /* border-radius: 18.5px;
     display: flex;
     flex-direction: column;
@@ -316,6 +333,15 @@
     top: 0.1px;
     width: 92.1%;
     height: 80%; */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 4px 10px var(--black-extra-transparent);
+    position: absolute;
+    left: -1.5px;
+    top: -3px;
+    width: 239px;
+    height: 72px;
   }  
   .card-image {
     /* position: absolute;
@@ -324,13 +350,23 @@
     height: 101.4%;
     object-fit: cover;
     flex-shrink: 0; */
-    position: absolute;
+    /* position: absolute;
     left: 1px;
     top: 6px;
     width: 50%;
     height: 91%;
     object-fit: cover;
     border-bottom-left-radius: 18px;
+    flex-shrink: 0; */
+  }
+  .card-image {
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    width: 50%;
+    height: 88px;
+    object-fit: cover;
+    /* border-bottom-left-radius: 1px; */
     flex-shrink: 0;
   }
   .event-name {
@@ -365,19 +401,27 @@
   }
   .card-date {
     width: 100%;
-    height: 50%;
-    margin-top: -8px;
+    height: 23px;
+    margin-top: 0px;
   }
   .card-details {
-    height: 112%;
+    /* height: 112%; */
+    /* font-size: clamp(0.1em, 1.8vw, 0.55em); */
+    /* font-size: clamp(0.5em, 0.51em, 1em);
+    width: 86.5%; */
+    /* width: 92%; */
+    /* border-bottom-right-radius: 22px;
+    margin-left: 1px;
+    padding: 2px; */
+    height: 62px;
     /* font-size: clamp(0.1em, 1.8vw, 0.55em); */
     font-size: clamp(0.5em, 0.51em, 1em);
-    width: 86.5%;
+    width: 120px;
     /* width: 92%; */
-    border-bottom-right-radius: 22px;
-    margin-left: 1px;
-    padding: 2px;
-}
+    border-bottom-right-radius: 20px;
+    /* margin-left: 1px; */
+    /* padding: 2px; */
+  }
   .card-badge {
     left: -2px;
     clip-path: polygon(0% 0%, 0% 100%, 100% 0%);
@@ -402,6 +446,34 @@
   }
   .event-name {
     font-size: clamp(0.5em, 1em, 1.5em)
+  }
+  .dragged :is(.card-inner) {
+    width: 229px;
+    height: 58px;
+  }
+  .correct-position.not-flipped {
+    margin-left: -2px;
+    width: 233px;
+    margin-top: -2px;
+    height: 62px;
+    border: 2px solid var(--primary-light-version);
+    filter: drop-shadow(0px 0px 1px var(--correct-position));
+  }
+  
+  .wrong-position.not-flipped {
+    margin-left: -2px;
+    width: 233px;
+    margin-top: -2px;
+    height: 62px;
+    border: 2px solid var(--wrong-position2);
+    filter: drop-shadow(0px 0px 1px var(--wrong-position));
+  }
+  .card.flipped {
+    padding: 10px;
+  }
+  .card-inner.flipped {
+    width: 236px;
+    height: 68px;
   }
 }
 
@@ -430,11 +502,11 @@
     padding: 1em;
   }
   .card-inner {
-    width: 95%;
-    height: 85%;
+    width: 231px;
+    height: 60px;
     flex-direction: row;
-    margin-top: -5.3px;
-    margin-left: -4px;
+    margin-top: -6px;
+    margin-left: -5px;
   }
   .card-inner.flipped {
     width: 100%;

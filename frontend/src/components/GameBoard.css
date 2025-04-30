@@ -30,12 +30,13 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  background-color: var(--test-color-6);
 }
 
 .submit-container {
   display: flex;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 10px;
   justify-content: center;
 }
@@ -55,10 +56,10 @@
 .play-again-wrapper {
   display: flex;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
   flex-direction: column;
   align-items: center;
-  line-height: 0.2;
 }
 
 .play-again-btn {
@@ -71,13 +72,7 @@
   font-weight: bold;
   padding: 12px 24px;
   z-index: 2;
-  transform-origin: center;
 
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
 }
 
 .play-again-btn:hover {
@@ -138,8 +133,9 @@
     height: 35rem;
   }
   .reorder-instruction h3 {
-    margin: 4px;
-    font-size: 0.9rem
+    margin: 10px;
+    font-size: 0.7rem;
+    font-weight: 400;
   }
   .final-message-wrapper h3 {
     margin-top: 8px;
@@ -148,7 +144,20 @@
   .instruction-message {
     font-size: 0.8rem;
     opacity: 0;
-}
+    margin-top: 0px;
+    position: absolute;
+    top: 15px;
+    color: var(--text-color-primary);
+  }
+  .remaining-attempts {
+    margin-top: -20px;
+    margin-bottom: -8px;
+    color: var(--text-color-secondary);
+    opacity: 0.9;
+  }
+  .final-message-wrapper {
+    display: none;
+  }
 }
 
 /* Mobile (Taller) Portrait */
@@ -164,7 +173,30 @@
     height:  45rem;
   }
   .reorder-instruction h3 {
-    margin: 4px
+    margin: 10px;
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+  .remaining-attempts {
+    margin-top: -20px;
+    margin-bottom: -8px;
+    color: var(--text-color-secondary);
+    opacity: 0.9;
+  }
+  .instruction-message {
+    font-size: 0.8rem;
+    opacity: 0;
+    margin-top: 15px;
+    position: absolute;
+    top: 0px;
+    color: var(--text-color-primary);
+  }
+  .final-message-wrapper {
+    display: none;
+  }
+  .game-board.submitted-mark {
+    margin: 8px;
+    overflow: visible;
   }
 }
 
@@ -178,7 +210,7 @@
 /* iPad / Tablet Portrait */
 @media screen and (device-width: 744px) and (device-height: 1133px) and (orientation: portrait), /* iPad Mini */
        screen and (device-width: 820px) and (device-height: 1180px) and (orientation: portrait), /* iPad Air 11" */
-      screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait), /* iPad Air 13" */
+       screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait), /* iPad Air 13" */
        screen and (device-width: 1032px) and (device-height: 1376px) and (orientation: portrait), /* iPad Pro 13" */
        screen and (device-width: 834px) and (device-height: 1194px) and (orientation: portrait), /* iPad Pro 11" */
        screen and (device-width: 800px) and (device-height: 1280px) and (orientation: portrait), /* Pixel Tablet, Fire HD 10 */
@@ -476,9 +508,9 @@
 }
 
 @keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% { opacity: 0.75; }
+  50% { opacity: 0.25; }
+  100% { opacity: 0.75; }
 }
 
 @keyframes fadeIn {
@@ -491,3 +523,5 @@
     transform: translate(-50%, -50%);
   }
 }
+
+

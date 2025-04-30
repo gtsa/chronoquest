@@ -20,9 +20,10 @@ type GameBoardProps = {
   hintUsed: boolean;
   submitted: boolean;
   onSubmit: () => void;
+  onFinished: () => void;
 };
 
-const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, onSubmit }) => {
+const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, onSubmit, onFinished }) => {
   const { i18n, t } = useTranslation();
   const [events, setEvents] = useState<Array<{
     id: number;
@@ -195,6 +196,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, 
   const backend = isTouchDevice() ? TouchBackend : HTML5Backend;
   const backendOptions = isTouchDevice() ? { delayTouchStart: 3 } : undefined;
 
+  useEffect(() => {
+    if (submitted && !modalFeedbackOpen && flippedCards && finalMessage) {onFinished()}
+  }, [submitted, modalFeedbackOpen, flippedCards]);
+  
+
   return (
     <DndProvider backend={backend} options={backendOptions}>
       <div className={`game-board-container ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
@@ -220,7 +226,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, 
               </div>
             )}
             
-            <p className= {`instruction-message ${clickableCards ? "clickable" : ""}`}>Click on the cards to reveal historical details</p>
+            <p className= {`instruction-message ${clickableCards ? "clickable" : ""}`}>{t("click_on_the_cards")}</p>
             
 
             <div className={`game-board ${submitted ? "submitted-mark" : ""} ${modalFeedbackOpen ? "feedback-open" : "feedback-closed"} ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
