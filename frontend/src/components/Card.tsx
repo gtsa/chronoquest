@@ -98,7 +98,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
             <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""}`}>
               {submitted && (
                 <div className={`card-badge ${cardResults[event.id] ? "correct" : "incorrect"}`}>
-                  {cardResults[event.id] ? "✓" : "✕"}
+                  {cardResults[event.id] ? <i className="fas fa-check badge-check"></i> : <i className="fas fa-xmark badge-xmark"></i>}
                 </div>
               )}
               
