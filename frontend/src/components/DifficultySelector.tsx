@@ -16,13 +16,13 @@ const DifficultySelector: React.FC<Props> = ({ difficulty, onChange }) => {
         className={`difficulty-option ${difficulty === "easy" ? "active" : ""}`}
         onClick={() => onChange("easy")}
       >
-        {difficulty === "easy" && "✓"} {t("easy_mode")}
+        {difficulty === "easy" && <i className="fas fa-check"></i>}&nbsp;&nbsp;{t("easy_mode")}
       </button>
       <button
         className={`difficulty-option ${difficulty === "hard" ? "active" : ""}`}
         onClick={() => onChange("hard")}
       >
-        {t("hard_mode")} {difficulty === "hard" && "✓"}
+        {t("hard_mode")}&nbsp;&nbsp;{difficulty === "hard" && <i className="fas fa-check"></i>}
       </button>
 
     </div>
