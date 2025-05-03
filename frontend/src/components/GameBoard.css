@@ -163,7 +163,7 @@
 /* Mobile (Taller) Portrait */
 @media 
        /*screen and (device-width: 448px) and (device-height: 998px) and (orientation: portrait)  Pixel 8 Pro */ 
-       screen and (min-width: 394px) and (max-width: 480px) and (orientation: portrait)
+       screen and (min-width: 384px) and (max-width: 480px) and (min-height: 668px) and (orientation: portrait)
        {
   .game-board {
     flex-direction: column;
@@ -198,7 +198,11 @@
     margin: 8px;
     overflow: visible;
   }
+  .modal-event img {
+    padding-left: 2px;
+  }
 }
+
 
 /* Mobile Landscape */
 @media screen and (min-width: 481px) and (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
@@ -312,6 +316,7 @@
   background-color: none;
   text-align:center;
   padding-bottom: 1rem;
+  color: var(--text-color-primary)
 }
 
 .modal-event {

@@ -294,7 +294,6 @@
   border-radius: 8px;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 4px 10px var(--black-extra-transparent);
   z-index: 1001;
 
   /* Hide scrollbar */
@@ -347,8 +346,7 @@
   align-items: center;
   position: absolute;
   width: 100%;
-  margin-left: -15px;
-  margin-top: 1px;
+  margin-top: -8px;
 }
 .close-btn {
   padding: 8px 16px;
