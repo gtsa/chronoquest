@@ -37,6 +37,10 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
   const ref = useRef<HTMLDivElement>(null);
   const { i18n } = useTranslation();
 
+  const isTouchDevice = () =>
+    typeof window !== "undefined" &&
+    ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  
   const [, drop] = useDrop({
     accept: "CARD",
     hover: (draggedItem: { index: number }) => {
@@ -66,7 +70,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
   return (
 
     <motion.div
-      layout
+      layout = {!isTouchDevice()}
       transition={{ type: "spring", stiffness: 200, damping: 50 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -77,7 +81,8 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
           ref={ref}
           className={
             `card ${flipped ? "flipped" : ""}
-            ${highlightIds.includes(event.id) ? "flash" : ""}
+            ${hintUsed ? "hint-used" : ""}
+            ${highlightIds.includes(event.id) ? "flash-correct" : "flash-wrong"}
             ${isDragging ? "dragged" : ""}
             ${clickable ? "clickable" : ""}`}
           onClick={() => {
@@ -87,7 +92,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
           }} 
         >
           <div className={`card-inner ${flipped ? "flipped" : ""}`}>
-            <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""} ${flipped ? "flipped" : ""}`}>
+            <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""} ${flipped ? "flipped" : "not-flipped"}`}>
               <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? eventRiddle : eventName}</div>
             </div>
             <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""}`}>

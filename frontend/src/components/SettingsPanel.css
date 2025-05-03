@@ -130,6 +130,7 @@
 .top-bar,
 .side-bar {
   display: none;
+  background-color: var(--test-color-5);
 }
 
 @media screen and (min-width: 480px){  
@@ -175,13 +176,13 @@
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
   }
 
   .top-buttons {
-    margin: 5px;
+    margin-top: 5px;
     display: flex;
     align-items: center;    
     justify-content: space-around;
@@ -211,7 +212,7 @@
   }
 
   .side-buttons {
-    margin: 5px;
+    margin-right: 5px;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
@@ -347,7 +348,7 @@
   position: absolute;
   width: 100%;
   margin-left: -15px;
-  margin-top: -8px;
+  margin-top: 1px;
 }
 .close-btn {
   padding: 8px 16px;
@@ -361,4 +362,27 @@
 }
 .close-btn:hover {
   background-color: var(--secondary-color);
+}
+
+@media 
+/*screen and (device-width: 448px) and (device-height: 998px) and (orientation: portrait)  Pixel 8 Pro */ 
+screen and (min-width: 394px) and (max-width: 480px) and (orientation: portrait){
+  .top-bar.off {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+@media
+screen and (device-width: 375px) and (device-height: 667px) and (orientation: portrait), /* iPhone 8 */
+screen and (device-width: 375px) and (device-height: 812px) and (orientation: portrait), /* iPhone 11 Pro */
+screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait), /* iPhone 13 mini */
+screen and (device-width: 393px) and (device-height: 851px) and (orientation: portrait), /* Pixel 5 */
+screen and (device-width: 360px) and (device-height: 760px) and (orientation: portrait), /* Galaxy S10e */
+screen and (device-width: 393px) and (device-height: 830px) and (orientation: portrait), /* Pixel 4 */
+screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait)  /* iPhone 12 mini */ {
+  .top-bar.off {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
 }

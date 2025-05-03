@@ -14,6 +14,7 @@ function App() {
   const [soundOn, setSoundOn] = useState(true);
   const [hintUsed, setHintUsed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [finished, setFinished] = useState(false);
   const { t } = useTranslation();
 
   const getInitialDifficulty = (): "easy" | "hard" => {
@@ -55,42 +56,50 @@ function App() {
         hintUsed={hintUsed}
         onHintUsed={() => setHintUsed(true)}
         submitted={submitted}
+        finished={finished}
         toggleMusic={() => setMusicOn((prev) => !prev)}
         toggleSound={() => setSoundOn((prev) => !prev)}
       />
 
-      <div className="header">
-        <img src={logo} alt="ChronoQuest Logo" className="logo" />
-        <h1>ChronoQuest</h1>
-      </div>
 
-      {!showGameBoard && (
-        <div className="game-options">
-          <div className="difficulty-label">{t("select_difficulty")}:</div>
-          <div className="difficulty-selector">
-            <DifficultySelector
-              difficulty={difficulty}
-              onChange={(level) => {
-                setDifficulty(level);
-                localStorage.setItem("difficulty", level);
-              }}
-          />
-          </div>
+      
 
-          <div className="start-button-container">
-            <button className="play-btn" onClick={handleStartGame}>{t("play")}</button>
-          </div>
+      <div className="header-gameboard-wrapper">
+
+        <div className="header">
+          <img src={logo} alt="ChronoQuest Logo" className="logo" />
+          <h1>ChronoQuest</h1>
         </div>
-      )}
 
-      {showGameBoard && (
-        <GameBoard 
-          difficulty={difficulty}
-          hintUsed={hintUsed}
-          submitted={submitted}
-          onSubmit={() => setSubmitted(true)}
-        />
-      )}
+        {!showGameBoard && (
+          <div className="game-options">
+            <div className="difficulty-label">{t("select_difficulty")}:</div>
+            <div className="difficulty-selector">
+              <DifficultySelector
+                difficulty={difficulty}
+                onChange={(level) => {
+                  setDifficulty(level);
+                  localStorage.setItem("difficulty", level);
+                }}
+            />
+            </div>
+
+            <div className="start-button-container">
+              <button className="play-btn" onClick={handleStartGame}>{t("play")}</button>
+            </div>
+          </div>
+        )}
+
+        {showGameBoard && (
+          <GameBoard 
+            difficulty={difficulty}
+            hintUsed={hintUsed}
+            submitted={submitted}
+            onSubmit={() => setSubmitted(true)}
+            onFinished={() => setFinished(true)}
+          />
+        )}
+      </div>
       <LanguageSwitcher />
     </div>
   );

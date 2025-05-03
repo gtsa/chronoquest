@@ -13,6 +13,7 @@ import Modal from "react-modal";
 import { Trans, useTranslation } from "react-i18next"
 import './SettingsPanel.css';
 import { useTheme } from "../context/theme-context";
+import { findSpring } from "framer-motion";
 
 interface SettingsPanelProps {
   difficulty: "easy" | "hard";
@@ -22,6 +23,7 @@ interface SettingsPanelProps {
   hintUsed: boolean;
   onHintUsed: () => void;
   submitted: boolean;
+  finished: boolean;
   toggleMusic: () => void;
   toggleSound: () => void;
 }
@@ -34,6 +36,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
   hintUsed,
   onHintUsed,
   submitted,
+  finished,
   toggleMusic,
   toggleSound,
 }) => {
@@ -66,7 +69,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
 
   return (
     <div className="settings-panel">
-      <div className="top-bar responsive-only" data-bar-type="top">
+      <div className={`top-bar responsive-only ${finished ? "off" : ""}`} data-bar-type="top">
         <div className="top-buttons">
 
           {/* Difficulty Indicator */}

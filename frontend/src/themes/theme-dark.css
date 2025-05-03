@@ -19,6 +19,7 @@
     --used-extra-grayed-out:rgb(46, 46, 49);
 
     --flash-correct: rgba(18, 78, 31, 0.6);
+    --flash-wrong: rgba(175, 16, 91, 0.6);
     --correct-position:  #1faa5e;
     --wrong-position: #813131;
     --wrong-position2: #9b5656;
@@ -46,10 +47,12 @@
     --front-card-border-ext: rgba(255, 255, 255, 0.27);
     --front-card-border-int: rgba(255, 255, 255, 0.1);
     
-    /* --test-color-1: red;
+    --test-color-1: red;
     --test-color-2: blue;
     --test-color-3: orange;
-    --test-color-4: lime; */
+    --test-color-4: lime;
+    --test-color-5: purple;
+    --test-color-6: green;
 
     --background-image: url("/background-dark.webp");
     --background-blend-mode: darken;
