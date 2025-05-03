@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
 @import url('./themes/theme-dark.css');
 @import url('./themes/theme-bright.css');
 
@@ -44,7 +44,7 @@ body {
   align-items: center;
   justify-content: center;
   min-width: 320px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: var(--background-image) center/100% 100% no-repeat;
   background-blend-mode: var(--background-blend-mode);
   background-color: var(--background-overlay);

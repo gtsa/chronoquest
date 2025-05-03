@@ -44,15 +44,15 @@
 
     --primary-color-front-card-ext: #011518;
     --secondary-color-front-card-ext: #140125;
-    --front-card-border-ext: rgba(255, 255, 255, 0.27);
-    --front-card-border-int: rgba(255, 255, 255, 0.1);
+    --front-card-border-ext: rgba(0, 0, 0, 1);
+    --front-card-border-int: rgba(255, 255, 255, 0.27);
     
-    --test-color-1: red;
+    /* --test-color-1: red;
     --test-color-2: blue;
     --test-color-3: orange;
     --test-color-4: lime;
     --test-color-5: purple;
-    --test-color-6: green;
+    --test-color-6: green; */
 
     --background-image: url("/background-dark.webp");
     --background-blend-mode: darken;
