@@ -33,6 +33,15 @@
 .game-options {
   margin-top: 20px;
   margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 99vw;
+  max-width: 99vw;
+  height:  fit-content;
+  background-color: var(--test-color-1);
+  
 }
 
 .start-button-container {
@@ -155,4 +164,20 @@
 /* 💻 Laptops & Desktops */
 @media (min-width: 1181px) {
   /* Styles for large screens */
+}
+
+/* Mobile Landscape */
+@media screen and (min-width: 660px) and (max-width: 1000px) and (max-height: 480px) and (orientation: landscape) {
+  .game-options {
+    margin-bottom: 0px;
+  }
+  .game-board {
+    height: 100%;
+  }
+  .header {
+    margin-top: 4px;
+  }
+  .logo {
+    width: 40px;
+  }
 }

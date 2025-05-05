@@ -239,9 +239,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
             disabled={hintUsed || submitted}
           >
             <Lightbulb className="icon-large"/>
-            <span className="bar-btn-label hint">
-              {hintUsed ? t("hint_used") : t("use_hint")}
-            </span>
           </button>
 
         </div>

@@ -106,10 +106,20 @@ button:hover {
   }
 }
 
-/* Mobile Landscape */
+/* Mobile Landscape
 @media screen and (min-width: 481px) and (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) {
   body::before {
     content: "Mobile Landscape Active";
+  }
+} */
+
+/* Mobile Landscape */
+@media screen and (min-width: 660px) and (max-width: 1000px) and (max-height: 480px) and (orientation: landscape) {
+  body::before {
+    content: "Mobile Landscape Active";
+  }
+  h1 {
+    font-size: 26px;
   }
 }
 

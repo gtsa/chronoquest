@@ -321,24 +321,6 @@
     padding: 10px;
   }
   .card-content.flipped {
-    /* border-radius: 18.5px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 4px 4px 10px var(--black-extra-transparent);
-    position: absolute;
-    left: -1.5px;
-    top: -4px;
-    width: 96%;
-    height: 89%; */
-    /* border-radius: 18.5px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 4px 4px 10px var(--black-extra-transparent);
-    position: absolute;
-    left: -0.38px;
-    top: 0.1px;
-    width: 92.1%;
-    height: 80%; */
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -349,22 +331,7 @@
     width: 239px;
     height: 72px;
   }  
-  .card-image {
-    /* position: absolute;
-    left: 0.5px;
-    width: 50%;
-    height: 101.4%;
-    object-fit: cover;
-    flex-shrink: 0; */
-    /* position: absolute;
-    left: 1px;
-    top: 6px;
-    width: 50%;
-    height: 91%;
-    object-fit: cover;
-    border-bottom-left-radius: 18px;
-    flex-shrink: 0; */
-  }
+
   .card-image {
     position: absolute;
     left: 0px;
@@ -659,5 +626,58 @@
   }
   .card-details {
     font-size: clamp(9px, 10px, 11px);
+  }
+}
+
+/* Mobile Landscape */
+@media screen and (min-width: 660px) and (max-width: 1000px) and (max-height: 480px) and (orientation: landscape) {
+  .card {
+    height: 200px;
+    width: 17vw;
+  }
+  .card.flipped {
+    width: 16vw;
+  }
+  .event-name {
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 0px;
+  }
+  .card-badge {
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+  }
+  .badge-check {
+    margin-left: -20px;
+    margin-top: 8px;
+  }
+  .badge-xmark {
+    margin-left: -20px;
+    margin-top: 8px;
+  }
+  .card-name-back,
+  .card-name-back.lang_en {
+    font-size: 0.5rem;
+    font-weight: 600
+  }
+  .card-details {
+    font-size: 0.45rem;
+    font-weight: 200;
+    margin-top: -5px;
+  }
+  .card:not(.flipped) {
+    padding-left: 3px;
+    padding-bottom: 5px;
+    padding-top: 3px;
+    padding-right: 5px;
+  }
+  .card.flipped {
+    background-color: transparent;
+    border: none;
+    padding-left: 7px;
+    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-right: 10px;
   }
 }
