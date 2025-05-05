@@ -489,9 +489,6 @@
   }
 }
 
-
-
-
 .close-icon {
   position: absolute;
   left: auto;
@@ -558,5 +555,76 @@
   }
   .close-btn-container-event {
     margin: -10px
+  }
+}
+
+/* Mobile Landscape */
+@media screen and (min-width: 660px) and (max-width: 1000px) and (max-height: 480px) and (orientation: landscape) {
+  .reorder-instruction h3 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+
+  .reorder-instruction {
+    margin-top: -10px
+  }
+
+  .submit-container {
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+  
+  .play-again-btn {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .play-again-wrapper {
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+  
+  .submit-btn {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .game-board-container {
+    min-height: 0;
+    height: 292px;
+  }
+
+  .game-board {
+    /* gap: 2px;
+    width: calc(100% - 45px);
+    align-self: flex-start;
+    /* padding: 0px 10px; */
+    /*overflow: hidden;*/
+    gap: 0px;
+    width: calc(100% - 4px);
+    align-self: flex-start;
+    overflow: hidden;
+    margin-left: -10px;
+  }
+
+  .remaining-attempts {
+    margin-top: -18px;
+    margin-bottom: -12px;
+    color: var(--text-color-secondary);
+    opacity: 0.9;
+    font-size: 0.7rem;
+  }
+
+  .final-message-wrapper h3 {
+    margin-top: 0px;
+    font-size: 1rem;
+  }
+  .instruction-message {
+    font-size: 0.7rem;
+  }
+  .game-board.submitted-mark {
+    overflow: visible;
   }
 }

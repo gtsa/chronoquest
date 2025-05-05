@@ -49,3 +49,20 @@
     transform: translateY(-20%);
   }
 }
+
+/* Mobile Landscape */
+@media screen and (min-width: 660px) and (max-width: 1000px) and (max-height: 480px) and (orientation: landscape) {
+  .language-switcher {
+    flex-direction: row;
+    transform: translateY(10%);
+    margin-left: -14px;
+  }
+  .language-switcher button {
+    transform: rotate(0deg);
+    padding: 0px 8px;
+    font-size: 12px;
+  }
+  .language-switcher button:hover {
+    transform: rotate(0deg) scale(1.1);
+  }
+}
