@@ -3,12 +3,11 @@
 @import url('./themes/theme-bright.css');
 
 body::before {
-  content: "Laptop Active";
   position: fixed;
+  color: red;
   top: 10px;
   left: 10px;
-  background:  var(--test-color-4);;
-  color: black;
+  background-color: lime;
   font-size: 1rem;
   z-index: 9999;
 }
@@ -159,5 +158,11 @@ button:hover {
        screen and (device-width: 1440px) and (device-height: 960px) and (orientation: landscape)  /* Surface Pro 9 */ {
   body::before {
     content: "iPad/Tablet Landscape Active";
+  }  
+}
+
+@media screen and (min-width: 1129px) {
+  body::before {
+    content: "Laptop Active";
   }  
 }

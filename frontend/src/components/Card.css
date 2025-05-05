@@ -479,6 +479,15 @@
   }
 }
 
+@media screen and (min-width: 1129px) {
+  .badge-xmark {
+    margin-left: -32px;
+  }
+  .badge-check {
+    margin-left: -32px;
+  }
+}
+
 /* iPad / Tablet Portrait */
 @media screen and (device-width: 744px) and (device-height: 1133px) and (orientation: portrait), /* iPad Mini */
        screen and (device-width: 820px) and (device-height: 1180px) and (orientation: portrait), /* iPad Air 11" */

@@ -340,7 +340,7 @@
   padding-right: 0.2em;
 }
 
-.close-btn-container {
+.close-btn-container-instructions {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -382,5 +382,11 @@ screen and (device-width: 360px) and (device-height: 780px) and (orientation: po
   .top-bar.off {
     opacity: 0;
     transition: all 0.5s ease-in-out;
+  }
+}
+
+@media screen and (min-width: 1129px) {
+  .close-btn-container-instructions {
+    margin-left: -15px
   }
 }
