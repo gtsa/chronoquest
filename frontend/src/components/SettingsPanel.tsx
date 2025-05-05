@@ -342,7 +342,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
           </ul>
         </div>
 
-        <div className="close-btn-container">
+        <div className="close-btn-container-instructions">
           <button className="close-btn" onClick={closeInstructionsModal}>
             {t("close")}
           </button>

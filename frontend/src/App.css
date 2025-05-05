@@ -62,6 +62,12 @@
   flex-shrink: 0;
 }
 
+@media screen and (min-width: 1129px) {
+  .header {
+    height: auto;
+  }  
+}
+
 .logo {
   width: 72px;
   height: auto;
