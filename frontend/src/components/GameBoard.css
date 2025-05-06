@@ -100,71 +100,8 @@
 
 /* Responsive Adjustments */
 
-/* Compact Mobile Portrait */
-/* @media screen and (min-width: 360px) and (max-width: 400px) and (orientation: portrait) {} */
-@media screen and (device-width: 375px) and (device-height: 667px) and (orientation: portrait), /* iPhone 8 */
-       screen and (device-width: 375px) and (device-height: 812px) and (orientation: portrait), /* iPhone 11 Pro */
-       screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait), /* iPhone 13 mini */
-       screen and (device-width: 393px) and (device-height: 851px) and (orientation: portrait), /* Pixel 5 */
-       screen and (device-width: 360px) and (device-height: 760px) and (orientation: portrait), /* Galaxy S10e */
-       screen and (device-width: 393px) and (device-height: 830px) and (orientation: portrait), /* Pixel 4 */
-       screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait)  /* iPhone 12 mini */ {
-/*   .game-board {
-    flex-direction: column;
-    gap: -120px !important
-  }
-  .game-board-container {
-    height:  41rem;
-    background-color: brown;
-    gap: 0px
-  }
-  .submit-container {
-    position: absolute;
-    bottom: 0px;
-  }
-  .instruction-message {
-    margin-bottom: 0px;
-  } */
-  .game-board {
-    flex-direction: column;
-    gap: clamp(-30px, 2vw, 5px);
-  }
-  .game-board-container {
-    height: 35rem;
-  }
-  .reorder-instruction h3 {
-    margin: 10px;
-    font-size: 0.7rem;
-    font-weight: 400;
-  }
-  .final-message-wrapper h3 {
-    margin-top: 8px;
-    font-size: 0.9rem
-  }
-  .instruction-message {
-    font-size: 0.8rem;
-    opacity: 0;
-    margin-top: 0px;
-    position: absolute;
-    top: 15px;
-    color: var(--text-color-primary);
-  }
-  .remaining-attempts {
-    margin-top: -20px;
-    margin-bottom: -8px;
-    color: var(--text-color-secondary);
-    opacity: 0.9;
-  }
-  .final-message-wrapper {
-    display: none;
-  }
-}
-
 /* Mobile (Taller) Portrait */
-@media 
-       /*screen and (device-width: 448px) and (device-height: 998px) and (orientation: portrait)  Pixel 8 Pro */ 
-       screen and (min-width: 384px) and (max-width: 480px) and (min-height: 668px) and (orientation: portrait)
-       {
+@media screen and (max-width: 480px) and (min-height: 668px) and (orientation: portrait) {
   .game-board {
     flex-direction: column;
     gap: clamp(-30px, 2vw, 5px);
@@ -203,11 +140,44 @@
   }
 }
 
-
-/* Mobile Landscape */
-@media screen and (min-width: 481px) and (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
+/* Mobile (Compact) Portrait */
+@media screen and (max-width: 400px) and (orientation: portrait) {
   .game-board {
-    flex-direction: row;
+    flex-direction: column;
+    gap: clamp(0px, 10px, 15px);
+  }
+  .game-board-container {
+    height:  45rem;
+  }
+  .reorder-instruction h3 {
+    margin: 10px;
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+  .remaining-attempts {
+    margin-top: -20px;
+    margin-bottom: -8px;
+    color: var(--text-color-secondary);
+    opacity: 0.9;
+  }
+  .instruction-message {
+    font-size: 0.8rem;
+    opacity: 0;
+    margin-top: 15px;
+    position: absolute;
+    top: 0px;
+    color: var(--text-color-primary);
+  }
+  .final-message-wrapper {
+    display: none;
+  }
+  .game-board.submitted-mark {
+    margin: 8px;
+    overflow: visible;
+    margin-bottom: 0px;
+  }
+  .modal-event img {
+    padding-left: 2px;
   }
 }
 
@@ -526,6 +496,7 @@
   }
 }
 
+/* 💻 Laptops & Desktops */
 @media screen and (min-width: 1129px) {
   .game-board-container {
     min-height: 620px;
@@ -597,11 +568,7 @@
   }
 
   .game-board {
-    /* gap: 2px;
-    width: calc(100% - 45px);
-    align-self: flex-start;
-    /* padding: 0px 10px; */
-    /*overflow: hidden;*/
+    flex-direction: row;
     gap: 0px;
     width: calc(100% - 4px);
     align-self: flex-start;
