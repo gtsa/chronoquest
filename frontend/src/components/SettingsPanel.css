@@ -367,29 +367,23 @@
   background-color: var(--secondary-color);
 }
 
-@media 
-/*screen and (device-width: 448px) and (device-height: 998px) and (orientation: portrait)  Pixel 8 Pro */ 
-screen and (min-width: 394px) and (max-width: 480px) and (orientation: portrait){
+/* Mobile (Taller) Portrait */
+@media screen and (min-width: 401px) and (max-width: 480px) and (orientation: portrait) {
   .top-bar.off {
     opacity: 0;
     transition: all 0.5s ease-in-out;
   }
 }
 
-@media
-screen and (device-width: 375px) and (device-height: 667px) and (orientation: portrait), /* iPhone 8 */
-screen and (device-width: 375px) and (device-height: 812px) and (orientation: portrait), /* iPhone 11 Pro */
-screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait), /* iPhone 13 mini */
-screen and (device-width: 393px) and (device-height: 851px) and (orientation: portrait), /* Pixel 5 */
-screen and (device-width: 360px) and (device-height: 760px) and (orientation: portrait), /* Galaxy S10e */
-screen and (device-width: 393px) and (device-height: 830px) and (orientation: portrait), /* Pixel 4 */
-screen and (device-width: 360px) and (device-height: 780px) and (orientation: portrait)  /* iPhone 12 mini */ {
+/* Mobile (Compact) Portrait */
+@media screen and (max-width: 400px) and (orientation: portrait) {
   .top-bar.off {
     opacity: 0;
     transition: all 0.5s ease-in-out;
   }
 }
 
+/* 💻 Laptops & Desktops */
 @media screen and (min-width: 1129px) {
   .close-btn-container-instructions {
     margin-left: -15px

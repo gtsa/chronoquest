@@ -9,7 +9,7 @@
   text-orientation: sideways;
   flex-direction: column;
   transform: translateY(-20%);
-  z-index: 1000;
+  z-index: 990;
 }
 
 .language-switcher button {
@@ -38,7 +38,21 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 600px) {
+/* Mobile (Taller) Portrait */
+@media screen and (min-width: 401px) and (max-width: 480px) and (orientation: portrait) {
+  .language-switcher {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    display: flex;
+    text-orientation: sideways;
+    flex-direction: column;
+    transform: translateY(-20%);
+  }
+}
+
+/* Mobile (Compact) Portrait */
+@media screen and (max-width: 400px) and (orientation: portrait) {
   .language-switcher {
     position: absolute;
     bottom: 60px;
