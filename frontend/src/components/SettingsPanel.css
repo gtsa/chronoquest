@@ -133,7 +133,7 @@
   background-color: var(--test-color-5);
 }
 
-@media screen and (min-width: 480px){  
+@media (min-width: 480px){  
   .settings-bar-btn {
     flex-direction: row;
     aspect-ratio: auto;
@@ -194,7 +194,7 @@
 /* -----------------------------
    Landscape Smartphone Layout
 ----------------------------- */
-@media screen and (min-width: 481px) and (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) {
+@media (min-width: 481px) and (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) {
   .side-bar {
     display: flex;
     flex-direction: column;
@@ -368,7 +368,7 @@
 }
 
 /* Mobile (Taller) Portrait */
-@media screen and (min-width: 401px) and (max-width: 480px) and (orientation: portrait) {
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
   .top-bar.off {
     opacity: 0;
     transition: all 0.5s ease-in-out;
@@ -376,7 +376,7 @@
 }
 
 /* Mobile (Compact) Portrait */
-@media screen and (max-width: 400px) and (orientation: portrait) {
+@media (max-width: 400px) and (orientation: portrait) {
   .top-bar.off {
     opacity: 0;
     transition: all 0.5s ease-in-out;
@@ -384,7 +384,7 @@
 }
 
 /* 💻 Laptops & Desktops */
-@media screen and (min-width: 1129px) {
+@media (min-width: 1025px) and (orientation: landscape), (min-width: 1102px) and (orientation: portrait) {
   .close-btn-container-instructions {
     margin-left: -15px
   }

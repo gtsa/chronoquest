@@ -39,7 +39,7 @@
 
 /* Responsive Adjustments */
 /* Mobile (Taller) Portrait */
-@media screen and (min-width: 401px) and (max-width: 480px) and (orientation: portrait) {
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
   .language-switcher {
     position: absolute;
     bottom: 60px;
@@ -52,7 +52,7 @@
 }
 
 /* Mobile (Compact) Portrait */
-@media screen and (max-width: 400px) and (orientation: portrait) {
+@media (max-width: 400px) and (orientation: portrait) {
   .language-switcher {
     position: absolute;
     bottom: 60px;
@@ -65,7 +65,7 @@
 }
 
 /* Mobile Landscape */
-@media screen and (min-width: 660px) and (max-width: 1000px) and (max-height: 480px) and (orientation: landscape) {
+@media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape)  {
   .language-switcher {
     flex-direction: row;
     transform: translateY(10%);

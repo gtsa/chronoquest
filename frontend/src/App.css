@@ -70,7 +70,7 @@
   flex-shrink: 0;
 }
 
-@media screen and (min-width: 1129px) {
+@media (min-width: 1025px) and (orientation: landscape), (min-width: 1102px) and (orientation: portrait) {
   .header {
     height: auto;
   }  
@@ -95,7 +95,7 @@
 }
 
 /* Mobile (Compact) Portrait */
-@media screen and (max-width: 400px) and (orientation: portrait) {
+@media (max-width: 400px) and (orientation: portrait) {
   .play-btn {
     font-size: 18px;
     padding: 10px 20px;
@@ -107,7 +107,7 @@
 }
 
 /* Mobile (Taller) Portrait */
-@media screen and (min-width: 401px) and (max-width: 480px) and (orientation: portrait){
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait) {
   .play-btn {
     font-size: 18px;
     padding: 10px 20px;
@@ -118,7 +118,7 @@
 }
 
 /* Mobile Landscape */
-@media screen and (min-width: 481px) and (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
+@media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape) {
   /* Styles for both phones in landscape */
   .play-btn {
     font-size: 18px;
@@ -139,17 +139,7 @@
 }
 
 /* iPad / Tablet Portrait */
-@media screen and (device-width: 744px) and (device-height: 1133px) and (orientation: portrait), /* iPad Mini */
-       screen and (device-width: 820px) and (device-height: 1180px) and (orientation: portrait), /* iPad Air 11" */
-      screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait), /* iPad Air 13" */
-       screen and (device-width: 1032px) and (device-height: 1376px) and (orientation: portrait), /* iPad Pro 13" */
-       screen and (device-width: 834px) and (device-height: 1194px) and (orientation: portrait), /* iPad Pro 11" */
-       screen and (device-width: 800px) and (device-height: 1280px) and (orientation: portrait), /* Pixel Tablet, Fire HD 10 */
-       screen and (device-width: 533px) and (device-height: 893px) and (orientation: portrait), /* Lenovo Tab M9 */
-       screen and (device-width: 533px) and (device-height: 853px) and (orientation: portrait), /* Fire HD 8 */
-       screen and (device-width: 1067px) and (device-height: 1707px) and (orientation: portrait), /* Galaxy Tab S7 / S8 */
-       screen and (device-width: 1102px) and (device-height: 1866px) and (orientation: portrait), /* Galaxy Tab S8+ */
-       screen and (device-width: 960px) and (device-height: 1440px) and (orientation: portrait)  /* Surface Pro 9 */ {
+@media (min-width: 480px) and (max-width: 1102px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
   .play-btn {
     font-size: 18px;
     padding: 10px 20px;
