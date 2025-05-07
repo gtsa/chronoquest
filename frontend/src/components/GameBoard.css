@@ -101,7 +101,7 @@
 /* Responsive Adjustments */
 
 /* Mobile (Taller) Portrait */
-@media screen and (max-width: 480px) and (min-height: 668px) and (orientation: portrait) {
+@media (max-width: 480px) and (min-height: 668px) and (orientation: portrait) {
   .game-board {
     flex-direction: column;
     gap: clamp(-30px, 2vw, 5px);
@@ -141,7 +141,7 @@
 }
 
 /* Mobile (Compact) Portrait */
-@media screen and (max-width: 400px) and (orientation: portrait) {
+@media (max-width: 400px) and (orientation: portrait) {
   .game-board {
     flex-direction: column;
     gap: clamp(0px, 10px, 15px);
@@ -182,17 +182,7 @@
 }
 
 /* iPad / Tablet Portrait */
-@media screen and (device-width: 744px) and (device-height: 1133px) and (orientation: portrait), /* iPad Mini */
-       screen and (device-width: 820px) and (device-height: 1180px) and (orientation: portrait), /* iPad Air 11" */
-       screen and (device-width: 1024px) and (device-height: 1366px) and (orientation: portrait), /* iPad Air 13" */
-       screen and (device-width: 1032px) and (device-height: 1376px) and (orientation: portrait), /* iPad Pro 13" */
-       screen and (device-width: 834px) and (device-height: 1194px) and (orientation: portrait), /* iPad Pro 11" */
-       screen and (device-width: 800px) and (device-height: 1280px) and (orientation: portrait), /* Pixel Tablet, Fire HD 10 */
-       screen and (device-width: 533px) and (device-height: 893px) and (orientation: portrait), /* Lenovo Tab M9 */
-       screen and (device-width: 533px) and (device-height: 853px) and (orientation: portrait), /* Fire HD 8 */
-       screen and (device-width: 1067px) and (device-height: 1707px) and (orientation: portrait), /* Galaxy Tab S7 / S8 */
-       screen and (device-width: 1102px) and (device-height: 1866px) and (orientation: portrait), /* Galaxy Tab S8+ */
-       screen and (device-width: 960px) and (device-height: 1440px) and (orientation: portrait)  /* Surface Pro 9 */ {
+@media (min-width: 480px)  and (max-width: 1102px) and (min-aspect-ratio: 3/5)  and (orientation: portrait) {
   .game-board {
     flex-direction: column;
     min-height: 820px;
@@ -201,17 +191,7 @@
 }
 
 /* iPad / Tablet Landscape */
-@media screen and (device-width: 1133px) and (device-height: 744px) and (orientation: landscape), /* iPad Mini */
-       screen and (device-width: 1180px) and (device-height: 820px) and (orientation: landscape), /* iPad Air 11" */
-       screen and (device-width: 1366px) and (device-height: 1024px) and (orientation: landscape), /* iPad Air 13" */
-       screen and (device-width: 1376px) and (device-height: 1032px) and (orientation: landscape), /* iPad Pro 13" */
-       screen and (device-width: 1194px) and (device-height: 834px) and (orientation: landscape), /* iPad Pro 11" */
-       screen and (device-width: 1280px) and (device-height: 800px) and (orientation: landscape), /* Pixel Tablet, Fire HD 10 */
-       screen and (device-width: 893px) and (device-height: 533px) and (orientation: landscape), /* Lenovo Tab M9 */
-       screen and (device-width: 853px) and (device-height: 533px) and (orientation: landscape), /* Fire HD 8 */
-       screen and (device-width: 1707px) and (device-height: 1067px) and (orientation: landscape), /* Galaxy Tab S7 / S8 */
-       screen and (device-width: 1866px) and (device-height: 1102px) and (orientation: landscape), /* Galaxy Tab S8+ */
-       screen and (device-width: 1440px) and (device-height: 960px) and (orientation: landscape)  /* Surface Pro 9 */ {
+@media (max-width: 1024px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
   .game-board {
     flex-direction: row;
   }
@@ -497,7 +477,7 @@
 }
 
 /* 💻 Laptops & Desktops */
-@media screen and (min-width: 1129px) {
+@media (min-width: 1025px) and (orientation: landscape), (min-width: 1102px) and (orientation: portrait) {
   .game-board-container {
     min-height: 620px;
   }
@@ -530,7 +510,7 @@
 }
 
 /* Mobile Landscape */
-@media screen and (min-width: 660px) and (max-width: 1000px) and (max-height: 480px) and (orientation: landscape) {
+@media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape)  {
   .reorder-instruction h3 {
     margin-top: 10px;
     margin-bottom: 0px;
