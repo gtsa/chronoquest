@@ -70,7 +70,7 @@
   flex-shrink: 0;
 }
 
-@media (min-width: 1025px) and (orientation: landscape), (min-width: 1102px) and (orientation: portrait) {
+@media (min-width: 1425px) {
   .header {
     height: auto;
   }  
@@ -103,7 +103,6 @@
   .logo {
     width: 40px;
   }
-  
 }
 
 /* Mobile (Taller) Portrait */
@@ -119,7 +118,6 @@
 
 /* Mobile Landscape */
 @media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape) {
-  /* Styles for both phones in landscape */
   .play-btn {
     font-size: 18px;
     padding: 10px 20px;
@@ -139,10 +137,43 @@
 }
 
 /* iPad / Tablet Portrait */
-@media (min-width: 480px) and (max-width: 1102px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
+@media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
   .play-btn {
     font-size: 18px;
     padding: 10px 20px;
+  }
+}
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .play-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  .game-options {
+    margin-bottom: 0px;
+  }
+  .game-board {
+    height: 100%;
+  }
+  .header {
+    margin-top: 4px;
+  }
+  .logo {
+    width: 10vh;
+  }
+  .difficulty-label {
+    font-size: 3.5vh;
+  }
+  .play-btn {
+
+    border-radius: 2vh;
+    font-size: 4vh;
+    padding: 2vh 4vh;
+  }
+  
+  .header {
+    height: 12vh;
   }
 }
 

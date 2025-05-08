@@ -31,3 +31,10 @@
   outline: none;
   box-shadow: none;
 }
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .difficulty-option {
+    font-size: 3vh
+  }
+}

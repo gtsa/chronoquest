@@ -80,3 +80,10 @@
     transform: rotate(0deg) scale(1.1);
   }
 }
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .language-switcher button {
+    font-size: 3vh;
+  }
+}

@@ -600,7 +600,7 @@
 }
 
 /* 💻 Laptops & Desktops */
-@media (min-width: 1025px) and (orientation: landscape), (min-width: 1102px) and (orientation: portrait) {
+@media (min-width: 1425px) {
   .badge-xmark {
     margin-left: -32px;
   }
@@ -610,7 +610,7 @@
 }
 
 /* iPad / Tablet Portrait */
-@media (min-width: 480px)  and (max-width: 1102px) and (min-aspect-ratio: 3/5)  and (orientation: portrait) {
+@media (min-width: 480px)  and (max-width: 1424px) and (min-aspect-ratio: 3/5)  and (orientation: portrait) {
   .card {
     width: 18rem;
     height: 5.5rem;
@@ -747,19 +747,64 @@
 }
 
 /* iPad / Tablet Landscape */
-@media (max-width: 1024px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
   .card {
-    height: 19.2rem;
-    width: 12rem;
+    height: 44vh;
+    width: 17vw;
+    border-radius: 4vh;
+  }
+  .card.flipped {
+    width: 16vw;
   }
   .event-name {
-    font-size: 1.2em;
+    font-size: 2.7vh;
+    font-weight: 600;
+    padding: 0px;
   }
-  .card-name-back {
-    font-size: clamp(12px, 1.8vw, 13px);
+  .card-front, .card-back {
+    border-radius: 3.5vh;
+    border: 0.25vh solid var(--front-card-border-int);
+  }
+  .card-content {
+    border-radius: 3.2vh;
+  }
+  .card-badge {
+    margin-top: 0.1vh;
+    margin-right: 1px;
+    width: 6.5vw;
+    height: 10.4vh;
+    font-size: 3.5vh;
+  }
+  .badge-check {
+    margin-left: -20px;
+    margin-top: 8px;
+  }
+  .badge-xmark {
+    margin-left: -2vw;
+    margin-top: 1.5vh;
+  }
+  .card-name-back,
+  .card-name-back.lang_en {
+    font-size: 0.5rem;
+    font-size: 1.7vh;
+    font-weight: 600;
+    /* line-height: 1vh; */
   }
   .card-details {
-    font-size: clamp(9px, 10px, 11px);
+    font-size: 1.4vh;
+    font-weight: 400;
+    padding-top: 0;
+    line-height: 2.2vh;
+  }
+  .card:not(.flipped) {
+    padding-left: 0.7vh;
+    padding-bottom: 1.1vh;
+    padding-top: 0.7vh;
+    padding-right: 1.1vh;
+  }
+  .dragged :is(.card-inner) {
+    width: 16.85vw;
+    height: 43.85vh;
   }
 }
 
