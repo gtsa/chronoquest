@@ -47,4 +47,13 @@
     transform: translate(-50%, -10%);
   }
 }
-  
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .install-banner {
+    bottom: 0px;
+    left: 49%;
+    width: 40%;
+    transform: translate(-50%, -10%);
+  }
+}

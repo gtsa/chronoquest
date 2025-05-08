@@ -263,7 +263,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, 
                   <p className="remaining-attempts"><br />{t("remaining_attempts", { count: maxAttempts-playAttempts, plural: true  })}</p>
                 </div>
               ) : (
-                <p>{t("see_you_tomorrow")}</p>
+                <p className="no-more-play">{t("see_you_tomorrow")}</p>
               )}
           </>
         )}

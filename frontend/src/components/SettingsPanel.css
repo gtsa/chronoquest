@@ -190,69 +190,6 @@
   }
 
 
-
-/* -----------------------------
-   Landscape Smartphone Layout
------------------------------ */
-@media (min-width: 481px) and (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) {
-  .side-bar {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    /* background-color: #0f0f0f; */
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 100;
-  }
-
-  .top-bar {
-    display: none;
-  }
-
-  .side-buttons {
-    margin-right: 5px;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    justify-content: space-around;
-    height: 100%;
-  }
-
-  .settings-bar-btn {
-    justify-content: center;
-    flex-direction: column;
-    width: 40px;
-    aspect-ratio: 1 / 1;
-  }
-
-  .icon-large,
-  .slash-overlay{
-    width: 24px;
-    height: auto;
-  }
-
-  .settings-bar-button.btn-off {
-    display: none;
-  }
-
-  .difficulty-btn-label,
-  .bar-btn-label {
-    font-size: 11px;
-    margin-top: 2px;
-  }
-
-  .settings-bar-btn[disabled] {
-    opacity: 0.2;
-    color: var(--text-color-primary);
-    border-color: var(--used-grayed-out);
-    cursor: not-allowed;
-    transform: none;
-    background: var(--black-extra-transparent);
-  }
-}
-
-
 /* -----------------------------
    Instructions Modal
 ----------------------------- */
@@ -351,7 +288,10 @@
   align-items: center;
   position: absolute;
   width: 100%;
-  margin-top: -8px;
+  margin-top: 8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
 }
 .close-btn {
   padding: 8px 16px;
@@ -384,8 +324,115 @@
 }
 
 /* 💻 Laptops & Desktops */
-@media (min-width: 1025px) and (orientation: landscape), (min-width: 1102px) and (orientation: portrait) {
+@media (min-width: 1425px) {
   .close-btn-container-instructions {
     margin-left: -15px
+  }
+}
+
+/* -----------------------------
+   Landscape Smartphone Layout
+----------------------------- */
+@media (min-width: 481px) and (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) {
+  .side-bar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* background-color: #0f0f0f; */
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+  }
+  .close-btn-container-instructions {
+    width: 100%;
+    margin-top: 8px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  .top-bar {
+    display: none;
+  }
+
+  .side-buttons {
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+  }
+
+  .settings-bar-btn {
+    justify-content: center;
+    flex-direction: column;
+    width: 40px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .icon-large,
+  .slash-overlay{
+    width: 24px;
+    height: auto;
+  }
+
+  .settings-bar-button.btn-off {
+    display: none;
+  }
+
+  .difficulty-btn-label,
+  .bar-btn-label {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .settings-bar-btn[disabled] {
+    opacity: 0.2;
+    color: var(--text-color-primary);
+    border-color: var(--used-grayed-out);
+    cursor: not-allowed;
+    transform: none;
+    background: var(--black-extra-transparent);
+  }
+}
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .settings-bar-btn {
+  }
+
+  .icon-large,
+  .slash-overlay{
+    width: 3vw;
+    height: auto;
+  }
+
+  .top-bar {
+    /* justify-content: space-between; */
+  }
+
+  .top-button-wrapper {
+    width: auto;
+  }
+
+  .top-buttons {
+    justify-content: space-evenly;
+  }
+
+  .icon-large,
+  .slash-overlay{
+  }
+
+  .settings-bar-button.btn-off {
+  }
+
+  .difficulty-btn-label,
+  .bar-btn-label {
+    font-size: 1.7vw;
+    margin-top: -0.2vw;
+  }
+
+  .settings-bar-btn[disabled] {
   }
 }
