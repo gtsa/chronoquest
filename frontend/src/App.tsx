@@ -21,7 +21,10 @@ function App() {
     const saved = localStorage.getItem("difficulty");
     return saved === "hard" ? "hard" : "easy";
   };
-  const [difficulty, setDifficulty] = useState<"easy" | "hard">(getInitialDifficulty);
+
+  const initialDifficulty = getInitialDifficulty();
+  const [difficulty, setDifficulty] = useState<"easy" | "hard">(initialDifficulty);
+  const [toBlink, setToBlink] = useState(initialDifficulty === "easy");
 
   const handleStartGame = () => {
     setShowGameBoard(true);
@@ -54,7 +57,12 @@ function App() {
         soundOn={soundOn}
         showGameBoard={showGameBoard}    
         hintUsed={hintUsed}
-        onHintUsed={() => setHintUsed(true)}
+        onHintUsed={() => {
+          setHintUsed(true);
+          setTimeout(() => {
+            setToBlink(false);
+          }, 2000);
+        }}
         submitted={submitted}
         finished={finished}
         toggleMusic={() => setMusicOn((prev) => !prev)}
@@ -79,6 +87,7 @@ function App() {
                 difficulty={difficulty}
                 onChange={(level) => {
                   setDifficulty(level);
+                  setToBlink(level === "easy");
                   localStorage.setItem("difficulty", level);
                 }}
             />
@@ -94,6 +103,7 @@ function App() {
           <GameBoard 
             difficulty={difficulty}
             hintUsed={hintUsed}
+            toBlink={toBlink}
             submitted={submitted}
             onSubmit={() => setSubmitted(true)}
             onFinished={() => setFinished(true)}

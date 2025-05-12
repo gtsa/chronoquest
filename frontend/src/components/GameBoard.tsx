@@ -18,12 +18,13 @@ Modal.setAppElement("#root");
 type GameBoardProps = {
   difficulty: "easy" | "hard";
   hintUsed: boolean;
+  toBlink: boolean;
   submitted: boolean;
   onSubmit: () => void;
   onFinished: () => void;
 };
 
-const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, onSubmit, onFinished }) => {
+const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, submitted, onSubmit, onFinished }) => {
   const { i18n, t } = useTranslation();
   const [events, setEvents] = useState<Array<{
     id: number;
@@ -243,6 +244,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, 
                     submitted={submitted}
                     difficulty={difficulty}
                     hintUsed={hintUsed}
+                    toBlink={toBlink}
                     highlightIds={hintHighlightIds}
                     onCardClick={openEventModal}
                   />
