@@ -120,7 +120,10 @@ button:hover {
 @media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
   body::before {
     content: "iPad/Tablet Portrait Active";
-  }  
+  }
+  h1 {
+    font-size: 5vh;
+  }
 }
 
 /* iPad / Tablet Landscape */

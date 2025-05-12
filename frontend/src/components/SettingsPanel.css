@@ -328,6 +328,12 @@
   .close-btn-container-instructions {
     margin-left: -15px
   }
+  .top-buttons {
+    box-shadow: 0 0.3vh 0.4vh var(--black-extra-transparent);
+  }
+  .top-button-wrapper {
+    padding-bottom: 4px;
+  }
 }
 
 /* -----------------------------
@@ -399,40 +405,54 @@
 
 /* iPad / Tablet Landscape */
 @media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
-  .settings-bar-btn {
-  }
-
   .icon-large,
   .slash-overlay{
     width: 3vw;
     height: auto;
   }
-
-  .top-bar {
-    /* justify-content: space-between; */
-  }
-
   .top-button-wrapper {
     width: auto;
   }
-
   .top-buttons {
     justify-content: space-evenly;
   }
-
-  .icon-large,
-  .slash-overlay{
-  }
-
-  .settings-bar-button.btn-off {
-  }
-
   .difficulty-btn-label,
   .bar-btn-label {
     font-size: 1.7vw;
     margin-top: -0.2vw;
   }
+}
 
-  .settings-bar-btn[disabled] {
+/* iPad / Tablet Portrait */
+@media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
+  .icon-large,
+  .slash-overlay{
+    width: 6vw;
+    height: auto;
+  }
+  .top-button-wrapper {
+    width: auto;
+  }
+  .top-buttons {
+    justify-content: space-evenly;
+    box-shadow: 0 0.3vh 0.4vh var(--black-extra-transparent);
+  }
+  .bar-btn-label {
+    display: none;
+  }
+  .settings-bar-btn.hint-btn{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 20%;
+    background-color: red;
+  }
+  .settings-bar-btn.difficulty-btn{
+    aspect-ratio: default;
+  }
+  .difficulty-btn-label {
+    font-size: 3vw;
+    font-weight: 800;
   }
 }
