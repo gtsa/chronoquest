@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import "./Card.css";
 import { EventType } from "../types/eventTypes";
 import { formatDate } from "../utils/formatDate";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+
 
 interface CardProps {
   event: {
@@ -95,7 +96,18 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
         >
           <div className={`card-inner ${flipped ? "flipped" : ""}`}>
             <div className={`card-front ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""} ${flipped ? "flipped" : "not-flipped"}`}>
-              <div className={`event-name`}>{difficulty === 'hard' && !hintUsed? eventRiddle : eventName}</div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={difficulty === 'hard' && !hintUsed ? 'riddle' : 'name'}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="event-name"
+                >
+                  {difficulty === 'hard' && !hintUsed ? eventRiddle : eventName}
+                </motion.div>
+              </AnimatePresence>
             </div>
             <div className={`card-back ${submitted ? (cardResults[event.id] ? "correct-position" : "wrong-position") : ""}`}>
               {submitted && (
