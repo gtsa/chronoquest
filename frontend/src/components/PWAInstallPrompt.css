@@ -57,3 +57,23 @@
     transform: translate(-50%, -10%);
   }
 }
+
+/* iPad / Tablet Portrait */
+@media (min-width: 480px)  and (max-width: 1424px) and (min-aspect-ratio: 3/5)  and (orientation: portrait) {
+  .install-banner {
+    bottom: 0px;
+    left: 49%;
+    width: 60%;
+    transform: translate(-50%, -10%);
+    border-radius: 2vh;
+  }
+  .install-banner p {
+    font-size: 2vh;
+  }
+  .install-banner button {
+    padding: 1vh 2vh;
+    font-size: 2vh;
+    border-radius: 1vh;
+    width: 26.5vw;
+  }
+}

@@ -38,3 +38,10 @@
     font-size: 3vh
   }
 }
+
+/* iPad / Tablet Portrait */
+@media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
+  .difficulty-option {
+    font-size: 1.5vh
+  }
+}

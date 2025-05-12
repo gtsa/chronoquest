@@ -309,7 +309,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, submitted, 
                 ))
               : "Loading..."}
           </p>
-          <div className="close-btn-container-event">
+          <div className="close-btn-container-feedback">
             <button className="close-btn" onClick={closeFeedbackModal}>{t("close")}</button>
           </div>
         </div>
