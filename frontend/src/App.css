@@ -108,8 +108,9 @@
 /* Mobile (Taller) Portrait */
 @media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait) {
   .play-btn {
-    font-size: 18px;
-    padding: 10px 20px;
+    font-size: 24px;
+    padding: 1vh 6vw;
+    border-radius: 1.5vh
   }
   .logo {
     width: 50px;
