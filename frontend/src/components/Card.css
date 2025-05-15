@@ -73,8 +73,8 @@
 }
 
 .card.dragged {
-  opacity: 0.5;
-  transform: scale(1.02)
+  /* opacity: 1; */
+  transform: scale(1.05)
 }
 
 .dragged :is(.card-front) {
@@ -274,7 +274,7 @@
 
 .checkmark {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Arial, sans-serif; /* Specify a valid font */
-  font-size: 54px; /* Size adjustments */
+  font-size: 54px;
 }
 
 .card-badge.incorrect {
@@ -295,16 +295,18 @@
   }
   .card.flipped {
     padding: 1em;
-    width: calc(15rem / 1.02)
+    width: 57vw;
+    margin-left: -3vw
   }
   .card-inner {
     width: 231px;
     height: calc(11vh - 9px);
     flex-direction: row;
-    margin-top: -5px;
-    margin-left: -5px;
+    margin-top: -0.6vh;
+    margin-left: -1.2vw;
   }
   .card-inner.flipped {
+    margin-top: 1vh;
     width: 100%;
     height: 100%;
   }
@@ -314,93 +316,99 @@
     justify-content: space-between;
     padding: 10px;
   }
-  .card-content.flipped {
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 4px 4px 10px var(--black-extra-transparent);
-    position: absolute;
-    left: -1.5px;
-    /* top: -3px; */
-    width: 239px;
-    height: calc(11vh + 5px);
-  }  
 
   .card-image {
     position: absolute;
-    left: 1.5px;
-    top: 3.5%;
-    width: 49.5%;
-    height: calc(100% - 4px);
+    left: 0;
+    top: 0;
+    width: 25.5vw;
+    height: 12.1vh;
     object-fit: cover;
-    border-bottom-left-radius: 15.2px;
+    border-bottom-left-radius: 4.2vw;
+    border-top-left-radius: 4.2vw;
     flex-shrink: 0;
   }
-  .event-name {
-    margin: 13px;
-    word-break: break-word;
-    width: 100%;
-  }
   .card-content {
-    width: 100%;
     flex-direction: row;
     height: 100%;
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 1.3vh;
   }
+  .card-content.flipped {
+    border-radius: 4.25vw;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0.5vh 0.5vh 1.2vh var(--black-extra-transparent);
+    position: absolute;
+    left: 0;
+    width: 57.8vw;
+    height: 9.2vh;
+    background-color: var(--purple-dark);
+  }  
   .card-back-low {
     position: absolute;
-    right: -5.9px;
+    left: 25.5vw;
     top: 0;
-    width:  52.2%;
-    height: 60.5%;
+    width:  31vw;
+    height: 7.6vh;
+  }
+  .card-back {
+    transform: rotateX(180deg);
+  }
+  .card.flipped .card-inner {
+    transform: rotateX(180deg);
   }
   .card-back-low hr{
-    opacity: 0;
-    width: 100%;
-    margin: -3px;
+    width: 37.5vw;
+    height: 0.1vh;
+    margin: 0;
   }
   .card-name-back {
-    height: 0%;
-    visibility: 0;
-    opacity: 0;
+    font-size: calc((1.32vh + 2.5vw) / 2);
+    line-height: calc((1.32vh + 2.5vw) / 2);
+    padding-left: 0.3vw;
+    padding-right: 0.3vw;
+    height: 4.6vh
   }
   .card-date {
-    width: 100%;
-    height: 25px;
-    margin-top: 0px;
+    width: 32.5vw;
+    height: 1.95vh;
+    font-size: calc((1.78vh + 3.38vw) / 2);
+    margin-top: 0vh;
+    margin-bottom: 0.26vh;
   }
   .card-details {
-    height: calc(12.64vh - 25px);
-    width: 88.5%;
-    border-bottom-right-radius: 15px;
-    font-size: 1.3vh;
-    font-weight: 600;
-    line-height: 1.3vh;
+    height: 4.1vh;
+    width: 37vw;
+    font-size: calc((0.80vh + 1.9vw)/2);
+    font-weight: 400;
+    line-height: 0.8vh;
+    padding: 0 0.3vw 5px 0.3vw;
+    opacity: 1;
+    border-bottom-right-radius: 3.8vw;
   }
   .card-badge {
-    left: -2px;
-    clip-path: polygon(0% 0%, 0% 100%, 100% 0%);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 0;
-    width: 60px;
-    height: 60px;
-    /* width: 40px;
-    height: 40px; */
-    line-height: 1.4em;
-    font-size: 1.8em;
-    text-indent: -0.85em;
-    /* line-height: 1.2em;
-    font-size: 1.4em;
-    text-indent: -0.7em; */
+    right: 0;
+    top: 0;
+    clip-path: none;
+    border-top-right-radius: 3.6vw;
+    width: 6.1vw;
+    height: 7.6vh;
+    line-height: 1vh;
+    font-size: 2.8vh;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
   }
   .card-back {
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px;
-    margin: -8px -10px -10px -9px;
-    /* height: 200px; */
+    padding: 1.3vh;
+    margin: -1vh -2.2vw -1.25vh -2.2vw;
+    width:58vw
   }
   .event-name {
     font-size: clamp(0.5em, 13px, 1.5em)
@@ -416,6 +424,11 @@
     height: calc(11vh - 6.2px);
     border: 2px solid var(--primary-light-version);
     filter: drop-shadow(0px 0px 1px var(--correct-position));
+    width: 233px;
+    margin-top: -2px;
+    height: calc(11vh - 6.2px);
+    border: 2px solid var(--primary-light-version);
+    filter: drop-shadow(0px 0px 1px var(--correct-position));
   }
   .wrong-position.not-flipped {
     margin-left: -2px;
@@ -425,18 +438,40 @@
     border: 2px solid var(--wrong-position2);
     filter: drop-shadow(0px 0px 1px var(--wrong-position));
   }
+  .wrong-position,
+  .correct-position {
+    border-radius: 4.75vw;
+    height: 9.2vh;
+  }
   .card.flipped {
-    padding: 10px;
+    padding-top: 0.04vh;
+    padding-left: 1.6vw;
+    padding-bottom: 0.04vh;
+    padding-right: 1.6vw;
   }
   .card-inner.flipped {
-    width: 236px;
+    width: 59vw;
     height: 11.1vh;
   }
   .badge-check {
-    margin-left: 30px;
+    margin-top: 0.8vh;
+    margin-left: -1.3rem;
   }
   .badge-xmark {
-    margin-left: 22px;
+    margin-top: 0.8vh;
+    margin-left: -1.4rem;
+  }
+  .card.clickable:hover {
+    box-shadow: 0px 0px 4vw 2vw var(--purple-primary);
+    margin-top: 1vh;
+    margin-left: 0.2vw;
+    margin-bottom: -1.8vh;
+    margin-right: -1.5vw;
+    padding-top: 0;
+    padding-bottom: 1vh;
+    padding-left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 /* Mobile (Compact) Portrait */
@@ -452,6 +487,12 @@
   .card.flipped {
     padding: 1em;
     width: calc(15rem / 1.02)
+  }
+  .card-back {
+    transform: rotateX(180deg);
+  }
+  .card.flipped .card-inner {
+    transform: rotateX(180deg);
   }
   .card-inner {
     width: 231px;
@@ -595,6 +636,18 @@
   .badge-xmark {
     margin-left: 22px;
   }
+  .card.clickable:hover {
+    box-shadow: 0px 0px 6vw 3vw var(--purple-primary);
+    margin-top: -2vh;
+    margin-left: -0vw;
+    margin-bottom: 1.5vh;
+    margin-right: -3vw;
+    padding-top: 3.4vh;
+    padding-bottom: 1vh;
+    padding-left: 1.2vw;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* 💻 Laptops & Desktops */
@@ -628,6 +681,9 @@
   .card-inner.flipped {
     width: 100%;
     height: 7.7vh;
+  }
+    .card.flipped .card-inner {
+    transform: rotateX(180deg);
   }
   .card-front,
   .card-back {
@@ -795,7 +851,6 @@
   .card-name-back.lang_en {
     font-size: 1.7vh;
     font-weight: 600;
-    /* line-height: 1vh; */
   }
   .card-details {
     font-size: 1.4vh;

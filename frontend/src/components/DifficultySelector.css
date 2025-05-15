@@ -32,6 +32,20 @@
   box-shadow: none;
 }
 
+/* Mobile (Taller) Portrait */
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
+  .difficulty-option {
+    font-size: calc((2.8vw + 1.22vh) / 2);
+  }
+}
+
+/* Mobile (Compact) Portrait */
+@media (max-width: 400px) and (orientation: portrait) {
+  .difficulty-option {
+    font-size: calc((2.8vw + 1.22vh) / 2);
+  }
+}
+
 /* iPad / Tablet Landscape */
 @media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
   .difficulty-option {
