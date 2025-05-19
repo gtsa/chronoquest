@@ -2,6 +2,7 @@
 @import url('../themes/theme-bright.css');
 
 /* Main geometry structure elements */
+
 .game-board-container {
   display: flex;
   flex-direction: column;
@@ -98,6 +99,45 @@
 
 .final-message-wrapper h3 {
   margin-top: 8px;
+}
+
+.game-board-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  position: relative;
+}
+
+.vertical-axis {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none; /* ⬅️ allows drag interactions to go through */
+  background: transparent; /* ⬅️ optional, can be semi-transparent if you like */
+  z-index: 2;
+}
+
+.axis-line {
+  width: 0.25vw;
+  flex-grow: 1;
+  background: linear-gradient(to bottom, var(--secondary-color), var(--purple-primary));
+  opacity: 1;
+}
+
+.axis-label {
+  font-size: 2.9vw;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--text-color-primary);
+  opacity: 0.7;
+  padding: 1.2vh;
 }
 
 /* Rest UI */
@@ -413,6 +453,9 @@
   .close-btn-container-feedback {
     margin-bottom: -36px;
   }
+  .vertical-axis {
+    display: flex;
+  }
 }
 
 /* Mobile (Compact) Portrait */
@@ -454,13 +497,16 @@
   .modal-event img {
     padding-left: 2px;
   }
+  .vertical-axis {
+    display: flex;
+  }
 }
 
 /* iPad / Tablet Portrait */
 @media (min-width: 480px)  and (max-width: 1424px) and (min-aspect-ratio: 3/5)  and (orientation: portrait) {
   .game-board {
     flex-direction: column;
-    height: 72vh;
+    height: 68vh;
     gap: 1vh;
     overflow: visible;
   }
@@ -484,6 +530,9 @@
   }
   .close-btn-container-feedback {
     margin-bottom: -36px;
+  }
+  .vertical-axis {
+    display: flex;
   }
 }
 

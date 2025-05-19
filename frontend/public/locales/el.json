@@ -54,6 +54,8 @@
     "sounds_on": "Ήχοι Ενεργοί",
     "sounds_off": "Ήχοι Ανενεργοί",
     "click_on_the_cards": "Κάνε κλικ στις κάρτες για να δεις ιστορικές λεπτομέρειες",
+    "oldest_event":"Παλαιότερο",
+    "most_recent_event": "Νεότερο",
     "instructions":
     {
       "title": "Πώς να Παίξεις",

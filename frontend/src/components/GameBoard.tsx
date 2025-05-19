@@ -227,29 +227,38 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
               </div>
             )}
             
-            <p className= {`instruction-message ${clickableCards ? "clickable" : ""}`}>{t("click_on_the_cards")}</p>
-            
+            <p className= {`instruction-message ${clickableCards ? "clickable" : ""}`}>{t("click_on_the_cards")}</p>  
 
-            <div className={`game-board ${submitted ? "submitted-mark" : ""} ${modalFeedbackOpen ? "feedback-open" : "feedback-closed"} ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
-              {showCards &&
-                events.map((event, index) => (
-                  <Card
-                    key={event.id}
-                    event={event}
-                    index={index}
-                    moveCard={moveCard}
-                    flipped={flippedCards}
-                    clickable={clickableCards}
-                    cardResults={cardResults}
-                    submitted={submitted}
-                    difficulty={difficulty}
-                    hintUsed={hintUsed}
-                    toBlink={toBlink}
-                    highlightIds={hintHighlightIds}
-                    onCardClick={openEventModal}
-                  />
-                ))}
+            <div className="game-board-wrapper">         
+
+              <div className={`game-board ${submitted ? "submitted-mark" : ""} ${modalFeedbackOpen ? "feedback-open" : "feedback-closed"} ${flippedCards ? "flipped-cards-mark" : "not-flipped-cards-mark"}`}>
+                {showCards &&
+                  events.map((event, index) => (
+                    <Card
+                      key={event.id}
+                      event={event}
+                      index={index}
+                      moveCard={moveCard}
+                      flipped={flippedCards}
+                      clickable={clickableCards}
+                      cardResults={cardResults}
+                      submitted={submitted}
+                      difficulty={difficulty}
+                      hintUsed={hintUsed}
+                      toBlink={toBlink}
+                      highlightIds={hintHighlightIds}
+                      onCardClick={openEventModal}
+                    />
+                  ))}
+              </div>
+
+              <div className="vertical-axis">
+                <span className="axis-label oldest">{t("oldest_event")}</span>
+                <div className="axis-line"></div>
+                <span className="axis-label most-recent">{t("most_recent_event")}</span>
+              </div>
             </div>
+            
 
               {!submitted ? (
                 <div className="submit-container">
