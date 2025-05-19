@@ -29,7 +29,7 @@
   color: var(--text-color-primary);
   padding: 5px;
   border: transparent;
-  border-radius: 10px;
+  border-radius: calc(0.5vw + 1vh);
   cursor: pointer;
   font-size: 18px;
   display: flex;
@@ -106,7 +106,7 @@
   font-size: 14px;
   max-width: 200px;
   z-index: 3;
-  border-radius: 8px;
+  border-radius: calc((0.5vw + 1vh) / 2);
   border: 1px solid var(--primary-extra-light-version);
   white-space: wrap;
 }
@@ -176,7 +176,6 @@
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    /* position: fixed; */
     top: 0;
     left: 0;
   }
@@ -323,6 +322,9 @@
     pointer-events: none; 
     transition: all 0.5s ease-in-out;
   }
+  .top-buttons {
+    width: 30%;
+  }
 }
 
 /* 💻 Laptops & Desktops */
@@ -336,17 +338,18 @@
   .top-button-wrapper {
     padding-bottom: 4px;
   }
+  .settings-bar-btn {
+    border-radius: calc((0.5vw + 1vh) / 2);
+  }
 }
 
-/* -----------------------------
-   Landscape Smartphone Layout
------------------------------ */
-@media (min-width: 481px) and (max-width: 1000px) and (max-height: 500px) and (orientation: landscape) {
+
+/* Mobile Landscape */
+@media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape) {
   .side-bar {
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* background-color: #0f0f0f; */
     position: fixed;
     right: 0;
     top: 0;
@@ -437,7 +440,6 @@
   }
   .top-buttons {
     justify-content: space-evenly;
-    box-shadow: 0 0.3vh 0.4vh var(--black-extra-transparent);
   }
   .bar-btn-label {
     display: none;
@@ -447,8 +449,6 @@
     flex-direction: column;
     height: auto;
     aspect-ratio: 1 / 1;
-    border-radius: 20%;
-    background-color: red;
   }
   .settings-bar-btn.difficulty-btn{
     aspect-ratio: default;
