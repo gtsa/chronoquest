@@ -83,27 +83,41 @@ export default function PWAInstallPrompt() {
 
   useEffect(() => {
     if (!isAndroid()) return;
+    if (
+      localStorage.getItem("chronoquest_pwa_dismissed") === "true" ||
+      localStorage.getItem("chronoquest_pwa_installed") === "true"
+    ) return;
 
+    const installHandler = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setMode("install");
+    };
+  
+    const appInstalledHandler = () => {
+      console.log("✅ PWA was installed via banner");
+      setMode(null);
+      setDeferredPrompt(null);
+    };
+  
     (async () => {
-      /* hide banner if the PWA (or A2HS shortcut) is already present */
       if (await isPWAInstalled()) {
         setMode(null);
         return;
       }
-
-      /* Chrome path — use beforeinstallprompt */
+  
       if (isChromeMobile()) {
-        const handler = (e: any) => {
-          e.preventDefault();
-          setDeferredPrompt(e);
-          setMode("install");
-        };
-        window.addEventListener("beforeinstallprompt", handler);
-        return () => window.removeEventListener("beforeinstallprompt", handler);
+        window.addEventListener("beforeinstallprompt", installHandler);
+        window.addEventListener("appinstalled", appInstalledHandler);
       }
     })();
-  }, []);
-
+  
+    return () => {
+      window.removeEventListener("beforeinstallprompt", installHandler);
+      window.removeEventListener("appinstalled", appInstalledHandler);
+    };
+    }, []);
+  
 
   /* ---------- click handlers ---------- */
   // `onInstall` only exists in Chrome path. We still
@@ -126,8 +140,17 @@ export default function PWAInstallPrompt() {
         {locale.installLine2}
       </p>
       <div className="install-buttons">
-        <button onClick={onInstall}>{locale.installButton}</button>
-        <button onClick={() => setMode(null)}>{locale.laterButton}</button>
+        <button onClick={() => {
+          onInstall();
+          localStorage.setItem("chronoquest_pwa_installed", "true");
+        }}>
+          {locale.installButton}
+        </button><button onClick={() => {
+          setMode(null);
+          localStorage.setItem("chronoquest_pwa_dismissed", "true");
+        }}>
+          {locale.laterButton}
+        </button>
       </div>
     </div>
   );
