@@ -73,7 +73,7 @@ button:hover {
 /* Mobile (Taller) Portrait */
 @media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
   body::before {
-    content: "Mobile Portrait Active";
+    /* content: "Mobile Portrait Active"; */
   }
   body {
     background-attachment: scroll;

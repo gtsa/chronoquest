@@ -38,12 +38,13 @@
   justify-content: center;
   transition: transform 0.2s ease;
   aspect-ratio: 1 / 1;
-  height: 50px;
+  height: 40px;
 }
 
 .music-off-icon {
   position: relative;
   display: inline-block;
+  margin-bottom: -5px;
 }
 
 .slash-overlay {

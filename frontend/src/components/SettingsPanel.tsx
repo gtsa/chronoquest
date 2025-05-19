@@ -101,7 +101,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
               className="settings-bar-btn"
               onClick={() => {
                 toggleMusic();
-                handlePlaceholderClick("Music");
               }}
             >
               {musicOn ? (

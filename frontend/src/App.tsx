@@ -1,21 +1,26 @@
 import { useState, useEffect } from "react";
 import GameBoard from "./components/GameBoard";
 import "./App.css";
-import PWAInstallPrompt from './components/PWAInstallPrompt';
+import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import DifficultySelector from "./components/DifficultySelector";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import SettingsPanel from "./components/SettingsPanel";
 import { useTranslation } from "react-i18next";
 import logo from "./assets/favicon-192x192.png";
+import WebAudioMusic from "./components/WebAudioMusic";
 
 function App() {
   const [showGameBoard, setShowGameBoard] = useState(false);
-  const [musicOn, setMusicOn] = useState(true);
   const [soundOn, setSoundOn] = useState(true);
   const [hintUsed, setHintUsed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [finished, setFinished] = useState(false);
   const { t } = useTranslation();
+
+  const [musicOn, setMusicOn] = useState(() => {
+    const saved = localStorage.getItem("musicOn");
+    return saved === null ? true : saved === "true";
+  });
 
   const getInitialDifficulty = (): "easy" | "hard" => {
     const saved = localStorage.getItem("difficulty");
@@ -28,6 +33,32 @@ function App() {
 
   const handleStartGame = () => {
     setShowGameBoard(true);
+
+
+    const context = (window as any).__chronoquestAudioContext__;
+    if (context && context.state === "suspended") {
+      context.resume();
+    }
+
+    
+  };
+
+  const toggleMusic = () => {
+    const context = (window as any).__chronoquestAudioContext__;
+    if (context && context.state === "suspended") {
+      context.resume();
+    }
+  
+    setMusicOn((prev) => {
+      const newValue = !prev;
+      localStorage.setItem("musicOn", String(newValue));
+      return newValue;
+    });
+  };
+  
+
+  const toggleSound = () => {
+    setSoundOn((prev) => !prev);
   };
 
   const [pageReady, setPageReady] = useState(false);
@@ -47,33 +78,27 @@ function App() {
     return () => window.removeEventListener('resize', setVh);
   }, []);
 
-
   return (
-    <div className={`app ${pageReady ? 'fade-in' : 'fade-out'}`}>
+    <div className={`app ${pageReady ? "fade-in" : "fade-out"}`}>
+      <WebAudioMusic musicOn={musicOn} />
       <PWAInstallPrompt />
       <SettingsPanel
         difficulty={difficulty}
         musicOn={musicOn}
         soundOn={soundOn}
-        showGameBoard={showGameBoard}    
+        showGameBoard={showGameBoard}
         hintUsed={hintUsed}
         onHintUsed={() => {
           setHintUsed(true);
-          setTimeout(() => {
-            setToBlink(false);
-          }, 2000);
+          setTimeout(() => setToBlink(false), 2000);
         }}
         submitted={submitted}
         finished={finished}
-        toggleMusic={() => setMusicOn((prev) => !prev)}
-        toggleSound={() => setSoundOn((prev) => !prev)}
+        toggleMusic={toggleMusic}
+        toggleSound={toggleSound}
       />
 
-
-      
-
       <div className="header-gameboard-wrapper">
-
         <div className="header">
           <img src={logo} alt="ChronoQuest Logo" className="logo" />
           <h1>ChronoQuest</h1>
@@ -90,17 +115,19 @@ function App() {
                   setToBlink(level === "easy");
                   localStorage.setItem("difficulty", level);
                 }}
-            />
+              />
             </div>
 
             <div className="start-button-container">
-              <button className="play-btn" onClick={handleStartGame}>{t("play")}</button>
+              <button className="play-btn" onClick={handleStartGame}>
+                {t("play")}
+              </button>
             </div>
           </div>
         )}
 
         {showGameBoard && (
-          <GameBoard 
+          <GameBoard
             difficulty={difficulty}
             hintUsed={hintUsed}
             toBlink={toBlink}
@@ -116,6 +143,3 @@ function App() {
 }
 
 export default App;
-
-
-
