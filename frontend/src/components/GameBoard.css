@@ -42,8 +42,8 @@
 }
 
 .submit-btn {
-  font-size: 2vh;
-  border-radius: 3vw;
+  font-size: calc((2vh + 3.4vw) / 2);
+  border-radius: calc(0.5vw + 1vh);
   background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary));
   color: var(--text-color-dark-button);
   cursor: pointer;
@@ -64,8 +64,8 @@
 }
 
 .play-again-btn {
-  font-size: 2vh;
-  border-radius: 3vw;
+  font-size: calc((2vh + 3.4vw) / 2);
+  border-radius: calc(0.5vw + 1vh);
   background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary) );
   color: var(--text-color-dark-button);
   cursor: pointer;
@@ -318,17 +318,10 @@
   aspect-ratio: 1 / 1;
   opacity: var(--loading-spinner-opacity);
   mix-blend-mode: var(--loading-spinner-mix-blend-mode);
-  /* opacity: 0.1;
-  mix-blend-mode: multiply; */
-  /* opacity: 0.05;
-  mix-blend-mode: color-dodge; */
   background-image: url('/favicon-512x512-spinning.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
-/* mix-blend-mode: overlay; */
-/* mix-blend-mode: soft-light; */
   animation: spin 2s linear infinite;
   z-index: 1;
 }
@@ -627,6 +620,13 @@
   }
   .modal-event-content {
     width: 99.6%;
+  }
+  .submit-btn {
+    font-size: calc(2vh);
+    border-radius: calc((0.5vw + 1vh) / 2);
+  }
+  .play-again-btn {
+    font-size: calc(2vh);
   }
 }
 
