@@ -229,7 +229,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
                 <h3>{t("reorder_events")}</h3>
               </div>
             )}
-            {/* {submitted && modalFeedbackOpen && <h3>&nbsp;</h3>} */}
             {submitted && !modalFeedbackOpen && finalMessage && (
               <div className="final-message-wrapper">
                 <h3>{finalMessage}</h3>
@@ -247,6 +246,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
                       key={event.id}
                       event={event}
                       index={index}
+                      dealIndex={index}
                       moveCard={moveCard}
                       flipped={flippedCards}
                       clickable={clickableCards}
@@ -276,13 +276,13 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
                     {t("submit_order")}
                   </button>
                 </div>
-              ) : (playAttempts < maxAttempts || true) ? (
+              ) : playAttempts < maxAttempts ? (
                 <div className="play-again-wrapper">
                   <button className="play-again-btn" onClick={() => {
                     playSound("bap.mp3");
                     setTimeout(() => {
                       window.location.reload();
-                    }, 200); // ⏱ enough time for the sound to start
+                    }, 200);
                   }}>
                     {t("play_again")}
                   </button>
