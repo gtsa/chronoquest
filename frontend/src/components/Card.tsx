@@ -1,10 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useTranslation } from "react-i18next";
 import "./Card.css";
 import { EventType } from "../types/eventTypes";
 import { formatDate } from "../utils/formatDate";
 import { AnimatePresence, motion } from "framer-motion";
+// import { useSound } from "../hooks/useSound";
 
 
 interface CardProps {
@@ -33,9 +34,10 @@ interface CardProps {
   toBlink: boolean;
   highlightIds: number[]
   onCardClick: (event: EventType) => void;
+  playSound: (sound: string) => void;
 }
 
-const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable, cardResults, submitted, difficulty, hintUsed, toBlink, highlightIds, onCardClick }) => {
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable, cardResults, submitted, difficulty, hintUsed, toBlink, highlightIds, onCardClick, playSound }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { i18n } = useTranslation();
 
@@ -48,6 +50,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
     hover: (draggedItem: { index: number }) => {
       if (draggedItem.index !== index) {
         moveCard(draggedItem.index, index);
+        // playSound("drop7.mp3")
         draggedItem.index = index;
       }
     },
@@ -57,9 +60,20 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
     type: "CARD",
     item: { index },
     canDrag: !submitted,
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
+    end: (_item, monitor) => {
+      if (monitor.didDrop()) {
+        playSound("bap.mp3");
+      }
+    },
+    collect: (monitor) => {
+      const dragging = monitor.isDragging();
+      if (dragging) {
+        playSound("drop7.mp3");
+      }
+      return {
+        isDragging: dragging,
+      };
+    },
   });
 
   drag(drop(ref));
@@ -88,6 +102,11 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
             ${highlightIds.includes(event.id) ? "flash-correct" : "flash-wrong"}
             ${isDragging ? "dragged" : ""}
             ${clickable ? "clickable" : ""}`}
+          onPointerDown={() => {
+            if (!submitted) {
+              playSound("bap.mp3"); // 🔊 Play sound on click/touch before dragging
+            }
+          }}
           onClick={() => {
             if (flipped) {
               onCardClick(event);

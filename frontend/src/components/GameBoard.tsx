@@ -9,6 +9,7 @@ import { getScoreMessage } from "../utils/scoreFeedback";
 import "./GameBoard.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../utils/formatDate";
+import { useSound } from "../hooks/useSound";
 import { div } from "framer-motion/client";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; 
@@ -59,7 +60,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
   const [hintHighlightIds, setHintHighlightIds] = useState<number[]>([]);
-
+  const { playSound } = useSound();
   // 🔹 Check if the player is allowed to play today and fetch events
   useEffect(() => {
     const checkGameAvailability = async () => {
@@ -88,6 +89,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
   
         setTimeout(() => {
           setShowCards(true);
+          playSound("reorder1.mp3");
           setLoading(false);
         }, 800);
       } catch (error) {
@@ -146,6 +148,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
         throw new Error("Failed to submit order");
       }
 
+      playSound("bap.mp3");
+
       const result = await response.json();
       setScore(result.score);
       setCorrectOrder(result.correctOrder);
@@ -175,7 +179,12 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
         )
       );
 
-      setTimeout(() => setFlippedCards(true), 600);
+      playSound("reorder.mp3");
+
+      setTimeout(() => {
+        setFlippedCards(true);
+        playSound("flip1.mp3");
+      }, 2000);
       setTimeout(() => setClickableCards(true), 1500);
     }, 300);
     setFinalMessage(`${scoreMessage[0]}... ${t("you_scored")} ${score} ${t("points")}.`);
@@ -248,6 +257,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
                       toBlink={toBlink}
                       highlightIds={hintHighlightIds}
                       onCardClick={openEventModal}
+                      playSound={playSound}
                     />
                   ))}
               </div>
@@ -266,9 +276,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
                     {t("submit_order")}
                   </button>
                 </div>
-              ) : playAttempts < maxAttempts ? (
+              ) : (playAttempts < maxAttempts || true) ? (
                 <div className="play-again-wrapper">
-                  <button className="play-again-btn" onClick={() => window.location.reload()}>
+                  <button className="play-again-btn" onClick={() => {
+                    playSound("bap.mp3");
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 200); // ⏱ enough time for the sound to start
+                  }}>
                     {t("play_again")}
                   </button>
                   <p className="remaining-attempts"><br />{t("remaining_attempts", { count: maxAttempts-playAttempts, plural: true  })}</p>
