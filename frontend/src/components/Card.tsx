@@ -65,12 +65,14 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
     end: (_item, monitor) => {
       if (monitor.didDrop()) {
         playSound("bap.mp3");
+        if (navigator.vibrate) navigator.vibrate(50);
       }
     },
     collect: (monitor) => {
       const dragging = monitor.isDragging();
       if (dragging) {
         playSound("drop7.mp3");
+        if (navigator.vibrate) navigator.vibrate(200);
       }
       return {
         isDragging: dragging,
@@ -110,7 +112,8 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
             ${clickable ? "clickable" : ""}`}
           onPointerDown={() => {
             if (!submitted) {
-              playSound("bap.mp3"); // 🔊 Play sound on click/touch before dragging
+              playSound("bap.mp3");
+              if (navigator.vibrate) navigator.vibrate(50);
             }
           }}
           onClick={() => {
