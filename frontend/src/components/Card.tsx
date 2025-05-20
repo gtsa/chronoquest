@@ -22,6 +22,7 @@ interface CardProps {
     wikipedia_url: string;
     details_en: string;
     details_el: string;
+    dealIndex: number;
   };
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
@@ -35,9 +36,10 @@ interface CardProps {
   highlightIds: number[]
   onCardClick: (event: EventType) => void;
   playSound: (sound: string) => void;
+  dealIndex: number;
 }
 
-const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable, cardResults, submitted, difficulty, hintUsed, toBlink, highlightIds, onCardClick, playSound }) => {
+const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable, cardResults, submitted, difficulty, hintUsed, toBlink, highlightIds, onCardClick, playSound, dealIndex}) => {
   const ref = useRef<HTMLDivElement>(null);
   const { i18n } = useTranslation();
 
@@ -88,9 +90,13 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
     <motion.div
       key={submitted ? "submitted" : "pre-submit"}
       layout={submitted || !isTouchDevice()}
-      transition={{ type: "spring", stiffness: 200, damping: 50 }}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 50,
+      }}
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0, transition: { delay: dealIndex * 0.15 } }}
       exit={{ opacity: 0, y: -20 }}
     >
       <div className="card-container">
