@@ -87,7 +87,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
               className="settings-bar-btn"
               onClick={() => {
                 toggleSound();
-                handlePlaceholderClick("Sound");
               }}
             >
               {soundOn ? <Volume2 className="icon-large"/> : <VolumeX className="icon-large"/>}
@@ -189,7 +188,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
             className="settings-bar-btn"
             onClick={() => {
               toggleSound();
-              handlePlaceholderClick("Sound");
             }}
           >
             {soundOn ? <Volume2 className="icon-large"/> : <VolumeX className="icon-large"/>}
@@ -200,7 +198,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
             className="settings-bar-btn"
             onClick={() => {
               toggleMusic();
-              handlePlaceholderClick("Music");
             }}
           >
             {musicOn ? (
