@@ -11,7 +11,6 @@ import WebAudioMusic from "./components/WebAudioMusic";
 
 function App() {
   const [showGameBoard, setShowGameBoard] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
   const [hintUsed, setHintUsed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -19,6 +18,11 @@ function App() {
 
   const [musicOn, setMusicOn] = useState(() => {
     const saved = localStorage.getItem("musicOn");
+    return saved === null ? true : saved === "true";
+  });
+
+  const [soundOn, setSoundOn] = useState(() => {
+    const saved = localStorage.getItem("soundOn");
     return saved === null ? true : saved === "true";
   });
 
@@ -55,10 +59,13 @@ function App() {
       return newValue;
     });
   };
-  
 
   const toggleSound = () => {
-    setSoundOn((prev) => !prev);
+    setSoundOn((prev) => {
+      const newValue = !prev;
+      localStorage.setItem("soundOn", String(newValue));
+      return newValue;
+    });
   };
 
   const [pageReady, setPageReady] = useState(false);
@@ -132,6 +139,7 @@ function App() {
             hintUsed={hintUsed}
             toBlink={toBlink}
             submitted={submitted}
+            soundOn={soundOn}
             onSubmit={() => setSubmitted(true)}
             onFinished={() => setFinished(true)}
           />

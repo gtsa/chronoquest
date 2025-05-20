@@ -23,9 +23,10 @@ type GameBoardProps = {
   submitted: boolean;
   onSubmit: () => void;
   onFinished: () => void;
+  soundOn: boolean;
 };
 
-const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, submitted, onSubmit, onFinished }) => {
+const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, submitted, onSubmit, onFinished, soundOn }) => {
   const { i18n, t } = useTranslation();
   const [events, setEvents] = useState<Array<{
     id: number;
@@ -60,7 +61,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalMessage, setFinalMessage] = useState("");
   const [hintHighlightIds, setHintHighlightIds] = useState<number[]>([]);
-  const { playSound } = useSound();
+  const { playSound } = useSound(soundOn);
   // 🔹 Check if the player is allowed to play today and fetch events
   useEffect(() => {
     const checkGameAvailability = async () => {
