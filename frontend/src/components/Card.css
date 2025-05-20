@@ -115,11 +115,14 @@
 .event-name {
   margin: 13px;
   font-size: 1.5em;
-  text-align: center;
   word-break: break-word;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .event-hint {
@@ -301,6 +304,11 @@
   .event-name {
     font-size: 0.8em;
     line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
   .card.flipped {
     padding: 1em;
@@ -420,7 +428,12 @@
     width:58vw
   }
   .event-name {
-    font-size: clamp(0.5em, 13px, 1.5em)
+    font-size: clamp(0.5em, 13px, 1.5em);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
   .dragged :is(.card-inner) {
     width: 229px;
@@ -492,6 +505,11 @@
   .event-name {
     font-size: 0.8em;
     line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
   .card.flipped {
     padding: 1em;
@@ -550,6 +568,10 @@
   .event-name {
     margin: 13px;
     word-break: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     width: 100%;
   }
   .card-content {
@@ -609,7 +631,12 @@
     margin: -8px -10px -10px -9px;
   }
   .event-name {
-    font-size: clamp(0.5em, 13px, 1.5em)
+    font-size: clamp(0.5em, 13px, 1.5em);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
   .dragged :is(.card-inner) {
     width: 229px;
@@ -733,8 +760,12 @@
   .event-name {
     margin: 2vw;
     word-break: break-word;
-    width: 100%;
     font-size: 1.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
   .card-content {
     width: 100%;
@@ -836,6 +867,11 @@
     font-size: 2.7vh;
     font-weight: 600;
     padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
   .card-front, .card-back {
     border-radius: 3.5vh;
@@ -895,6 +931,11 @@
     font-size: 11.5px;
     font-weight: 500;
     padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
   }
   .card-badge {
     width: 55px;
