@@ -8,6 +8,7 @@ import SettingsPanel from "./components/SettingsPanel";
 import { useTranslation } from "react-i18next";
 import logo from "./assets/favicon-192x192.png";
 import WebAudioMusic from "./components/WebAudioMusic";
+import { useSound } from "./hooks/useSound";
 
 function App() {
   const [showGameBoard, setShowGameBoard] = useState(false);
@@ -25,6 +26,7 @@ function App() {
     const saved = localStorage.getItem("soundOn");
     return saved === null ? true : saved === "true";
   });
+  const { playSound } = useSound(soundOn);
 
   const getInitialDifficulty = (): "easy" | "hard" => {
     const saved = localStorage.getItem("difficulty");
@@ -36,15 +38,14 @@ function App() {
   const [toBlink, setToBlink] = useState(initialDifficulty === "easy");
 
   const handleStartGame = () => {
-    setShowGameBoard(true);
-
-
-    const context = (window as any).__chronoquestAudioContext__;
-    if (context && context.state === "suspended") {
-      context.resume();
-    }
-
-    
+    playSound("button.mp3");
+    setTimeout(() => {
+      setShowGameBoard(true);
+      const context = (window as any).__chronoquestAudioContext__;
+      if (context && context.state === "suspended") {
+        context.resume();
+      }
+    }, 420);   
   };
 
   const toggleMusic = () => {
@@ -117,6 +118,7 @@ function App() {
             <div className="difficulty-selector">
               <DifficultySelector
                 difficulty={difficulty}
+                soundOn={soundOn}
                 onChange={(level) => {
                   setDifficulty(level);
                   setToBlink(level === "easy");

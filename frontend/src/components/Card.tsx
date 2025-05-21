@@ -1,11 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useTranslation } from "react-i18next";
 import "./Card.css";
 import { EventType } from "../types/eventTypes";
 import { formatDate } from "../utils/formatDate";
 import { AnimatePresence, motion } from "framer-motion";
-// import { useSound } from "../hooks/useSound";
 
 
 interface CardProps {
@@ -52,7 +51,6 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
     hover: (draggedItem: { index: number }) => {
       if (draggedItem.index !== index) {
         moveCard(draggedItem.index, index);
-        // playSound("drop7.mp3")
         draggedItem.index = index;
       }
     },
@@ -64,7 +62,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
     canDrag: !submitted,
     end: (_item, monitor) => {
       if (monitor.didDrop()) {
-        playSound("bap.mp3");
+        playSound("drop-2.mp3");
         if (navigator.vibrate) navigator.vibrate(50);
       }
     },
@@ -112,7 +110,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
             ${clickable ? "clickable" : ""}`}
           onPointerDown={() => {
             if (!submitted) {
-              playSound("bap.mp3");
+              playSound("drop-1.mp3");
               if (navigator.vibrate) navigator.vibrate(50);
             }
           }}
