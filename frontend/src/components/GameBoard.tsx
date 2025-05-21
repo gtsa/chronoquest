@@ -264,9 +264,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
               </div>
 
               <div className="vertical-axis">
-                <span className="axis-label oldest">{t("oldest_event")}</span>
-                <div className="axis-line"></div>
                 <span className="axis-label most-recent">{t("most_recent_event")}</span>
+                  <div className="axis-line"></div>
+                <span className="axis-label oldest">{t("oldest_event")}</span> 
               </div>
             </div>
             
