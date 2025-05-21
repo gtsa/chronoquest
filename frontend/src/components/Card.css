@@ -67,8 +67,12 @@
   background: linear-gradient(45deg, var(--primary-color-front-card), var(--secondary-color-front-card));
 }
 
-.card.dragged {
-  transform: scale(1.05)
+.card.dragged.touch {
+  transform: scale(1.1)
+}
+
+.card.dragged.not-touch {
+  opacity: 0
 }
 
 .dragged :is(.card-front) {
