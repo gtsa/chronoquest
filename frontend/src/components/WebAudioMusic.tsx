@@ -24,32 +24,44 @@ const WebAudioMusic: React.FC<WebAudioMusicProps> = ({ musicOn }) => {
 
     const context = contextRef.current;
 
-    // 2. If audio buffer not yet loaded, fetch and decode it
-    if (!bufferRef.current) {
-      fetch("/chronoquest_music_theme.mp3")
-        .then((res) => res.arrayBuffer())              // Fetch as binary
-        .then((data) => context.decodeAudioData(data)) // Decode to Web Audio buffer
-        .then((decoded) => {
-          bufferRef.current = decoded;                 // Save decoded buffer
-          if (musicOn) {
-            playFromOffset();                          // Play immediately if music should be on
-          }
-        })
-        .catch((err) => console.error("Failed to load audio:", err));
-    } else {
-      // 3. If buffer is already loaded, play or pause based on `musicOn`
-      musicOn ? playFromOffset() : pauseMusic();
-    }
+  const isWindowFocused = document.hasFocus();
+  const isTabVisible = document.visibilityState === "visible";
 
-    // 4. Cleanup audio on component unmount
-    return () => pauseMusic();
-  }, [musicOn]);
+  if (!bufferRef.current) {
+    fetch("/chronoquest_music_theme.mp3")
+      .then((res) => res.arrayBuffer())
+      .then((data) => context.decodeAudioData(data))
+      .then((decoded) => {
+        bufferRef.current = decoded;
+
+        // After decoding, play only if tab is visible and focused to avoid autoplay in background
+        if (musicOn && isWindowFocused && isTabVisible) {
+          playFromOffset();
+        }
+      })
+      .catch((err) => console.error("Failed to load audio:", err));
+  } else {
+    // Decide whether to resume or pause checking again if tab is visible and focused to avoid autoplay in background
+    if (musicOn && isWindowFocused && isTabVisible) {
+      playFromOffset();
+    } else {
+      pauseMusic();
+    }
+  }
+
+  return () => pauseMusic();
+}, [musicOn]);
 
   // Handle visibility/focus events to pause/resume music appropriately
   useEffect(() => {
     const handlePause = () => pauseMusic();          // Pause when window loses focus
+
+    // Resume music only if tab is visible and window is focused
+    // Prevents unwanted playback after reloads while app is out of focus
+
     const handleResume = () => {
-      if (musicOn) playFromOffset();                 // Resume music if musicOn is true
+      
+      if (musicOn) playFromOffset();      // Resume music if musicOn is true
     };
 
     document.addEventListener("visibilitychange", () => {
