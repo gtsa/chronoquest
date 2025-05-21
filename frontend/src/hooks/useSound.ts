@@ -5,7 +5,7 @@ export const useSound = (soundOn: boolean = true) => {
     if (!soundOn) return;
 
     const audio = new Audio(`/sounds/${filename}`);
-    audio.volume = 0.25;
+    audio.volume = 0.4;
     audio.play();
   }, [soundOn]);
 

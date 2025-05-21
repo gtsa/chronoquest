@@ -90,7 +90,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
   
         setTimeout(() => {
           setShowCards(true);
-          playSound("reorder1.mp3");
+          playSound("reorder.mp3");
           setLoading(false);
         }, 800);
       } catch (error) {
@@ -149,22 +149,22 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
         throw new Error("Failed to submit order");
       }
 
-      playSound("bap.mp3");
-
+      playSound("button.mp3");
       const result = await response.json();
-      setScore(result.score);
-      setCorrectOrder(result.correctOrder);
-      setIsCorrect(result.correct);
-      onSubmit();
-      setModalFeedbackOpen(true);
-      setScoreMessage(getScoreMessage(result.score, hintUsed));
+      setTimeout(() => {
+        setScore(result.score);
+        setCorrectOrder(result.correctOrder);
+        setIsCorrect(result.correct);
+        onSubmit();
+        setModalFeedbackOpen(true);
+        setScoreMessage(getScoreMessage(result.score, hintUsed));
 
-      const correctnessMap: Record<number, boolean> = {};
-      events.forEach((event, index) => {
-        correctnessMap[event.id] = result.correctOrder[index] === event.id;
-      });
-      setCardResults(correctnessMap);
-
+        const correctnessMap: Record<number, boolean> = {};
+        events.forEach((event, index) => {
+          correctnessMap[event.id] = result.correctOrder[index] === event.id;
+        });
+        setCardResults(correctnessMap);
+      }, 420);
     } catch (error) {
       console.error("Error submitting order:", error);
     }
@@ -184,7 +184,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
 
       setTimeout(() => {
         setFlippedCards(true);
-        playSound("flip1.mp3");
+        playSound("flip.mp3");
       }, 2000);
       setTimeout(() => setClickableCards(true), 1500);
     }, 300);
@@ -280,10 +280,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
               ) : playAttempts < maxAttempts ? (
                 <div className="play-again-wrapper">
                   <button className="play-again-btn" onClick={() => {
-                    playSound("bap.mp3");
+                    playSound("button.mp3");
                     setTimeout(() => {
                       window.location.reload();
-                    }, 200);
+                    }, 420);
                   }}>
                     {t("play_again")}
                   </button>
