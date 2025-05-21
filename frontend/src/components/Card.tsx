@@ -71,8 +71,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
     collect: (monitor) => {
       const dragging = monitor.isDragging();
       if (dragging) {
-        playSound("drop7.mp3");
-        if (navigator.vibrate) navigator.vibrate(200);
+        if (navigator.vibrate) navigator.vibrate(100);
       }
       return {
         isDragging: dragging,
@@ -109,6 +108,7 @@ const Card: React.FC<CardProps> = ({ event, index, moveCard, flipped, clickable,
             ${hintUsed && toBlink? "hint-used" : ""}
             ${highlightIds.includes(event.id) ? "flash-correct" : "flash-wrong"}
             ${isDragging ? "dragged" : ""}
+            ${isTouchDevice() ? "touch" : "not-touch"}
             ${clickable ? "clickable" : ""}`}
           onPointerDown={() => {
             if (!submitted) {
