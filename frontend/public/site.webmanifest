@@ -1,0 +1,22 @@
+{
+    "name": "ChronoQuest",
+    "short_name": "ChronoQuest",
+    "icons": [
+      {
+        "src": "/favicon-192x192.png?v=0",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/favicon-512x512.png?v=0",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "background_color": "#07000f",
+    "theme_color": "#ffffff",
+    "display": "standalone",
+    "description": "Reorder historical events, learn, and test your knowledge with ChronoQuest!",
+    "start_url": "/?source=pwa"
+  }
+  

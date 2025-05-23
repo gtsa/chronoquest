@@ -1,0 +1,99 @@
+@import url('../themes/theme-dark.css');
+@import url('../themes/theme-bright.css');
+
+.language-switcher {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  display: flex;
+  text-orientation: sideways;
+  flex-direction: column;
+  transform: translateY(-20%);
+  z-index: 990;
+}
+
+.language-switcher button {
+  padding: 10px 15px;
+  border: none;
+  background-color: transparent;
+  color: var(--primary-light-version);
+  font-weight: 200;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  transform: rotate(-90deg);
+  text-align: center;
+}
+
+.language-switcher button:hover {
+  background-color: transparent;
+  color: var(--primary-extra-light-version);
+  transform: rotate(-90deg) scale(1.1);
+}
+
+.language-switcher button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Responsive Adjustments */
+/* Mobile (Taller) Portrait */
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
+  .language-switcher {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    display: flex;
+    text-orientation: sideways;
+    flex-direction: column;
+    transform: translateY(-20%);
+  }
+}
+
+/* Mobile (Compact) Portrait */
+@media (max-width: 400px) and (orientation: portrait) {
+  .language-switcher {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    display: flex;
+    text-orientation: sideways;
+    flex-direction: column;
+    transform: translateY(-20%);
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape)  {
+  .language-switcher {
+    flex-direction: row;
+    transform: translateY(10%);
+    margin-left: -14px;
+  }
+  .language-switcher button {
+    transform: rotate(0deg);
+    padding: 0px 8px;
+    font-size: 12px;
+  }
+  .language-switcher button:hover {
+    transform: rotate(0deg) scale(1.1);
+  }
+}
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .language-switcher button {
+    font-size: 3vh;
+  }
+}
+
+/* iPad / Tablet Portrait */
+@media (min-width: 480px)  and (max-width: 1424px) and (min-aspect-ratio: 3/5)  and (orientation: portrait) {
+  .language-switcher button {
+    font-size: 2vh;
+  }
+  .language-switcher {
+    gap: 1.2vh
+  }
+}

@@ -1,42 +1,191 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100dvh;
+  height: 100svh; /* Fallback for older browsers */
+  color: var(--text-color-primary);
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color:  var(--test-color-2);
+}
+
+.header-gameboard-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; /* Center vertically if content shorter than full height */
+  min-height: 0; /* Important for internal flex behavior */
+  overflow: visible;
+}
+
+.game-options {
+  margin-top: 20px;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 99vw;
+  max-width: 99vw;
+  height:  fit-content;
+  background-color: var(--test-color-1);
+  
+}
+
+.start-button-container {
+  margin-top: 40px;
+}
+
+.play-btn {
+  background: linear-gradient(90deg, var(--secondary-color), var(--purple-primary));
+  color: var(--text-color-dark-button);
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px var(--black-extra-transparent);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: calc(0.5vw + 1vh);
+
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: visible;
+  background-color: var(--test-color-3);
+  height: 38px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1425px) {
+  .header {
+    height: auto;
+  }  
+}
+
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 72px;
+  height: auto;
+  filter: drop-shadow(0px 0px 10px var(--purple-logo));
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.difficulty-label {
+  opacity: 0.8;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+.fade-out {
+  opacity: 0;
+}
+
+/* Mobile (Compact) Portrait */
+@media (max-width: 400px) and (orientation: portrait) {
+  .play-btn {
+    font-size: 18px;
+    padding: 10px 20px;
   }
-  to {
-    transform: rotate(360deg);
+  .logo {
+    width: 40px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Mobile (Taller) Portrait */
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait) {
+  .play-btn {
+    font-size: 24px;
+    padding: 1vh 6vw;
+  }
+  .logo {
+    width: 50px;
   }
 }
 
-.card {
-  padding: 2em;
+/* Mobile Landscape */
+@media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape) {
+  .play-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+  .game-options {
+    margin-bottom: 0px;
+  }
+  .game-board {
+    height: 100%;
+  }
+  .header {
+    margin-top: 4px;
+  }
+  .logo {
+    width: 40px;
+  }
 }
 
-.read-the-docs {
-  color: #888;
+/* iPad / Tablet Portrait */
+@media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
+  .play-btn {
+    margin-top: 1vh;
+    font-size: 3vh;
+    padding: 0.8vh 3vh;
+  }
+  .logo {
+    width: 8vh;
+  }
+  .difficulty-label {
+    font-size: 2.5vh;
+  }
+  .header {
+    height: 5vh;
+    margin-top: 2vh;
+  }
+}
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .game-options {
+    margin-bottom: 0px;
+  }
+  .game-board {
+    height: 100%;
+  }
+  .header {
+    margin-top: 4px;
+  }
+  .logo {
+    width: 10vh;
+  }
+  .difficulty-label {
+    font-size: 3.5vh;
+  }
+  .play-btn {
+    font-size: 4vh;
+    padding: 2vh 4vh;
+  } 
+  .header {
+    height: 12vh;
+  }
+}
+
+/* 💻 Laptops & Desktops */
+@media (min-width: 1425px) {
+  /* Styles for large screens */
+  .play-btn {
+    border-radius: calc((0.5vw + 1vh) / 2);
+  }
 }

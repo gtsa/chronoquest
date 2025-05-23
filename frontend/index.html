@@ -2,12 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- In index.html -->
+    <meta id="theme-color-meta" name="theme-color" content="#ffffff">
+
+    <!-- PNG versions for various devices -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x164.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x324.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x484.png">
+
+    <!-- For Apple devices -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-192x192.png">
+
+    <!-- Android/Chrome Web App -->
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>ChronoQuest</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

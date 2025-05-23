@@ -1,0 +1,62 @@
+:root[data-theme="darkMode"] {
+    --primary-color: #223b40;
+    --secondary-color: #103951;
+    --primary-dark-version: #051f2e;
+    --primary-extra-dark-version: #040708;
+    --primary-color-front-card: #010f11;
+    --primary-light-version: #3e7a86;
+    --primary-extra-light-version: #61dafbaa;
+
+    --background-dark: #1a1a1a;
+    --background-extra-dark: #0c0c0c;
+    --background-light: #242424;
+    --black-transparent: rgba(0, 0, 0, 0.774);
+    --black-extra-transparent: rgba(0, 0, 0, 0.3);
+    --background-overlay: #0d0e0fc5;
+
+    --white-extra-transparent: rgba(255, 255, 255, 0.3);
+    --used-grayed-out: #a4a5c4;
+    --used-extra-grayed-out:rgb(46, 46, 49);
+
+    --flash-correct: rgba(18, 78, 31, 0.6);
+    --flash-wrong: rgba(175, 16, 91, 0.6);
+    --correct-position:  #1faa5e;
+    --wrong-position: #813131;
+    --wrong-position2: #9b5656;
+    --correct-position-glare:  #3e7a8655;
+    --wrong-position-glare: #af105b55;
+    --modal-feedback-success: #072200;
+    --modal-feedback-failure: #22000e;
+    
+    --text-color-primary: #fff;
+    --text-color-secondary: #2c494e;
+    --white-color: #fff;
+    --white-color-grayer: #ccc;
+    --text-instruction-message: #bbb;
+    --text-color-dark-button: #d2d0dd;
+
+    --purple-primary: #4a2867;
+    --secondary-color-front-card: #0a0113;
+    --purple-dark: #191a24e5;
+    --purple-shadow: #271b31a2;
+    --purple-shadow-front-card: #4c365ea2;
+    --purple-logo: #7e1ecc93;
+
+    --primary-color-front-card-ext: #011518;
+    --secondary-color-front-card-ext: #140125;
+    --front-card-border-ext: rgba(0, 0, 0, 1);
+    --front-card-border-int: rgba(255, 255, 255, 0.27);
+    
+    /* --test-color-1: red;
+    --test-color-2: blue;
+    --test-color-3: orange;
+    --test-color-4: lime;
+    --test-color-5: purple;
+    --test-color-6: green; */
+
+    --background-image: url("/background-dark.webp");
+    --background-blend-mode: darken;
+
+    --loading-spinner-opacity: 0.01;
+    --loading-spinner-mix-blend-mode: lighten;
+  }

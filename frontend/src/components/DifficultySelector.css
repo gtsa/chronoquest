@@ -1,0 +1,61 @@
+.difficulty-toggle-wrapper {
+  display: inline-flex;
+  border: 1px solid var(--purple-primary);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 10px auto 10px;
+}
+
+.difficulty-option {
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-color-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.difficulty-option:not(:last-child) {
+  border-right: 1px solid var(--purple-primary);
+}
+
+.difficulty-option.active {
+  background: linear-gradient(90deg, var(--primary-color), var(--purple-primary));
+  color: #fff;
+  font-weight: 600;
+}
+
+.difficulty-option:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Mobile (Taller) Portrait */
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
+  .difficulty-option {
+    font-size: calc((2.8vw + 1.22vh) / 2);
+  }
+}
+
+/* Mobile (Compact) Portrait */
+@media (max-width: 400px) and (orientation: portrait) {
+  .difficulty-option {
+    font-size: calc((2.8vw + 1.22vh) / 2);
+  }
+}
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  .difficulty-option {
+    font-size: 3vh
+  }
+}
+
+/* iPad / Tablet Portrait */
+@media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
+  .difficulty-option {
+    font-size: 1.5vh
+  }
+}

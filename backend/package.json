@@ -1,31 +1,32 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Handles game logic, scoring, and API endpoints for the historical knowledge game.  ",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "migrate": "psql -U user -d chronoquest -f migrations/001-create-events.sql",
+    "seed": "node -r ts-node/register src/seed.ts" 
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gtsa/chronoquest.git"
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
+    "express": "^4.18.2",
+    "pg": "^8.14.1",
+    "uuid": "^11.1.0"
   },
-  "keywords": [
-    "\"chronoquest\"",
-    "\"historical",
-    "game\"",
-    "\"education\"",
-    "\"timeline",
-    "game\"",
-    "\"history",
-    "trivia\"",
-    "\"node.js\"",
-    "\"backend\""
-  ],
-  "author": "geotsa",
-  "license": "GPL-3.0  ",
-  "bugs": {
-    "url": "https://github.com/gtsa/chronoquest/issues"
-  },
-  "homepage": "https://github.com/gtsa/chronoquest#readme"
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "@types/pg": "^8.11.11",
+    "@types/uuid": "^10.0.0",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
 }

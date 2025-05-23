@@ -1,11 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
+@import url('./themes/theme-dark.css');
+@import url('./themes/theme-bright.css');
+
+body::before {
+  position: fixed;
+  color: red;
+  top: 10px;
+  left: 10px;
+  background-color: lime;
+  font-size: 1rem;
+  z-index: 9999;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Raleway, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-color-primary);
+  background-color: var(--background-light);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,54 +29,114 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary-light-version);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--primary-extra-light-version);
 }
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
-  min-height: 100vh;
+  background: var(--background-image) center/100% 100% no-repeat;
+  background-blend-mode: var(--background-blend-mode);
+  background-color: var(--background-overlay);
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: clamp(2em, 2.5em, 3em);
   line-height: 1.1;
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border: 1px solid var(--purple-primary);
+  padding: 0.3em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transform: scale(1.05);
+  filter: brightness(1.15)
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Responsive Adjustments */
+
+/* Mobile (Taller) Portrait */
+@media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
+  /* body::before {
+    content: "Mobile Portrait Active";
+  } */
+  body {
+    background-attachment: scroll;
   }
-  a:hover {
-    color: #747bff;
+  h1 {
+    font-size: 2em;
   }
   button {
-    background-color: #f9f9f9;
+    font-size: 0.9em;
+    padding: 0.4em 1em;
   }
+}
+
+/* Mobile Landscape */
+@media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape) {
+  /* body::before {
+    content: "Mobile Landscape Active";
+  } */
+  h1 {
+    font-size: 26px;
+  }
+}
+
+/* Mobile (Compact) Portrait */
+@media (max-width: 400px) and (orientation: portrait) {
+  /* body::before {
+    content: "Compact Mobile Portrait Active";
+  } */
+  body {
+    background-attachment: scroll;
+  }
+  h1 {
+    font-size: 2em;
+  }
+  button {
+    font-size: 0.9em;
+    padding: 0.4em 1em;
+  }
+}
+
+/* iPad / Tablet Portrait */
+@media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
+  /* body::before {
+    content: "iPad/Tablet Portrait Active";
+  } */
+  h1 {
+    font-size: 5vh;
+  }
+}
+
+/* iPad / Tablet Landscape */
+@media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
+  /* body::before {
+    content: "iPad/Tablet Landscape Active";
+  } */
+  h1 {
+    font-size: 7vh;
+  }
+}
+
+/* 💻 Laptops & Desktops */
+@media (min-width: 1425px) {
+  /* body::before {
+    content: "Laptop Active";
+  }   */
 }
