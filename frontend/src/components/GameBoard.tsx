@@ -173,14 +173,13 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
   // 🔹 Close Feedback Modal
   const closeFeedbackModal = () => {
     setModalFeedbackOpen(false);
+    playSound(`${isCorrect ? "bravo.mp3" : "reorder.mp3"}`);
     setTimeout(() => {
       setEvents((prevEvents) =>
         correctOrder.map((id: number) =>
           prevEvents.find((e) => e.id === id)!
         )
       );
-
-      playSound("reorder.mp3");
 
       setTimeout(() => {
         setFlippedCards(true);
