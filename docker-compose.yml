@@ -29,7 +29,7 @@ services:
       - ./shared:/app/shared
       - /app/backend/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       - BASE_URL=${PROTOCOL}://${DOMAIN}:5000
     env_file:
@@ -51,7 +51,7 @@ services:
       - ./shared:/app/shared
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     env_file:
       - .env
