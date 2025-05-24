@@ -10,7 +10,6 @@ import "./GameBoard.css";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../utils/formatDate";
 import { useSound } from "../hooks/useSound";
-import { div } from "framer-motion/client";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; 
 

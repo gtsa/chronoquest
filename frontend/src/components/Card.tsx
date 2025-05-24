@@ -21,7 +21,6 @@ interface CardProps {
     wikipedia_url: string;
     details_en: string;
     details_el: string;
-    dealIndex: number;
   };
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;

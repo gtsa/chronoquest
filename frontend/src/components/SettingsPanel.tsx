@@ -13,7 +13,6 @@ import Modal from "react-modal";
 import { Trans, useTranslation } from "react-i18next"
 import './SettingsPanel.css';
 import { useTheme } from "../context/theme-context";
-import { findSpring } from "framer-motion";
 
 interface SettingsPanelProps {
   difficulty: "easy" | "hard";
@@ -49,10 +48,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
     day: "numeric",
     month: "long"
   })
-
-  const handlePlaceholderClick = (feature: string) => {
-    alert(`${feature} — ${t("coming_soon")}`);
-  };
 
   const handleHintClick = () => {
     hintUsed = true;
