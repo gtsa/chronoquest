@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -5,8 +6,9 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
+  const publicUrl = env.VITE_PUBLIC_URL;
+  const hostname = new URL(publicUrl).hostname;
 
-  const hostname = new URL(env.VITE_PUBLIC_URL).hostname;
 
   return {
     plugins: [react()],

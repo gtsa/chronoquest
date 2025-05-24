@@ -72,9 +72,9 @@ button:hover {
 
 /* Mobile (Taller) Portrait */
 @media (min-width: 401px) and (max-width: 768px) and (max-aspect-ratio: 3/5) and (orientation: portrait)  {
-  body::before {
-    /* content: "Mobile Portrait Active"; */
-  }
+  /* body::before {
+    content: "Mobile Portrait Active";
+  } */
   body {
     background-attachment: scroll;
   }
@@ -89,9 +89,9 @@ button:hover {
 
 /* Mobile Landscape */
 @media (max-width: 1024px) and (min-aspect-ratio: 5/3) and (orientation: landscape) {
-  body::before {
+  /* body::before {
     content: "Mobile Landscape Active";
-  }
+  } */
   h1 {
     font-size: 26px;
   }
@@ -99,9 +99,9 @@ button:hover {
 
 /* Mobile (Compact) Portrait */
 @media (max-width: 400px) and (orientation: portrait) {
-  body::before {
+  /* body::before {
     content: "Compact Mobile Portrait Active";
-  }
+  } */
   body {
     background-attachment: scroll;
   }
@@ -116,9 +116,9 @@ button:hover {
 
 /* iPad / Tablet Portrait */
 @media (min-width: 480px) and (max-width: 1424px) and (min-aspect-ratio: 3/5) and (orientation: portrait) {
-  body::before {
+  /* body::before {
     content: "iPad/Tablet Portrait Active";
-  }
+  } */
   h1 {
     font-size: 5vh;
   }
@@ -126,9 +126,9 @@ button:hover {
 
 /* iPad / Tablet Landscape */
 @media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
-  body::before {
+  /* body::before {
     content: "iPad/Tablet Landscape Active";
-  }
+  } */
   h1 {
     font-size: 7vh;
   }
@@ -136,7 +136,7 @@ button:hover {
 
 /* 💻 Laptops & Desktops */
 @media (min-width: 1425px) {
-  body::before {
+  /* body::before {
     content: "Laptop Active";
-  }  
+  }   */
 }
