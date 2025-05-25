@@ -860,9 +860,10 @@
 /* iPad / Tablet Landscape */
 @media (max-width: 1424px) and (max-aspect-ratio: 5/3) and (orientation: landscape) {
   .card {
-    height: 44vh;
+    height: 40vh;
     width: 17vw;
     border-radius: 4vh;
+    margin: 2vh 0;
   }
   .card.flipped {
     width: 16vw;
@@ -998,3 +999,28 @@
     border-radius: 2.6vw;
   }
 }
+
+
+.card-front {
+  background-image: url('/card-pattern.png');
+  background-color: var(--primary-color-front-card);
+  /* background-size: cover; */
+  /* background-repeat: round; */
+  background-blend-mode: difference;
+  animation: hueCycle 8s linear infinite;
+}
+
+/* Animate hue rotation smoothly */
+@keyframes hueCycle {
+  0%   { filter: hue-rotate(0deg); }
+  25%  { filter: hue-rotate(90deg); }
+  50%  { filter: hue-rotate(180deg); }
+  75%  { filter: hue-rotate(270deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Optional: reflection using brightness or subtle scale flicker */
+/* @keyframes reflectPulse {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50%      { transform: scaleY(1.02); opacity: 0.96; }
+} */
