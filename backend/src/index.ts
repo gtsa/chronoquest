@@ -5,6 +5,7 @@ import eventRoutes from "./routes/events";
 import gameAttemptsRoutes from "./routes/gameAttempts";
 import path from "path";
 import dotenv from "dotenv";
+import db from "./db";
 
 // Load environment variables
 dotenv.config();
@@ -45,6 +46,19 @@ app.get("/", (req, res) => {
 // Register routes
 app.use("/api/events", eventRoutes);
 app.use("/api/game", gameAttemptsRoutes);
+
+// DB connectivity check
+(async () => {
+  try {
+    const res = await db.query(`SELECT to_regclass('public.events')`);
+    if (!res.rows[0].to_regclass) {
+      console.warn('WARNING: The "events" table does not exist. Have you run the migrations?');
+    }
+  } catch (err) {
+    console.error('Database connection failed or DB not initialized. Check if the container is running and if migrations are applied.');
+    console.error(err);
+  }
+})();
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PROTOCOL}://${DOMAIN}:${PORT}`);
