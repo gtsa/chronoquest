@@ -47,7 +47,7 @@ services:
       args:
         - MODE=${NODE_ENV}
     ports:
-      - "4173:80"
+      - "4173:4173"
     volumes:
       - ./frontend:/app
       - ./shared:/app/shared

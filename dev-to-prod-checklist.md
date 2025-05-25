@@ -26,20 +26,7 @@
 
 ---
 
-### 3. Frontend `Dockerfile` (ChronoQuest)
-
-✅ Has conditional stages for dev/prod.
-
-* [ ] Ensure build starts with:
-
-  ```dockerfile
-  ARG MODE=production
-  ```
-
-
----
-
-### 4. `gameConfig.ts`
+### 3. `gameConfig.ts`
 
 Update for production:
 
@@ -60,7 +47,7 @@ cat dist/game_config/gameConfig.js
 
 ---
 
-### 5. 🔥 Nginx Proxy (Otterverse) — **Critical ChronoQuest Port Switch**
+### 4. 🔥 Nginx Proxy (Otterverse) — **Critical ChronoQuest Port Switch**
 
 #### 🔴 MUST CHANGE:
 
