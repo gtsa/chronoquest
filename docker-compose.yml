@@ -44,6 +44,8 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile
+      args:
+        - MODE=${NODE_ENV}
     ports:
       - "4173:80"
     volumes:
