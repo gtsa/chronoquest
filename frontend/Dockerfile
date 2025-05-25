@@ -1,21 +1,35 @@
-FROM node:18
+# ---------- Declare arg for mode ----------
+ARG MODE
 
+# ---------- Base Stage ----------
+FROM node:18 AS base
 WORKDIR /app
 
-# Copy package.json first for better caching
 COPY frontend/package*.json ./
-
 RUN npm install
 
-# Copy the frontend source code
 COPY frontend/ ./
-
-# Copy shared folder
 COPY shared /app/shared
+COPY .env .env
 
-# Expose your preferred port (4173)
+# ---------- DEV Stage ----------
+FROM base AS development
+RUN echo "🏗️  Building DEVELOPMENT image"
 EXPOSE 4173
-
-# Start Vite in development mode with port 4173
 CMD ["node", "node_modules/vite/bin/vite.js", "--host", "0.0.0.0", "--port", "4173"]
 
+# ---------- PROD Stage ----------
+FROM base AS builder
+RUN echo "🏗️  Building PRODUCTION builder image" \
+    && npm run build
+
+FROM nginx:alpine AS production
+RUN echo "🏗️  Building PRODUCTION final image"
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+# ---------- Final Stage Dispatcher ----------
+FROM ${MODE} AS final
+ARG MODE
+RUN echo "🏗️  Building FINAL image for mode: ${MODE}"    
