@@ -53,7 +53,9 @@ Validate compiled config reflects these settings.
 To check final build config inside Docker:
 
 ```bash
-docker exec -it chronoquest-frontend-1 cat /usr/share/nginx/html/assets/gameConfig-*.js
+docker exec -it chronoquest-backend-1 sh 
+# Once inside the container:
+cat dist/game_config/gameConfig.js
 ```
 
 ---
