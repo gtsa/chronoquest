@@ -92,9 +92,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ difficulty, hintUsed, toBlink, su
           playSound("reorder.mp3");
           setLoading(false);
         }, 800);
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error:", error);
-        setErrorMessage("Something went wrong. Please try again.");
+
+        if (error.message.includes("connect") || error.message.includes("fetch")) {
+          setErrorMessage("Backend or database might not be initialized. Please ensure migrations are applied and services are running.");
+        } else {
+          setErrorMessage("Something went wrong. Please try again.");
+        }
         setLoading(false);
       }
     };
