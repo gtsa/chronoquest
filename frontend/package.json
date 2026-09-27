@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "validate:card-fit": "node card-fit/validate.mjs"
+    "validate:card-fit": "node card-fit/validate.mjs",
+    "test:card-fit": "node card-fit/test-samples.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",

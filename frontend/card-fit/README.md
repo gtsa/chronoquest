@@ -22,8 +22,10 @@ The sampled viewport matrix is 1440×900 desktop, 430×932 normal portrait phone
 The validator waits for fonts and a frame, disables animation timing during measurement, then uses DOM `Range.getClientRects()` for each word fragment. It measures real wrapped glyph rectangles against the face's available content box on the front and `.card-details` content box on the back, including clipping ancestors. It records lines, computed font and available dimensions for diagnosis. It does not infer fit from character or word counts.
 
 - **FAIL:** empty text, horizontal or vertical glyph overflow, or clipping by a parent. Any failed variant fails the candidate.
-- **REVIEW:** an isolated single word or final line under one quarter the preceding line's rendered width, or less than the greater of 3px and 0.35 computed line heights of clearance. Any reviewed variant reviews the candidate unless another fails.
+- **REVIEW:** a word broken across lines, an isolated single word or final line under one quarter the preceding line's rendered width, or less than the greater of 3px and 0.35 computed line heights of clearance. Any reviewed variant reviews the candidate unless another fails.
 - **PASS:** no measured issue across sampled variants.
+
+Run `npm run test:card-fit` for automated assertions against the deliberately short, long-word, long and extreme sample cases. A failed assertion exits non-zero.
 
 The final-line and clearance thresholds are editorial heuristics, not hard layout limits. Inspect `variants[].reasons`, `lines` and `marginPx` before rewriting. Extremely short lines and text near the boundary merit review even if fully visible.
 

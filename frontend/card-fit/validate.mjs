@@ -52,10 +52,25 @@ try {
             top: bounds.top + insetY, bottom: bounds.bottom - parseFloat(regionStyle.borderBottomWidth) - parseFloat(regionStyle.paddingBottom),
           };
           const words = [...content.matchAll(/\S+/gu)];
+          let brokenWord = false;
           const fragments = words.flatMap(match => {
             const range = document.createRange();
             range.setStart(text, match.index); range.setEnd(text, match.index + match[0].length);
-            return [...range.getClientRects()].map(rect => ({ left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, text: match[0] }));
+            const rects = [...range.getClientRects()];
+            if (rects.length <= 1) return rects.map(rect => ({ left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, text: match[0] }));
+            brokenWord = true;
+            // Build readable line fragments when CSS breaks a word mid-word.
+            const pieces = [];
+            let offset = match.index;
+            for (const character of match[0]) {
+              range.setStart(text, offset); range.setEnd(text, offset + character.length);
+              const rect = range.getBoundingClientRect();
+              const piece = pieces.find(piece => Math.abs(piece.top - rect.top) < 2);
+              if (piece) { piece.right = Math.max(piece.right, rect.right); piece.bottom = Math.max(piece.bottom, rect.bottom); piece.text += character; }
+              else pieces.push({ left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, text: character });
+              offset += character.length;
+            }
+            return pieces;
           });
           const lines = [];
           for (const fragment of fragments) {
@@ -93,8 +108,9 @@ try {
           if (vertical) reasons.push('vertical overflow');
           if (clipped) reasons.push('ancestor clipping');
           if (orphan) reasons.push('isolated/short final line');
+          if (brokenWord) reasons.push('word broken across lines');
           if (nearEdge) reasons.push('near available-area edge');
-          return { status: !content.trim() || horizontal || vertical || clipped ? 'FAIL' : orphan || nearEdge ? 'REVIEW' : 'PASS', reasons, lines: lines.map(line => line.words.join(' ')), marginPx: Number.isFinite(margin) ? +margin.toFixed(1) : null, area: { width: +(area.right - area.left).toFixed(1), height: +(area.bottom - area.top).toFixed(1) }, font: style.fontFamily, fontSize: style.fontSize, lineHeight: style.lineHeight, side };
+          return { status: !content.trim() || horizontal || vertical || clipped ? 'FAIL' : orphan || nearEdge || brokenWord ? 'REVIEW' : 'PASS', reasons, lines: lines.map(line => line.words.join(' ')), marginPx: Number.isFinite(margin) ? +margin.toFixed(1) : null, area: { width: +(area.right - area.left).toFixed(1), height: +(area.bottom - area.top).toFixed(1) }, font: style.fontFamily, fontSize: style.fontSize, lineHeight: style.lineHeight, side };
         }, side);
         variants.push({ viewport: viewport.name, field, ...measurement });
       }
